@@ -48,6 +48,7 @@ class ShoppingListResource extends Resource
         return [
             'index' => Pages\ListShoppingLists::route('/'),
             'create' => Pages\CreateShoppingList::route('/create'),
+            'view' => Pages\ViewShoppingList::route('/{record}'),
             'edit' => Pages\EditShoppingList::route('/{record}/edit'),
         ];
     }

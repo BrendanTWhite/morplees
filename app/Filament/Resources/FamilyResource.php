@@ -48,6 +48,7 @@ class FamilyResource extends Resource
         return [
             'index' => Pages\ListFamilies::route('/'),
             'create' => Pages\CreateFamily::route('/create'),
+            'view' => Pages\ViewFamily::route('/{record}'),
             'edit' => Pages\EditFamily::route('/{record}/edit'),
         ];
     }

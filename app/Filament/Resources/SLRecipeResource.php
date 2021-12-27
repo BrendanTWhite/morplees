@@ -48,6 +48,7 @@ class SLRecipeResource extends Resource
         return [
             'index' => Pages\ListSLRecipes::route('/'),
             'create' => Pages\CreateSLRecipe::route('/create'),
+            'view' => Pages\ViewSLRecipe::route('/{record}'),
             'edit' => Pages\EditSLRecipe::route('/{record}/edit'),
         ];
     }

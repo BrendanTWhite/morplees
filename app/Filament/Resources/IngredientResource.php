@@ -48,6 +48,7 @@ class IngredientResource extends Resource
         return [
             'index' => Pages\ListIngredients::route('/'),
             'create' => Pages\CreateIngredient::route('/create'),
+            'view' => Pages\ViewIngredient::route('/{record}'),
             'edit' => Pages\EditIngredient::route('/{record}/edit'),
         ];
     }

@@ -48,6 +48,7 @@ class RecipeResource extends Resource
         return [
             'index' => Pages\ListRecipes::route('/'),
             'create' => Pages\CreateRecipe::route('/create'),
+            'view' => Pages\ViewRecipe::route('/{record}'),
             'edit' => Pages\EditRecipe::route('/{record}/edit'),
         ];
     }

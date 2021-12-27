@@ -48,6 +48,7 @@ class SLItemResource extends Resource
         return [
             'index' => Pages\ListSLItems::route('/'),
             'create' => Pages\CreateSLItem::route('/create'),
+            'view' => Pages\ViewSLItem::route('/{record}'),
             'edit' => Pages\EditSLItem::route('/{record}/edit'),
         ];
     }

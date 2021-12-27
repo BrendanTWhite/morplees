@@ -48,6 +48,7 @@ class StepResource extends Resource
         return [
             'index' => Pages\ListSteps::route('/'),
             'create' => Pages\CreateStep::route('/create'),
+            'view' => Pages\ViewStep::route('/{record}'),
             'edit' => Pages\EditStep::route('/{record}/edit'),
         ];
     }
