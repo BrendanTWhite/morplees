@@ -3,11 +3,11 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
-use Filament\Resources\Pages\Page;
+use Filament\Resources\Pages\ViewRecord;
 
-class ViewUser extends Page
+class ViewUser extends ViewRecord
 {
     protected static string $resource = UserResource::class;
 
-    protected static string $view = 'filament.resources.user-resource.pages.view-user';
+    //protected static string $view = 'filament.resources.user-resource.pages.view-user';
 }
