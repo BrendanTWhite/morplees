@@ -14,7 +14,7 @@ class FamilyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->firstName() . '\'s family',
         ];
     }
 }

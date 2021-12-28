@@ -15,6 +15,9 @@ class CreateFamiliesTable extends Migration
     {
         Schema::create('families', function (Blueprint $table) {
             $table->id();
+
+            $table->text('name');
+
             $table->timestamps();
         });
     }
