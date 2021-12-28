@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Family extends Model
 {
     use HasFactory;
+
+
+
+
+
+    /**
+     * Get the users for the family.
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

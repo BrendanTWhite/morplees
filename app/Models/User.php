@@ -41,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    /**
+     * Get the family that owns the user.
+     */
+    public function family()
+    {
+        return $this->belongsTo(Family::class);
+    }
+
+
 }
