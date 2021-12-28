@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Family;
 use App\Models\User;
+use App\Models\Shop;
+use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
  
 class FamilySeeder extends Seeder
@@ -19,11 +21,27 @@ class FamilySeeder extends Seeder
         Family::factory()
             ->count(5)
             ->hasUsers(3)
+            ->has(
+                Shop::factory()
+                    ->count(5)
+                    ->has(
+                        Product::factory()
+                            ->count(12)
+                    )
+            )
             ->create();
 
         Family::factory()
             ->count(5)
             ->hasUsers(1)
+            ->has(
+                Shop::factory()
+                    ->count(3)
+                    ->has(
+                        Product::factory()
+                            ->count(5)
+                    )
+            )
             ->create();
 
         $this->command->info('Families created.');

@@ -15,13 +15,18 @@ class ShopResource extends Resource
 {
     protected static ?string $model = Shop::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'bi-shop';
+
+    protected static ?string $navigationGroup = 'Products';
+    public static ?int $navigationSort = 210;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\BelongsToSelect::make('family_id')
+                    ->relationship('family', 'name'),
             ]);
     }
 
@@ -29,7 +34,7 @@ class ShopResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
                 //
@@ -39,7 +44,7 @@ class ShopResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ProductsRelationManager::class,
         ];
     }
 

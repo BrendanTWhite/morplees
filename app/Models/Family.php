@@ -20,4 +20,13 @@ class Family extends Model
     {
         return $this->hasMany(User::class);
     }
+
+
+    /**
+     * Get the shops for the family.
+     */
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
 }

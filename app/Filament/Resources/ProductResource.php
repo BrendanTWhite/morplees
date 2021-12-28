@@ -15,13 +15,18 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'lineawesome-apple-alt-solid';
+         
+    protected static ?string $navigationGroup = 'Products';
+    public static ?int $navigationSort = 220;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\BelongsToSelect::make('shop_id')
+                    ->relationship('shop', 'name'),
             ]);
     }
 
@@ -29,7 +34,7 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
                 //

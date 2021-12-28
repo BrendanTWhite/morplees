@@ -8,4 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Shop extends Model
 {
     use HasFactory;
+
+
+
+
+    /**
+     * Get the family that owns the shop.
+     */
+    public function family()
+    {
+        return $this->belongsTo(Family::class);
+    }
+
+    /**
+     * Get the products for the shop.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

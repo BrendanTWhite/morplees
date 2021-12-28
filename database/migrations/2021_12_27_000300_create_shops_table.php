@@ -15,6 +15,10 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('family_id')->constrained();
+            
+            $table->text('name');
+
             $table->timestamps();
         });
     }
