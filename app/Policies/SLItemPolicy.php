@@ -18,7 +18,7 @@ class SLItemPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class SLItemPolicy
      */
     public function view(User $user, SLItem $sLItem)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class SLItemPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class SLItemPolicy
      */
     public function update(User $user, SLItem $sLItem)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class SLItemPolicy
      */
     public function delete(User $user, SLItem $sLItem)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class SLItemPolicy
      */
     public function restore(User $user, SLItem $sLItem)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class SLItemPolicy
      */
     public function forceDelete(User $user, SLItem $sLItem)
     {
-        //
+        return true;
     }
 }

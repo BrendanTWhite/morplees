@@ -18,7 +18,7 @@ class ShoppingListPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class ShoppingListPolicy
      */
     public function view(User $user, ShoppingList $shoppingList)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class ShoppingListPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ShoppingListPolicy
      */
     public function update(User $user, ShoppingList $shoppingList)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class ShoppingListPolicy
      */
     public function delete(User $user, ShoppingList $shoppingList)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class ShoppingListPolicy
      */
     public function restore(User $user, ShoppingList $shoppingList)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class ShoppingListPolicy
      */
     public function forceDelete(User $user, ShoppingList $shoppingList)
     {
-        //
+        return true;
     }
 }

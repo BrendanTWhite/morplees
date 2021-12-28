@@ -18,7 +18,7 @@ class StepPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class StepPolicy
      */
     public function view(User $user, Step $step)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class StepPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class StepPolicy
      */
     public function update(User $user, Step $step)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class StepPolicy
      */
     public function delete(User $user, Step $step)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class StepPolicy
      */
     public function restore(User $user, Step $step)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class StepPolicy
      */
     public function forceDelete(User $user, Step $step)
     {
-        //
+        return true;
     }
 }

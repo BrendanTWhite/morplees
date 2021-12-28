@@ -18,7 +18,7 @@ class SLRecipePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class SLRecipePolicy
      */
     public function view(User $user, SLRecipe $sLRecipe)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class SLRecipePolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class SLRecipePolicy
      */
     public function update(User $user, SLRecipe $sLRecipe)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class SLRecipePolicy
      */
     public function delete(User $user, SLRecipe $sLRecipe)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class SLRecipePolicy
      */
     public function restore(User $user, SLRecipe $sLRecipe)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class SLRecipePolicy
      */
     public function forceDelete(User $user, SLRecipe $sLRecipe)
     {
-        //
+        return true;
     }
 }
