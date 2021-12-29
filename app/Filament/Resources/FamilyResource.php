@@ -17,7 +17,7 @@ class FamilyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationGroup = 'People';
+    protected static ?string $navigationGroup = 'People & Products';
     public static ?int $navigationSort = 110;
 
     public static function form(Form $form): Form

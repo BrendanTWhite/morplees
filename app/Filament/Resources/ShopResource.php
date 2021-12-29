@@ -17,7 +17,7 @@ class ShopResource extends Resource
 
     protected static ?string $navigationIcon = 'bi-shop';
 
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = 'People & Products';
     public static ?int $navigationSort = 210;
 
     public static function form(Form $form): Form
