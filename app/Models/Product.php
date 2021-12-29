@@ -27,4 +27,12 @@ class Product extends Model
         return $this->belongsTo(Shop::class);
     }
 
+    /**
+     * Get the ingredients for the product.
+     */
+    public function ingredients()
+    {
+        return $this->hasMany(Ingredient::class);
+    }
+
 }

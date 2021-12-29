@@ -14,7 +14,9 @@ class RecipeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->catchPhrase(),
+            'prep_time' => $this->faker->randomNumber(3, false),
+            'cook_time' => $this->faker->randomNumber(3, false),
         ];
     }
 }

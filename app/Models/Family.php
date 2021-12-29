@@ -37,4 +37,13 @@ class Family extends Model
     {
         return $this->hasMany(Shop::class);
     }
+    
+    /**
+     * Get the recipes for the family.
+     */
+    public function recipes()
+    {
+        return $this->hasMany(Recipe::class);
+    }
+
 }

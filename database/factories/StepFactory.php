@@ -14,7 +14,8 @@ class StepFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'sequence' => $this->faker->randomDigit(),
+            'instructions' => $this->faker->sentence(),
         ];
     }
 }

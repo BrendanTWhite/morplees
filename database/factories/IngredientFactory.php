@@ -14,7 +14,8 @@ class IngredientFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'sequence' => $this->faker->randomDigit(),
+            'quantity' => $this->faker->bothify(),
         ];
     }
 }

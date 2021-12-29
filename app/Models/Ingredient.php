@@ -8,4 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Ingredient extends Model
 {
     use HasFactory;
+
+
+
+
+    /**
+     * Get the recipe that owns the ingredient.
+     */
+    public function recipe()
+    {
+        return $this->belongsTo(Recipe::class);
+    }
+
+
+
+    /**
+     * Get the product that owns the ingredient.
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

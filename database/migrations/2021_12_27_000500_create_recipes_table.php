@@ -15,6 +15,12 @@ class CreateRecipesTable extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('family_id')->constrained();
+
+            $table->integer('prep_time');
+            $table->integer('cook_time');
+            $table->text('name');
+
             $table->timestamps();
         });
     }

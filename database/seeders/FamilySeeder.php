@@ -7,6 +7,8 @@ use App\Models\Family;
 use App\Models\User;
 use App\Models\Shop;
 use App\Models\Product;
+use App\Models\Recipe;
+use App\Models\Step;
 use Illuminate\Support\Facades\Hash;
  
 class FamilySeeder extends Seeder
@@ -21,6 +23,7 @@ class FamilySeeder extends Seeder
         Family::factory()
             ->count(5)
             ->hasUsers(3)
+
             ->has(
                 Shop::factory()
                     ->count(5)
@@ -29,19 +32,16 @@ class FamilySeeder extends Seeder
                             ->count(12)
                     )
             )
-            ->create();
 
-        Family::factory()
-            ->count(5)
-            ->hasUsers(1)
             ->has(
-                Shop::factory()
-                    ->count(3)
+                Recipe::factory()
+                    ->count(9)
                     ->has(
-                        Product::factory()
-                            ->count(5)
+                        Step::factory()
+                            ->count(6)
                     )
             )
+
             ->create();
 
         $this->command->info('Families created.');

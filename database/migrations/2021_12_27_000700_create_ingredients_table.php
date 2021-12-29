@@ -15,6 +15,12 @@ class CreateIngredientsTable extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('recipe_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+
+            $table->integer('sequence');
+            $table->text('quantity');
+
             $table->timestamps();
         });
     }
