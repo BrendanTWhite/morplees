@@ -21,24 +21,27 @@ class FamilySeeder extends Seeder
     public function run()
     {
         Family::factory()
-            ->count(5)
+            ->count(5) 
             ->hasUsers(3)
 
             ->has(
                 Shop::factory()
                     ->count(5)
-                    ->has(
-                        Product::factory()
-                            ->count(12)
-                    )
+                    ->hasProducts(10)
             )
 
             ->has(
-                Recipe::factory()
-                    ->count(9)
-                    ->has(
-                        Step::factory()
-                            ->count(6)
+                $recipe = Recipe::factory()
+                    ->count(10)
+                    ->hasSteps(6)
+                    ->hasIngredients(10, 
+                        function (array $attributes, Recipe $recipe) {
+                            return [
+                                'product_id' => 
+                                $recipe->family->shops->random()
+                                ->products->random()->id
+                            ];
+                        }
                     )
             )
 
