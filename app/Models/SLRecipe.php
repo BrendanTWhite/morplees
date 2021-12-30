@@ -10,6 +10,19 @@ class SLRecipe extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'shopping_list_id',
+        'recipe_id',
+    ];
+
+    
+
+
+    /**
      * Get the shopping list that owns this record.
      */
     public function shopping_list()

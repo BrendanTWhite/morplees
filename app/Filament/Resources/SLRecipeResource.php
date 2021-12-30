@@ -15,13 +15,21 @@ class SLRecipeResource extends Resource
 {
     protected static ?string $model = SLRecipe::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-database';
+    protected static ?string $label = 'Shopping List - Recipe';
+    protected static ?string $pluralLabel = 'Shopping List - Recipes';
+
+    protected static ?string $navigationGroup = 'Shopping Lists';
+    public static ?int $navigationSort = 420;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\BelongsToSelect::make('shopping_list_id')
+                    ->relationship('shopping_list', 'created_at'),
+                Forms\Components\BelongsToSelect::make('recipe_id')
+                    ->relationship('recipe', 'name'),
             ]);
     }
 
@@ -29,7 +37,8 @@ class SLRecipeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('shopping_list.name'),
+                Tables\Columns\TextColumn::make('recipe.name'),
             ])
             ->filters([
                 //

@@ -46,7 +46,7 @@ class ShoppingListResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\SLRecipesRelationManager::class,
         ];
     }
 
