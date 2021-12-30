@@ -63,7 +63,15 @@ public function getNameAttribute()
     /**
      * Get the SL Recipes for this record.
      */
-    public function s_l_recipes()
+    public function s_l_recipes() // snake for Filament
+    {
+        return $this->hasMany(SLRecipe::class);
+    }
+
+    /**
+     * Get the SL Recipes for this record.
+     */
+    public function sLRecipes() // Camel for seeder
     {
         return $this->hasMany(SLRecipe::class);
     }

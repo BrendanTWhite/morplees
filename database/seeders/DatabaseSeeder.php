@@ -49,13 +49,23 @@ class DatabaseSeeder extends Seeder
 
             -> has (
                 $shopping_list = ShoppingList::factory()
-                    ->count(8)
+                    ->count(10)
                     ->state(new Sequence(
                         ['override_name' => null],
                         ['override_name' => null],
                         ['override_name' => null],
                         ['override_name' => 'custom list name'],
                     ))            
+                    ->hasSLRecipes(10, 
+                        function (array $attributes, ShoppingList $shopping_list) {
+                            return [
+                                'recipe_id' => 
+                                $shopping_list->family->recipes->random()->id
+                            ];
+                        }
+                    )
+
+
                 )
 
             ->create();
