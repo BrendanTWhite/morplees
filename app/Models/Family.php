@@ -49,7 +49,7 @@ class Family extends Model
     /**
      * Get the shopping lists for the family.
      */
-    public function shoppingLists()
+    public function shopping_lists()
     {
         return $this->hasMany(ShoppingList::class);
     }

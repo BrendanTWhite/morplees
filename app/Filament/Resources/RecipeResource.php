@@ -15,7 +15,7 @@ class RecipeResource extends Resource
 {
     protected static ?string $model = Recipe::class;
 
-    protected static ?string $navigationIcon = 'bi-file-text';
+    protected static ?string $navigationIcon = 'bi-journal-text';
 
     protected static ?string $navigationGroup = 'Recipes';
     public static ?int $navigationSort = 310;
@@ -36,6 +36,7 @@ class RecipeResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('family.name'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('prep_time'),
                 Tables\Columns\TextColumn::make('cook_time'),

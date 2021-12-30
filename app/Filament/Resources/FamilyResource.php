@@ -45,6 +45,7 @@ class FamilyResource extends Resource
             RelationManagers\UsersRelationManager::class,
             RelationManagers\ShopsRelationManager::class,
             RelationManagers\RecipesRelationManager::class,
+            RelationManagers\ShoppingListsRelationManager::class,
         ];
     }
 

@@ -15,13 +15,19 @@ class ShoppingListResource extends Resource
 {
     protected static ?string $model = ShoppingList::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'bi-file-text';
+
+    protected static ?string $navigationGroup = 'Shopping Lists';
+    public static ?int $navigationSort = 410;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\BelongsToSelect::make('family_id')
+                    ->relationship('family', 'name'),
+                Forms\Components\TextInput::make('override_name')
+                    ->placeholder('If not specified, the create date will be used'),
             ]);
     }
 
@@ -29,7 +35,8 @@ class ShoppingListResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('family.name'),
+                Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
                 //
