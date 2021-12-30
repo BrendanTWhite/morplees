@@ -59,5 +59,13 @@ public function getNameAttribute()
     {
         return $this->belongsTo(Family::class);
     }
+    
+    /**
+     * Get the SL Recipes for this record.
+     */
+    public function s_l_recipes()
+    {
+        return $this->hasMany(SLRecipe::class);
+    }
 
 }

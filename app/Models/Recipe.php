@@ -37,5 +37,13 @@ class Recipe extends Model
     {
         return $this->hasMany(Step::class);
     }
+    
+    /**
+     * Get the SL Recipes for this record.
+     */
+    public function s_l_recipes()
+    {
+        return $this->hasMany(SLRecipe::class);
+    }
 
 }
