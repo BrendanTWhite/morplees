@@ -49,7 +49,15 @@ class Family extends Model
     /**
      * Get the shopping lists for the family.
      */
-    public function shopping_lists()
+    public function shopping_lists() // snake case for Filament
+    {
+        return $this->hasMany(ShoppingList::class);
+    }
+
+    /**
+     * Get the shopping lists for the family.
+     */
+    public function shoppingLists() // camel case for seeder
     {
         return $this->hasMany(ShoppingList::class);
     }
