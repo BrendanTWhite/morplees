@@ -46,4 +46,12 @@ class Family extends Model
         return $this->hasMany(Recipe::class);
     }
 
+    /**
+     * Get the shopping lists for the family.
+     */
+    public function shopping_lists()
+    {
+        return $this->hasMany(ShoppingList::class);
+    }
+
 }

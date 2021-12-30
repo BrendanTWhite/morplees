@@ -15,6 +15,10 @@ class CreateShoppingListsTable extends Migration
     {
         Schema::create('shopping_lists', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('family_id')->constrained();
+
+            $table->text('override_name');
+
             $table->timestamps();
         });
     }
