@@ -13,6 +13,6 @@ class IngredientSeeder extends Seeder
      */
     public function run()
     {
-        // created as part of the Family seeder
+        //
     }
 }
