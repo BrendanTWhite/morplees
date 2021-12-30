@@ -15,13 +15,20 @@ class RecipeResource extends Resource
 {
     protected static ?string $model = Recipe::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'bi-file-text';
+
+    protected static ?string $navigationGroup = 'Recipes';
+    public static ?int $navigationSort = 310;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\BelongsToSelect::make('family_id')
+                    ->relationship('family', 'name'),
+                Forms\Components\TextInput::make('prep_time')->required(),
+                Forms\Components\TextInput::make('cook_time')->required(),
             ]);
     }
 
@@ -29,7 +36,9 @@ class RecipeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('prep_time'),
+                Tables\Columns\TextColumn::make('cook_time'),
             ])
             ->filters([
                 //
@@ -39,7 +48,8 @@ class RecipeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\IngredientsRelationManager::class,
+            RelationManagers\StepsRelationManager::class,
         ];
     }
 

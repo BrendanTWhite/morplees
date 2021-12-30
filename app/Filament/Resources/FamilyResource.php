@@ -44,6 +44,7 @@ class FamilyResource extends Resource
         return [
             RelationManagers\UsersRelationManager::class,
             RelationManagers\ShopsRelationManager::class,
+            RelationManagers\RecipesRelationManager::class,
         ];
     }
 

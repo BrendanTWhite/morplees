@@ -15,13 +15,19 @@ class StepResource extends Resource
 {
     protected static ?string $model = Step::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'bi-list-ol';
+
+    protected static ?string $navigationGroup = 'Recipes';
+    public static ?int $navigationSort = 330;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\BelongsToSelect::make('recipe_id')
+                    ->relationship('recipe', 'name'),
+                Forms\Components\TextInput::make('sequence')->required(),
+                Forms\Components\TextInput::make('instructions')->required(),
             ]);
     }
 
@@ -29,7 +35,9 @@ class StepResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('recipe.name'),
+                Tables\Columns\TextColumn::make('sequence'),
+                Tables\Columns\TextColumn::make('instructions'),
             ])
             ->filters([
                 //
