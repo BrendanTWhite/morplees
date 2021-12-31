@@ -15,6 +15,14 @@ class CreateSLItemsTable extends Migration
     {
         Schema::create('s_l_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shopping_list_id')->constrained();
+
+            // Polymorphic relationship for either Ingredient or Product
+            $table->morphs('itemable');
+
+            $table->integer('suggestion_interval');
+            $table->boolean('need_to_buy')->default(false);
+
             $table->timestamps();
         });
     }

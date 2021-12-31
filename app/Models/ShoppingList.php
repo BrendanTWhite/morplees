@@ -77,4 +77,20 @@ public function getNameAttribute()
         return $this->hasMany(SLRecipe::class);
     }
 
+    /**
+     * Get the SL Items for this record.
+     */
+    public function s_l_items() // snake for Filament
+    {
+        return $this->hasMany(SLItem::class);
+    }
+
+    /**
+     * Get the SL Items for this record.
+     */
+    public function sLItems() // Camel for seeder
+    {
+        return $this->hasMany(SLItem::class);
+    }
+
 }

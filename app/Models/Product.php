@@ -36,4 +36,12 @@ class Product extends Model
         return $this->hasMany(Ingredient::class);
     }
 
+    /**
+     * Get all of the product's SL items.
+     */
+    public function s_l_items()
+    {
+        return $this->morphMany('App\Models\SLItem', 'itemable');
+    }
+
 }

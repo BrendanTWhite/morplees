@@ -41,4 +41,13 @@ class Ingredient extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * Get all of the ingredient's SL items.
+     */
+    public function s_l_items()
+    {
+        return $this->morphMany('App\Models\SLItem', 'itemable');
+    }
+
 }

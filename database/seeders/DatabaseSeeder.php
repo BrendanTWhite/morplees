@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
                         ['override_name' => null],
                         ['override_name' => 'custom list name'],
                     ))            
+
                     ->hasSLRecipes(10, 
                         function (array $attributes, ShoppingList $shopping_list) {
                             return [
@@ -65,6 +66,15 @@ class DatabaseSeeder extends Seeder
                         }
                     )
 
+                    // ->hasSLItems(10, 
+                    //     function (array $attributes, ShoppingList $shopping_list) {
+                    //         return [
+                    //             'product_id' => 
+                    //             $shopping_list->family->shops->random()
+                    //             ->products->random()->id
+                    //         ];
+                    //     }
+                    // )
 
                 )
 
