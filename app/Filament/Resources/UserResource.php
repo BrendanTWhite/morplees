@@ -25,9 +25,11 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('email')->email()->required(),
                 Forms\Components\BelongsToSelect::make('family_id')
-                    ->relationship('family', 'name'),
+                    ->relationship('family', 'name')->required(),
+                Forms\Components\TextInput::make('email')->email()->required(),
+                Forms\Components\TextInput::make('password')->required()
+                    ->visible(fn ($livewire) => $livewire instanceof Pages\CreateUser),
             ]);
     }
 

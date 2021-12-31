@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
         $brendan = User::find(7);
         $brendan->name = 'Brendan White';
         $brendan->email = 'brendan@thespia.com';
-        $brendan->password = Hash::make('dingodingo');
+        $brendan->password = 'dingodingo'; // gets hashed by the setPasswordAttribute mutator
         $brendan->save();
 
         $this->command->info('Seeding complete.');
