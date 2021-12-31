@@ -66,19 +66,11 @@ class DatabaseSeeder extends Seeder
                         }
                     )
 
-                    // ->hasSLItems(10, 
-                    //     function (array $attributes, ShoppingList $shopping_list) {
-                    //         return [
-                    //             'product_id' => 
-                    //             $shopping_list->family->shops->random()
-                    //             ->products->random()->id
-                    //         ];
-                    //     }
-                    // )
-
                 )
 
             ->create();
+
+            // We won't seed the SLItem table - too tricky
 
 
         // Reset the details for Brendan
