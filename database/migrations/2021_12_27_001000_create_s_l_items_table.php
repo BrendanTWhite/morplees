@@ -20,8 +20,8 @@ class CreateSLItemsTable extends Migration
             // Polymorphic relationship for either Ingredient or Product
             $table->morphs('itemable');
 
-            $table->integer('suggestion_interval');
-            $table->boolean('need_to_buy')->default(false);
+            $table->boolean('needed');
+            $table->boolean('bought');            
 
             $table->timestamps();
         });

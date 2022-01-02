@@ -16,18 +16,12 @@ class SLItem extends Model
      */
     protected $fillable = [
         'shopping_list_id',
-        'product_id',
-        'ingredient_id',
+        'itemable_type',
+        'itemable_id',
+        'needed',
+        'bought',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'need_to_buy' => 'boolean',
-    ];
 
 
     /**
@@ -41,7 +35,7 @@ class SLItem extends Model
     /**
      * Get the model (either Ingredient or Product) for this SLItem.
      */
-    public function itemable(): Model
+    public function itemable()
     {
         return $this->morphTo();
     }

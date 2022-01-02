@@ -14,8 +14,8 @@ class SLItemFactory extends Factory
     public function definition()
     {
         return [
-            'suggestion_interval' => $this->faker->randomDigit(),
-            'need_to_buy' => $this->faker->boolean(),
+            'needed' => $this->faker->boolean(),
+            'bought' => $this->faker->boolean(),
         ];
     }
 }
