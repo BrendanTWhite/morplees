@@ -17,6 +17,8 @@ class Product extends Model
     protected $fillable = [
         'name',
         'shop_id',
+        'default_in_list',
+        'needed_soon',
     ];
 
 

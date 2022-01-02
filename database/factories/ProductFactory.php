@@ -15,6 +15,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
+            'default_in_list' => $this->faker->boolean(),
+            'needed_soon' => $this->faker->boolean(),
         ];
     }
 }
