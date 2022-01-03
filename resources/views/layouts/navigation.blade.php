@@ -34,6 +34,13 @@
                     </x-slot>
 
                     <x-slot name="content">
+
+                        @if (Auth::user()->is_admin)
+                            <x-dropdown-link :href="url('admin')">
+                                {{ __('Admin') }}
+                            </x-dropdown-link>
+                        @endif
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
