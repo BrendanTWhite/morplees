@@ -30,6 +30,7 @@ class AddWhiteFamilyData extends Migration
             'email' => 'brendan@thespia.com',
             'password' => 'dingodingo', // gets hashed by the setPasswordAttribute mutator
         ]);
+        $brendan->is_admin = true; $brendan->save(); // not fillable so updated separately
 
         // Create Kate 
         $kate = User::create([

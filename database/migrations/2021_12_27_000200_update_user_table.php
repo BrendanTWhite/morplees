@@ -15,6 +15,7 @@ class UpdateUserTable extends Migration
     {   
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('family_id')->constrained();
+            $table->boolean('is_admin')->default(false);
         });
     }
 
