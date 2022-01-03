@@ -17,9 +17,13 @@ class CreateRecipesTable extends Migration
             $table->id();
             $table->foreignId('family_id')->constrained();
 
-            $table->integer('prep_time');
-            $table->integer('cook_time');
             $table->text('name');
+
+            $table->integer('prep_time')->nullable();
+            $table->integer('cook_time')->nullable();
+
+            $table->text('book_reference')->nullable();
+            $table->text('url')->nullable();
 
             $table->timestamps();
         });

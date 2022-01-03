@@ -72,14 +72,6 @@ class DatabaseSeeder extends Seeder
 
             // We won't seed the SLItem table - too tricky
 
-
-        // Reset the details for Brendan
-        $brendan = User::find(7);
-        $brendan->name = 'Brendan White';
-        $brendan->email = 'brendan@thespia.com';
-        $brendan->password = 'dingodingo'; // gets hashed by the setPasswordAttribute mutator
-        $brendan->save();
-
         $this->command->info('Seeding complete.');
 
     }

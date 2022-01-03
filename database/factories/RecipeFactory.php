@@ -17,6 +17,8 @@ class RecipeFactory extends Factory
             'name' => $this->faker->catchPhrase(),
             'prep_time' => $this->faker->randomNumber(3, false),
             'cook_time' => $this->faker->randomNumber(3, false),
+            'book_reference' => $this->faker->bothify(),
+            'url' => $this->faker->url(3, false),
         ];
     }
 }

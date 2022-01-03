@@ -19,6 +19,8 @@ class Recipe extends Model
         'family_id',
         'prep_time',
         'cook_time',
+        'book_reference',
+        'url',
     ];
 
 
