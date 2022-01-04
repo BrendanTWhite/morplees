@@ -31,7 +31,13 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {
-        return $this->is_admin;
+
+        // If you want only Admins to see Filament, un-commment the following line
+        //return $this->is_admin;
+
+        // If you want everyone to see Filament, un-comment this line
+        return true;
+    
     }
 
 

@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return true;
+        return ($user->id === $model->id) or ($user->is_admin);
     }
 
     /**
@@ -40,7 +40,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return ($user->is_admin);
     }
 
     /**
@@ -52,7 +52,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return true;
+        return ($user->id === $model->id) or ($user->is_admin);
     }
 
     /**
@@ -64,7 +64,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return true;
+        return ($user->id === $model->id) or ($user->is_admin);
     }
 
     /**
@@ -76,7 +76,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model)
     {
-        return true;
+        return ($user->id === $model->id) or ($user->is_admin);
     }
 
     /**
@@ -88,6 +88,6 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model)
     {
-        return true;
+        return false;
     }
 }
