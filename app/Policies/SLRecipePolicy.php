@@ -30,7 +30,7 @@ class SLRecipePolicy
      */
     public function view(User $user, SLRecipe $sLRecipe)
     {
-        return true;
+        return ($user->family_id === $sLRecipe->shopping_list->family_id) or ($user->is_admin);
     }
 
     /**
@@ -53,7 +53,7 @@ class SLRecipePolicy
      */
     public function update(User $user, SLRecipe $sLRecipe)
     {
-        return true;
+        return ($user->family_id === $sLRecipe->shopping_list->family_id) or ($user->is_admin);
     }
 
     /**
@@ -65,7 +65,7 @@ class SLRecipePolicy
      */
     public function delete(User $user, SLRecipe $sLRecipe)
     {
-        return true;
+        return ($user->family_id === $sLRecipe->shopping_list->family_id) or ($user->is_admin);
     }
 
     /**
@@ -77,7 +77,7 @@ class SLRecipePolicy
      */
     public function restore(User $user, SLRecipe $sLRecipe)
     {
-        return true;
+        return ($user->family_id === $sLRecipe->shopping_list->family_id) or ($user->is_admin);
     }
 
     /**
@@ -89,6 +89,6 @@ class SLRecipePolicy
      */
     public function forceDelete(User $user, SLRecipe $sLRecipe)
     {
-        return true;
+        return ($user->family_id === $sLRecipe->shopping_list->family_id) or ($user->is_admin);
     }
 }

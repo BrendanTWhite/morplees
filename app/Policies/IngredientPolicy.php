@@ -30,7 +30,7 @@ class IngredientPolicy
      */
     public function view(User $user, Ingredient $ingredient)
     {
-        return true;
+        return ($user->family_id === $ingredient->recipe->family_id) or ($user->is_admin);
     }
 
     /**
@@ -53,7 +53,7 @@ class IngredientPolicy
      */
     public function update(User $user, Ingredient $ingredient)
     {
-        return true;
+        return ($user->family_id === $ingredient->recipe->family_id) or ($user->is_admin);
     }
 
     /**
@@ -65,7 +65,7 @@ class IngredientPolicy
      */
     public function delete(User $user, Ingredient $ingredient)
     {
-        return true;
+        return ($user->family_id === $ingredient->recipe->family_id) or ($user->is_admin);
     }
 
     /**
@@ -77,7 +77,7 @@ class IngredientPolicy
      */
     public function restore(User $user, Ingredient $ingredient)
     {
-        return true;
+        return ($user->family_id === $ingredient->recipe->family_id) or ($user->is_admin);
     }
 
     /**
@@ -89,6 +89,6 @@ class IngredientPolicy
      */
     public function forceDelete(User $user, Ingredient $ingredient)
     {
-        return true;
+        return false;
     }
 }

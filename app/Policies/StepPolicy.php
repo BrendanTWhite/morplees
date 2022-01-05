@@ -30,7 +30,7 @@ class StepPolicy
      */
     public function view(User $user, Step $step)
     {
-        return true;
+        return ($user->family_id === $step->recipe->family_id) or ($user->is_admin);
     }
 
     /**
@@ -53,7 +53,7 @@ class StepPolicy
      */
     public function update(User $user, Step $step)
     {
-        return true;
+        return ($user->family_id === $step->recipe->family_id) or ($user->is_admin);
     }
 
     /**
@@ -65,7 +65,7 @@ class StepPolicy
      */
     public function delete(User $user, Step $step)
     {
-        return true;
+        return ($user->family_id === $step->recipe->family_id) or ($user->is_admin);
     }
 
     /**
@@ -77,7 +77,7 @@ class StepPolicy
      */
     public function restore(User $user, Step $step)
     {
-        return true;
+        return ($user->family_id === $step->recipe->family_id) or ($user->is_admin);
     }
 
     /**
@@ -89,6 +89,6 @@ class StepPolicy
      */
     public function forceDelete(User $user, Step $step)
     {
-        return true;
+        return false;
     }
 }

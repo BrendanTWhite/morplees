@@ -30,7 +30,7 @@ class ShopPolicy
      */
     public function view(User $user, Shop $shop)
     {
-        return true;
+        return ($user->family_id === $shop->family_id) or ($user->is_admin);
     }
 
     /**
@@ -53,7 +53,7 @@ class ShopPolicy
      */
     public function update(User $user, Shop $shop)
     {
-        return true;
+        return ($user->family_id === $shop->family_id) or ($user->is_admin);
     }
 
     /**
@@ -65,7 +65,7 @@ class ShopPolicy
      */
     public function delete(User $user, Shop $shop)
     {
-        return true;
+        return ($user->family_id === $shop->family_id) or ($user->is_admin);
     }
 
     /**
@@ -77,7 +77,7 @@ class ShopPolicy
      */
     public function restore(User $user, Shop $shop)
     {
-        return true;
+        return ($user->family_id === $shop->family_id) or ($user->is_admin);
     }
 
     /**
@@ -89,6 +89,6 @@ class ShopPolicy
      */
     public function forceDelete(User $user, Shop $shop)
     {
-        return true;
+        return false;
     }
 }

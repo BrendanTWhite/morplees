@@ -30,7 +30,7 @@ class ShoppingListPolicy
      */
     public function view(User $user, ShoppingList $shoppingList)
     {
-        return true;
+        return ($user->family_id === $shoppingList->family_id) or ($user->is_admin);
     }
 
     /**
@@ -53,7 +53,7 @@ class ShoppingListPolicy
      */
     public function update(User $user, ShoppingList $shoppingList)
     {
-        return true;
+        return ($user->family_id === $shoppingList->family_id) or ($user->is_admin);
     }
 
     /**
@@ -65,7 +65,7 @@ class ShoppingListPolicy
      */
     public function delete(User $user, ShoppingList $shoppingList)
     {
-        return true;
+        return ($user->family_id === $shoppingList->family_id) or ($user->is_admin);
     }
 
     /**
@@ -77,7 +77,7 @@ class ShoppingListPolicy
      */
     public function restore(User $user, ShoppingList $shoppingList)
     {
-        return true;
+        return ($user->family_id === $shoppingList->family_id) or ($user->is_admin);
     }
 
     /**
@@ -89,6 +89,6 @@ class ShoppingListPolicy
      */
     public function forceDelete(User $user, ShoppingList $shoppingList)
     {
-        return true;
+        return false;
     }
 }

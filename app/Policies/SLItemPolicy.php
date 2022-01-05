@@ -30,7 +30,7 @@ class SLItemPolicy
      */
     public function view(User $user, SLItem $sLItem)
     {
-        return true;
+        return ($user->family_id === $sLItem->shopping_list->family_id) or ($user->is_admin);
     }
 
     /**
@@ -53,7 +53,7 @@ class SLItemPolicy
      */
     public function update(User $user, SLItem $sLItem)
     {
-        return true;
+        return ($user->family_id === $sLItem->shopping_list->family_id) or ($user->is_admin);
     }
 
     /**
@@ -65,7 +65,7 @@ class SLItemPolicy
      */
     public function delete(User $user, SLItem $sLItem)
     {
-        return true;
+        return ($user->family_id === $sLItem->shopping_list->family_id) or ($user->is_admin);
     }
 
     /**
@@ -77,7 +77,7 @@ class SLItemPolicy
      */
     public function restore(User $user, SLItem $sLItem)
     {
-        return true;
+        return ($user->family_id === $sLItem->shopping_list->family_id) or ($user->is_admin);
     }
 
     /**
@@ -89,6 +89,6 @@ class SLItemPolicy
      */
     public function forceDelete(User $user, SLItem $sLItem)
     {
-        return true;
+        return false;
     }
 }
