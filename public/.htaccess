@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    # See brendancodes.wordpress.com/2021/05/23/laravel-in-a-subdomain
+    RewriteBase /
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
