@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 
 class UserResource extends Resource
 {
@@ -37,11 +38,11 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('family')->relationship('family', 'name'),
             ]);
     }
 
