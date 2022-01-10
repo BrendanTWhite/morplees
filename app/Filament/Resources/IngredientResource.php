@@ -27,7 +27,7 @@ class IngredientResource extends Resource
                 Forms\Components\BelongsToSelect::make('recipe_id')
                     ->relationship('recipe', 'name'),
                 Forms\Components\TextInput::make('sequence')->required(),
-                Forms\Components\TextInput::make('quantity')->required(),
+                Forms\Components\TextInput::make('quantity'),
                 Forms\Components\BelongsToSelect::make('product_id')
                     ->relationship('product', 'name'),
             ]);
@@ -37,10 +37,10 @@ class IngredientResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('recipe.name'),
+                Tables\Columns\TextColumn::make('recipe.name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('sequence'),
                 Tables\Columns\TextColumn::make('quantity'),
-                Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('product.name')->searchable()->sortable(),
             ])
             ->filters([
                 //

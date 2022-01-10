@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 
 class RecipeResource extends Resource
 {
@@ -27,8 +28,10 @@ class RecipeResource extends Resource
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\BelongsToSelect::make('family_id')
                     ->relationship('family', 'name'),
-                Forms\Components\TextInput::make('prep_time')->required(),
-                Forms\Components\TextInput::make('cook_time')->required(),
+                Forms\Components\TextInput::make('prep_time'),
+                Forms\Components\TextInput::make('cook_time'),
+                Forms\Components\TextInput::make('book_reference'),
+                Forms\Components\TextInput::make('url'),
             ]);
     }
 
@@ -36,13 +39,15 @@ class RecipeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('family.name'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('prep_time'),
-                Tables\Columns\TextColumn::make('cook_time'),
+                Tables\Columns\TextColumn::make('family.name')->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('prep_time')->sortable(),
+                Tables\Columns\TextColumn::make('cook_time')->sortable(),
+                Tables\Columns\TextColumn::make('book_reference')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('url')->searchable()->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('family')->relationship('family', 'name'),
             ]);
     }
 

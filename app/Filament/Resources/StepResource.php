@@ -35,9 +35,9 @@ class StepResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('recipe.name'),
-                Tables\Columns\TextColumn::make('sequence'),
-                Tables\Columns\TextColumn::make('instructions'),
+                Tables\Columns\TextColumn::make('recipe.name')->sortable(),
+                Tables\Columns\TextColumn::make('sequence')->sortable(),
+                Tables\Columns\TextColumn::make('instructions')->sortable(),
             ])
             ->filters([
                 //

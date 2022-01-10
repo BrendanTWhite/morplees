@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 
 class ProductResource extends Resource
 {
@@ -36,12 +37,12 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\BooleanColumn::make('default_in_list'),
-                Tables\Columns\BooleanColumn::make('needed_soon'),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\BooleanColumn::make('default_in_list')->sortable(),
+                Tables\Columns\BooleanColumn::make('needed_soon')->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('shop')->relationship('shop', 'name'),
             ]);
     }
 
