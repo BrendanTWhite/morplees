@@ -44,7 +44,9 @@ class RecipeResource extends Resource
                 Tables\Columns\TextColumn::make('prep_time')->sortable(),
                 Tables\Columns\TextColumn::make('cook_time')->sortable(),
                 Tables\Columns\TextColumn::make('book_reference')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('url')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('url')->searchable()->sortable()
+                    ->url(fn (Recipe $record): string => $record->url)
+                    ->openUrlInNewTab(),
             ])
             ->filters([
                 SelectFilter::make('family')->relationship('family', 'name'),
