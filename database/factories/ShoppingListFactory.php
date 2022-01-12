@@ -15,7 +15,7 @@ class ShoppingListFactory extends Factory
     {
         return [
             'override_name' => null,
-            'created_at' => $this->faker->dateTimeBetween('-6 month', '-1 hour'),
+            'created_at' => $this->faker->dateTimeBetween('-6 month', '-1 day'),
         ];
     }
 }
