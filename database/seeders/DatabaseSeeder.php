@@ -29,11 +29,16 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Shop::factory()
                     ->count(5)
-                    ->hasProducts(10)
+                    ->hasProducts(10,
+                        function (array $attributes, Shop $shop) {
+                            // dd($attributes); // array:3 [ "name" => "quo", "default_in_list" => true, "needed_soon" => true ]
+                            return [ 'family_id' => $shop->family_id ];
+                        }
+                    )
             )
 
             ->has(
-                $recipe = Recipe::factory()
+                Recipe::factory()
                     ->count(10)
                     ->hasSteps(6)
                     ->hasIngredients(10, 
@@ -50,12 +55,12 @@ class DatabaseSeeder extends Seeder
             -> has (
                 $shopping_list = ShoppingList::factory()
                     ->count(10)
-                    ->state(new Sequence(
-                        ['override_name' => null],
-                        ['override_name' => null],
-                        ['override_name' => null],
-                        ['override_name' => 'custom list name'],
-                    ))            
+                    // ->state(new Sequence(
+                    //     ['override_name' => null],
+                    //     ['override_name' => null],
+                    //     ['override_name' => null],
+                    //     ['override_name' => 'custom list name'],
+                    // ))            
 
                     ->hasSLRecipes(10, 
                         function (array $attributes, ShoppingList $shopping_list) {

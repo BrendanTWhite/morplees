@@ -21,6 +21,12 @@ class CreateProductsTable extends Migration
             $table->boolean('default_in_list')->default(false);            
             $table->boolean('needed_soon')->default(false);
 
+            // Additional indexes for convenience and integrity
+            $table->foreignId('family_id')->constrained();
+            $table->foreign(['family_id', 'shop_id'])
+                ->references(['family_id', 'id'])
+                ->on('shops');
+
             $table->timestamps();
         });
     }
