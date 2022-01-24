@@ -44,9 +44,9 @@ any records, not even their own.
     }
 ````
 
-### Booted Method on Laravel Model
+### Global Scope on the Booted Method on Laravel Model
 
-Probably the best option. Seems to stop users from seeing other
+Probably the best option so far. Seems to stop users from seeing other
 users' records everywhere (including Filament tables and forms)
 while still allowing them to see their own records everywhere.
 
@@ -74,3 +74,13 @@ Can also be extended to allow admin users to see everyone's records.
         });
     }
 ````
+
+### Laravel Global Scopes
+
+Laravel's [Global Scopes](https://laravel.com/docs/8.x/eloquent#global-scopes) in a separate file are another option
+and are probably cleaner. They can easily enough be overridden
+where needed for eg admin access, but they will still take effect
+without needing to remember to include them, once implemented.
+
+We still need to include them in the model's `booted()` function,
+but it's perhaps a little cleaner while still being overridable.
