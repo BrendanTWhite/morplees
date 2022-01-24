@@ -10,7 +10,6 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
 
 class FamilyResource extends Resource
 {
@@ -58,11 +57,6 @@ class FamilyResource extends Resource
             'view' => Pages\ViewFamily::route('/{record}'),
             'edit' => Pages\EditFamily::route('/{record}/edit'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('id',auth()->user()->family_id);
     }
 
 }

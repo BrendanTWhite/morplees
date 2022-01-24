@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
 
 class ShoppingListResource extends Resource
 {
@@ -60,11 +59,6 @@ class ShoppingListResource extends Resource
             'view' => Pages\ViewShoppingList::route('/{record}'),
             'edit' => Pages\EditShoppingList::route('/{record}/edit'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->whereBelongsTo(auth()->user()->family);
     }
 
 }
