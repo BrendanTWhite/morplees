@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class Shop extends Model
 {
@@ -37,4 +39,23 @@ class Shop extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('ours', function (Builder $builder) {
+            if (Auth::user()->is_admin) {
+                return $builder;
+            } else {
+                return $builder->where('family_id', '=', Auth::user()->family_id);    
+            }
+            
+        });
+    }
+
 }
