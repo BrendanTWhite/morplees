@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class Family extends Model
 {
@@ -60,6 +62,25 @@ class Family extends Model
     public function shoppingLists() // camel case for seeder
     {
         return $this->hasMany(ShoppingList::class);
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {        
+        // Note that JustMyFamilyScope checks the family_id foreign key
+        // which doesn' exist on a Family. We need to just check the id
+        
+        static::addGlobalScope('this_family', function (Builder $builder) {
+            if  (Auth::hasUser()) {
+                return $builder->where('id', '=', Auth::user()->family_id);
+            } else {
+                return $builder;
+            }
+        });
     }
 
 }

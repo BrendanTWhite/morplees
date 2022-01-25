@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\JustMyFamilyScope;
 
 class Product extends Model
 {
@@ -45,6 +46,17 @@ class Product extends Model
     public function s_l_items()
     {
         return $this->morphMany('App\Models\SLItem', 'itemable');
+    }
+
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }
