@@ -7,7 +7,7 @@ There are several options for restricting access.
 
 ## Filters on Filament Table
 
-Only works on the table. Doesn't eg filter for just that user's Shops 
+Only works on the Filament Resource table. Doesn't eg filter for just that user's Shops 
 when building a Shops filter on Products. Doesn't stop a user guessing 
 a URL for some other user's record like [thing.com/products/42](https://google.com/)
 
