@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27843ba01bd7a94d0324468d91a4a9f4",
+    "content-hash": "83fc5bd342c26378037fbbd6ee989a1f",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -948,16 +948,16 @@
         },
         {
             "name": "filament/filament",
-            "version": "v2.9.13",
+            "version": "v2.9.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-filament/admin.git",
-                "reference": "3af9a730f7d3bbd1ad09d6c380c29bd42e74b983"
+                "reference": "4675595a10783697b347001765aa0a692cc3f6e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-filament/admin/zipball/3af9a730f7d3bbd1ad09d6c380c29bd42e74b983",
-                "reference": "3af9a730f7d3bbd1ad09d6c380c29bd42e74b983",
+                "url": "https://api.github.com/repos/laravel-filament/admin/zipball/4675595a10783697b347001765aa0a692cc3f6e3",
+                "reference": "4675595a10783697b347001765aa0a692cc3f6e3",
                 "shasum": ""
             },
             "require": {
@@ -1004,20 +1004,20 @@
                 "issues": "https://github.com/laravel-filament/filament/issues",
                 "source": "https://github.com/laravel-filament/filament"
             },
-            "time": "2022-01-26T09:06:04+00:00"
+            "time": "2022-01-28T21:00:11+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v2.9.13",
+            "version": "v2.9.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-filament/forms.git",
-                "reference": "3f5b1277656c35c1e0e74e3f9b5d94d0852d0508"
+                "reference": "0d1ab903845429c2c200119aa953458de61914c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-filament/forms/zipball/3f5b1277656c35c1e0e74e3f9b5d94d0852d0508",
-                "reference": "3f5b1277656c35c1e0e74e3f9b5d94d0852d0508",
+                "url": "https://api.github.com/repos/laravel-filament/forms/zipball/0d1ab903845429c2c200119aa953458de61914c2",
+                "reference": "0d1ab903845429c2c200119aa953458de61914c2",
                 "shasum": ""
             },
             "require": {
@@ -1060,20 +1060,20 @@
                 "issues": "https://github.com/laravel-filament/filament/issues",
                 "source": "https://github.com/laravel-filament/filament"
             },
-            "time": "2022-01-25T22:29:59+00:00"
+            "time": "2022-01-28T21:00:06+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v2.9.13",
+            "version": "v2.9.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-filament/tables.git",
-                "reference": "0d4d8acbf7c4380fa97f5bf03b4ebdfa80f10887"
+                "reference": "7541a30b5bb67087473e9914d54ceb45ed827a09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-filament/tables/zipball/0d4d8acbf7c4380fa97f5bf03b4ebdfa80f10887",
-                "reference": "0d4d8acbf7c4380fa97f5bf03b4ebdfa80f10887",
+                "url": "https://api.github.com/repos/laravel-filament/tables/zipball/7541a30b5bb67087473e9914d54ceb45ed827a09",
+                "reference": "7541a30b5bb67087473e9914d54ceb45ed827a09",
                 "shasum": ""
             },
             "require": {
@@ -1113,7 +1113,7 @@
                 "issues": "https://github.com/laravel-filament/filament/issues",
                 "source": "https://github.com/laravel-filament/filament"
             },
-            "time": "2022-01-25T23:27:18+00:00"
+            "time": "2022-01-28T21:00:18+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -2824,16 +2824,16 @@
         },
         {
             "name": "opis/closure",
-            "version": "3.6.2",
+            "version": "3.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opis/closure.git",
-                "reference": "06e2ebd25f2869e54a306dda991f7db58066f7f6"
+                "reference": "3d81e4309d2a927abbe66df935f4bb60082805ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opis/closure/zipball/06e2ebd25f2869e54a306dda991f7db58066f7f6",
-                "reference": "06e2ebd25f2869e54a306dda991f7db58066f7f6",
+                "url": "https://api.github.com/repos/opis/closure/zipball/3d81e4309d2a927abbe66df935f4bb60082805ad",
+                "reference": "3d81e4309d2a927abbe66df935f4bb60082805ad",
                 "shasum": ""
             },
             "require": {
@@ -2883,9 +2883,9 @@
             ],
             "support": {
                 "issues": "https://github.com/opis/closure/issues",
-                "source": "https://github.com/opis/closure/tree/3.6.2"
+                "source": "https://github.com/opis/closure/tree/3.6.3"
             },
-            "time": "2021-04-09T13:42:10+00:00"
+            "time": "2022-01-27T09:35:39+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -3750,16 +3750,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "a2c6b7ced2eb7799a35375fb9022519282b5405e"
+                "reference": "a2a86ec353d825c75856c6fd14fac416a7bdb6b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/a2c6b7ced2eb7799a35375fb9022519282b5405e",
-                "reference": "a2c6b7ced2eb7799a35375fb9022519282b5405e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/a2a86ec353d825c75856c6fd14fac416a7bdb6b8",
+                "reference": "a2a86ec353d825c75856c6fd14fac416a7bdb6b8",
                 "shasum": ""
             },
             "require": {
@@ -3829,7 +3829,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.2"
+                "source": "https://github.com/symfony/console/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -3845,20 +3845,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-20T16:11:12+00:00"
+            "time": "2022-01-26T16:28:35+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v6.0.2",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "380f86c1a9830226f42a08b5926f18aed4195f25"
+                "reference": "1955d595c12c111629cc814d3f2a2ff13580508a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/380f86c1a9830226f42a08b5926f18aed4195f25",
-                "reference": "380f86c1a9830226f42a08b5926f18aed4195f25",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/1955d595c12c111629cc814d3f2a2ff13580508a",
+                "reference": "1955d595c12c111629cc814d3f2a2ff13580508a",
                 "shasum": ""
             },
             "require": {
@@ -3894,7 +3894,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v6.0.2"
+                "source": "https://github.com/symfony/css-selector/tree/v6.0.3"
             },
             "funding": [
                 {
@@ -3910,7 +3910,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-16T22:13:01+00:00"
+            "time": "2022-01-02T09:55:41+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -3981,16 +3981,16 @@
         },
         {
             "name": "symfony/error-handler",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
-                "reference": "e0c0dd0f9d4120a20158fc9aec2367d07d38bc56"
+                "reference": "c4ffc2cd919950d13c8c9ce32a70c70214c3ffc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/error-handler/zipball/e0c0dd0f9d4120a20158fc9aec2367d07d38bc56",
-                "reference": "e0c0dd0f9d4120a20158fc9aec2367d07d38bc56",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/c4ffc2cd919950d13c8c9ce32a70c70214c3ffc5",
+                "reference": "c4ffc2cd919950d13c8c9ce32a70c70214c3ffc5",
                 "shasum": ""
             },
             "require": {
@@ -4032,7 +4032,7 @@
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/error-handler/tree/v5.4.2"
+                "source": "https://github.com/symfony/error-handler/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -4048,20 +4048,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-19T20:02:00+00:00"
+            "time": "2022-01-02T09:53:40+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v6.0.2",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "7093f25359e2750bfe86842c80c4e4a6a852d05c"
+                "reference": "6472ea2dd415e925b90ca82be64b8bc6157f3934"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/7093f25359e2750bfe86842c80c4e4a6a852d05c",
-                "reference": "7093f25359e2750bfe86842c80c4e4a6a852d05c",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/6472ea2dd415e925b90ca82be64b8bc6157f3934",
+                "reference": "6472ea2dd415e925b90ca82be64b8bc6157f3934",
                 "shasum": ""
             },
             "require": {
@@ -4115,7 +4115,7 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher/tree/v6.0.2"
+                "source": "https://github.com/symfony/event-dispatcher/tree/v6.0.3"
             },
             "funding": [
                 {
@@ -4131,7 +4131,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-21T10:43:13+00:00"
+            "time": "2022-01-02T09:55:41+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -4214,16 +4214,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "e77046c252be48c48a40816187ed527703c8f76c"
+                "reference": "231313534dded84c7ecaa79d14bc5da4ccb69b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/e77046c252be48c48a40816187ed527703c8f76c",
-                "reference": "e77046c252be48c48a40816187ed527703c8f76c",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/231313534dded84c7ecaa79d14bc5da4ccb69b7d",
+                "reference": "231313534dded84c7ecaa79d14bc5da4ccb69b7d",
                 "shasum": ""
             },
             "require": {
@@ -4257,7 +4257,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v5.4.2"
+                "source": "https://github.com/symfony/finder/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -4273,20 +4273,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-15T11:06:13+00:00"
+            "time": "2022-01-26T16:34:36+00:00"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "ce952af52877eaf3eab5d0c08cc0ea865ed37313"
+                "reference": "ef409ff341a565a3663157d4324536746d49a0c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/ce952af52877eaf3eab5d0c08cc0ea865ed37313",
-                "reference": "ce952af52877eaf3eab5d0c08cc0ea865ed37313",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/ef409ff341a565a3663157d4324536746d49a0c7",
+                "reference": "ef409ff341a565a3663157d4324536746d49a0c7",
                 "shasum": ""
             },
             "require": {
@@ -4330,7 +4330,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v5.4.2"
+                "source": "https://github.com/symfony/http-foundation/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -4346,20 +4346,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-28T17:15:56+00:00"
+            "time": "2022-01-02T09:53:40+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "35b7e9868953e0d1df84320bb063543369e43ef5"
+                "reference": "936ca1ba7fb197c9e100a68d7e963b93d99db26e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/35b7e9868953e0d1df84320bb063543369e43ef5",
-                "reference": "35b7e9868953e0d1df84320bb063543369e43ef5",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/936ca1ba7fb197c9e100a68d7e963b93d99db26e",
+                "reference": "936ca1ba7fb197c9e100a68d7e963b93d99db26e",
                 "shasum": ""
             },
             "require": {
@@ -4442,7 +4442,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v5.4.2"
+                "source": "https://github.com/symfony/http-kernel/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -4458,20 +4458,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-29T13:20:26+00:00"
+            "time": "2022-01-28T11:06:03+00:00"
         },
         {
             "name": "symfony/mime",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "1bfd938cf9562822c05c4d00e8f92134d3c8e42d"
+                "reference": "e1503cfb5c9a225350f549d3bb99296f4abfb80f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/1bfd938cf9562822c05c4d00e8f92134d3c8e42d",
-                "reference": "1bfd938cf9562822c05c4d00e8f92134d3c8e42d",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/e1503cfb5c9a225350f549d3bb99296f4abfb80f",
+                "reference": "e1503cfb5c9a225350f549d3bb99296f4abfb80f",
                 "shasum": ""
             },
             "require": {
@@ -4525,7 +4525,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v5.4.2"
+                "source": "https://github.com/symfony/mime/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -4541,7 +4541,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-28T17:15:56+00:00"
+            "time": "2022-01-02T09:53:40+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -5362,16 +5362,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "2b3ba8722c4aaf3e88011be5e7f48710088fb5e4"
+                "reference": "553f50487389a977eb31cf6b37faae56da00f753"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/2b3ba8722c4aaf3e88011be5e7f48710088fb5e4",
-                "reference": "2b3ba8722c4aaf3e88011be5e7f48710088fb5e4",
+                "url": "https://api.github.com/repos/symfony/process/zipball/553f50487389a977eb31cf6b37faae56da00f753",
+                "reference": "553f50487389a977eb31cf6b37faae56da00f753",
                 "shasum": ""
             },
             "require": {
@@ -5404,7 +5404,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v5.4.2"
+                "source": "https://github.com/symfony/process/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -5420,20 +5420,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-27T21:01:00+00:00"
+            "time": "2022-01-26T16:28:35+00:00"
         },
         {
             "name": "symfony/routing",
-            "version": "v5.4.0",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "9eeae93c32ca86746e5d38f3679e9569981038b1"
+                "reference": "44b29c7a94e867ccde1da604792f11a469958981"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/9eeae93c32ca86746e5d38f3679e9569981038b1",
-                "reference": "9eeae93c32ca86746e5d38f3679e9569981038b1",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/44b29c7a94e867ccde1da604792f11a469958981",
+                "reference": "44b29c7a94e867ccde1da604792f11a469958981",
                 "shasum": ""
             },
             "require": {
@@ -5494,7 +5494,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/v5.4.0"
+                "source": "https://github.com/symfony/routing/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -5510,7 +5510,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-23T10:19:22+00:00"
+            "time": "2022-01-02T09:53:40+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -5596,16 +5596,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v6.0.2",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "bae261d0c3ac38a1f802b4dfed42094296100631"
+                "reference": "522144f0c4c004c80d56fa47e40e17028e2eefc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/bae261d0c3ac38a1f802b4dfed42094296100631",
-                "reference": "bae261d0c3ac38a1f802b4dfed42094296100631",
+                "url": "https://api.github.com/repos/symfony/string/zipball/522144f0c4c004c80d56fa47e40e17028e2eefc2",
+                "reference": "522144f0c4c004c80d56fa47e40e17028e2eefc2",
                 "shasum": ""
             },
             "require": {
@@ -5661,7 +5661,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v6.0.2"
+                "source": "https://github.com/symfony/string/tree/v6.0.3"
             },
             "funding": [
                 {
@@ -5677,20 +5677,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-16T22:13:01+00:00"
+            "time": "2022-01-02T09:55:41+00:00"
         },
         {
             "name": "symfony/translation",
-            "version": "v6.0.2",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "a16c33f93e2fd62d259222aebf792158e9a28a77"
+                "reference": "71bb15335798f8c4da110911bcf2d2fead7a430d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/a16c33f93e2fd62d259222aebf792158e9a28a77",
-                "reference": "a16c33f93e2fd62d259222aebf792158e9a28a77",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/71bb15335798f8c4da110911bcf2d2fead7a430d",
+                "reference": "71bb15335798f8c4da110911bcf2d2fead7a430d",
                 "shasum": ""
             },
             "require": {
@@ -5756,7 +5756,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v6.0.2"
+                "source": "https://github.com/symfony/translation/tree/v6.0.3"
             },
             "funding": [
                 {
@@ -5772,7 +5772,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-25T20:10:03+00:00"
+            "time": "2022-01-07T00:29:03+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -5854,16 +5854,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "1b56c32c3679002b3a42384a580e16e2600f41c1"
+                "reference": "970a01f208bf895c5f327ba40b72288da43adec4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/1b56c32c3679002b3a42384a580e16e2600f41c1",
-                "reference": "1b56c32c3679002b3a42384a580e16e2600f41c1",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/970a01f208bf895c5f327ba40b72288da43adec4",
+                "reference": "970a01f208bf895c5f327ba40b72288da43adec4",
                 "shasum": ""
             },
             "require": {
@@ -5923,7 +5923,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v5.4.2"
+                "source": "https://github.com/symfony/var-dumper/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -5939,7 +5939,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-29T10:10:35+00:00"
+            "time": "2022-01-17T16:30:37+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -8990,17 +8990,84 @@
             "time": "2020-09-28T06:39:44+00:00"
         },
         {
-            "name": "symfony/debug",
-            "version": "v4.4.36",
+            "name": "spatie/laravel-mail-preview",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/debug.git",
-                "reference": "346e1507eeb3f566dcc7a116fefaa407ee84691b"
+                "url": "https://github.com/spatie/laravel-mail-preview.git",
+                "reference": "58b6df662dc6680142779a3597876bee75a1b51f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/346e1507eeb3f566dcc7a116fefaa407ee84691b",
-                "reference": "346e1507eeb3f566dcc7a116fefaa407ee84691b",
+                "url": "https://api.github.com/repos/spatie/laravel-mail-preview/zipball/58b6df662dc6680142779a3597876bee75a1b51f",
+                "reference": "58b6df662dc6680142779a3597876bee75a1b51f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "^8.26",
+                "illuminate/mail": "^8.26",
+                "illuminate/support": "^8.26",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.11",
+                "spatie/ray": "^1.19"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\MailPreview\\MailPreviewServiceProvider"
+                    ],
+                    "aliases": {
+                        "sentMails": "Spatie\\MailPreview\\Facades\\SentMails"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\MailPreview\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "themsaid@gmail.com"
+                }
+            ],
+            "description": "A mail driver to quickly preview mail",
+            "homepage": "https://github.com/themsaid/laravel-preview-mail-driver",
+            "keywords": [
+                "laravel",
+                "mail"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-mail-preview/issues",
+                "source": "https://github.com/spatie/laravel-mail-preview/tree/5.2.0"
+            },
+            "time": "2021-04-01T15:31:00+00:00"
+        },
+        {
+            "name": "symfony/debug",
+            "version": "v4.4.37",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/debug.git",
+                "reference": "5de6c6e7f52b364840e53851c126be4d71e60470"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/5de6c6e7f52b364840e53851c126be4d71e60470",
+                "reference": "5de6c6e7f52b364840e53851c126be4d71e60470",
                 "shasum": ""
             },
             "require": {
@@ -9039,7 +9106,7 @@
             "description": "Provides tools to ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/debug/tree/v4.4.36"
+                "source": "https://github.com/symfony/debug/tree/v4.4.37"
             },
             "funding": [
                 {
@@ -9055,7 +9122,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-29T08:40:48+00:00"
+            "time": "2022-01-02T09:41:36+00:00"
         },
         {
             "name": "theseer/tokenizer",
