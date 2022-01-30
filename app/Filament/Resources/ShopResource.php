@@ -12,6 +12,9 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 
+use App\Scopes\JustMyFamilyScope;
+use Illuminate\Database\Eloquent\Builder;
+
 class ShopResource extends Resource
 {
     protected static ?string $model = Shop::class;
@@ -58,5 +61,12 @@ class ShopResource extends Resource
             'edit' => Pages\EditShop::route('/{record}/edit'),
         ];
     }
+
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withGlobalScope('family', JustMyFamilyScope::Class);
+    }
+
 
 }
