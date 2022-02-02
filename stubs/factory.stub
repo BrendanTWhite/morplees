@@ -3,6 +3,7 @@
 namespace {{ factoryNamespace }};
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Family;
 
 class {{ factory }}Factory extends Factory
 {
@@ -14,7 +15,9 @@ class {{ factory }}Factory extends Factory
     public function definition()
     {
         return [
-            //
+            
+
+            'family_id' => Family::factory(), // normally we'll specify a family; if not, it'll create a new one
         ];
     }
 }
