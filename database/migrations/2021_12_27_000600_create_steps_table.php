@@ -15,6 +15,7 @@ class CreateStepsTable extends Migration
     {
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('family_id')->constrained();
             $table->foreignId('recipe_id')->constrained();
 
             $table->integer('sequence');

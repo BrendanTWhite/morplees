@@ -15,6 +15,7 @@ class CreateSLRecipesTable extends Migration
     {
         Schema::create('s_l_recipes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('family_id')->constrained();
             $table->foreignId('shopping_list_id')->constrained();
             $table->foreignId('recipe_id')->constrained();
 

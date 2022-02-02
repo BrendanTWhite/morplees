@@ -15,6 +15,7 @@ class CreateSLItemsTable extends Migration
     {
         Schema::create('s_l_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('family_id')->constrained();
             $table->foreignId('shopping_list_id')->constrained();
 
             // Polymorphic relationship for either Ingredient or Product
