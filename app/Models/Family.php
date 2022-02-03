@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use App\Scopes\JustMyFamilyScope;
 
 class Family extends Model
 {
@@ -74,9 +75,9 @@ class Family extends Model
         // Note that JustMyFamilyScope checks the family_id foreign key
         // which doesn' exist on a Family. We need to just check the id
         
-        static::addGlobalScope('this_family', function (Builder $builder) {
-            if  (Auth::hasUser()) {
-                return $builder->where('id', '=', Auth::user()->family_id);
+            static::addGlobalScope('this_family', function (Builder $builder) {
+            if(session()->has('family_id')) {
+                return $builder->where('id', '=', session(key: 'family_id'));            
             } else {
                 return $builder;
             }

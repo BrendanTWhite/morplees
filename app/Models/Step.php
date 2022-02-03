@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\JustMyFamilyScope;
 
 class Step extends Model
 {
@@ -32,6 +33,16 @@ class Step extends Model
     public function recipe()
     {
         return $this->belongsTo(Recipe::class);
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }

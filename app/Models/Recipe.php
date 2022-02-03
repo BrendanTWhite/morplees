@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\JustMyFamilyScope;
 
 class Recipe extends Model
 {
@@ -58,6 +59,16 @@ class Recipe extends Model
     public function s_l_recipes()
     {
         return $this->hasMany(SLRecipe::class);
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }
