@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Scopes\JustMyFamilyScope;
+use App\Traits\BelongsToFamily;
 
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
+   use BelongsToFamily;
 
     /**
      * The attributes that are mass assignable.
@@ -81,17 +82,6 @@ class User extends Authenticatable implements FilamentUser
     public function family()
     {
         return $this->belongsTo(Family::class);
-    }
-
-
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }

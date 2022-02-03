@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Scopes\JustMyFamilyScope;
+use App\Traits\BelongsToFamily;
 
 class SLItem extends Model
 {
     use HasFactory;
+    use BelongsToFamily;
 
     /**
      * The attributes that are mass assignable.
@@ -78,17 +79,6 @@ class SLItem extends Model
         } else {
             return $itemable;
         }        
-    }
-
-
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }

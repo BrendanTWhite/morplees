@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Scopes\JustMyFamilyScope;
+use App\Traits\BelongsToFamily;
 
 class SLRecipe extends Model
 {
     use HasFactory;
+    use BelongsToFamily;
 
     /**
      * The attributes that are mass assignable.
@@ -37,17 +38,6 @@ class SLRecipe extends Model
     public function recipe()
     {
         return $this->belongsTo(Recipe::class);
-    }
-
-
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }
