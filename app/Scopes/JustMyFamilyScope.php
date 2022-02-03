@@ -18,10 +18,8 @@ class JustMyFamilyScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        if  (Auth::hasUser()) {
-            return $builder->where('family_id', '=', Auth::user()->family_id);
-        } else {
-            return $builder;
+        if(session()->has('family_id')) {
+            $builder->where('family_id', '=', session(key: 'family_id'));            
         }
     }
 
