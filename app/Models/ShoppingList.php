@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\JustMyFamilyScope;
 
 class ShoppingList extends Model
 {
@@ -91,6 +92,17 @@ public function getNameAttribute()
     public function sLItems() // Camel for seeder
     {
         return $this->hasMany(SLItem::class);
+    }
+
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }

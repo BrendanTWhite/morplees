@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\JustMyFamilyScope;
 
 class SLItem extends Model
 {
@@ -77,6 +78,17 @@ class SLItem extends Model
         } else {
             return $itemable;
         }        
+    }
+
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }
