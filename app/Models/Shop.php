@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use App\Scopes\JustMyFamilyScope;
+use App\Traits\BelongsToFamily;
 
 class Shop extends Model
 {
     use HasFactory;
+    use BelongsToFamily;
 
     /**
      * The attributes that are mass assignable.
@@ -39,17 +41,6 @@ class Shop extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
-    }
-
-
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new JustMyFamilyScope);
     }
 
 }

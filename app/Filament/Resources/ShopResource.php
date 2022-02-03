@@ -29,8 +29,6 @@ class ShopResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\BelongsToSelect::make('family_id')
-                    ->relationship('family', 'name'),
             ]);
     }
 
@@ -41,7 +39,7 @@ class ShopResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
             ])
             ->filters([
-                SelectFilter::make('family')->relationship('family', 'name'),
+                //
             ]);
     }
 

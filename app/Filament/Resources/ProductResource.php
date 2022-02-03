@@ -38,6 +38,7 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('shop.name')->searchable()->sortable(),
                 Tables\Columns\BooleanColumn::make('default_in_list')->sortable(),
                 Tables\Columns\BooleanColumn::make('needed_soon')->sortable(),
             ])
