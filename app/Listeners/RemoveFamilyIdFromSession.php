@@ -25,6 +25,6 @@ class RemoveFamilyIdFromSession
      */
     public function handle($event)
     {
-        //
+        session()->forget('family_id');
     }
 }
