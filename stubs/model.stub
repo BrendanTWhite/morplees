@@ -4,8 +4,13 @@ namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\BelongsToFamily;
 
 class {{ class }} extends Model
 {
     use HasFactory;
+    use BelongsToFamily;
+
+
+
 }
