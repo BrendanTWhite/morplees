@@ -18,16 +18,14 @@ class RecipeResource extends Resource
 
     protected static ?string $navigationIcon = 'bi-journal-text';
 
-    protected static ?string $navigationGroup = 'OTHER';
-    public static ?int $navigationSort = 950;
+    protected static ?string $navigationGroup = '';
+    public static ?int $navigationSort = 100;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\BelongsToSelect::make('family_id')
-                    ->relationship('family', 'name'),
                 Forms\Components\TextInput::make('prep_time'),
                 Forms\Components\TextInput::make('cook_time'),
                 Forms\Components\TextInput::make('book_reference'),
@@ -39,17 +37,20 @@ class RecipeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('family.name')->sortable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('prep_time')->sortable(),
                 Tables\Columns\TextColumn::make('cook_time')->sortable(),
                 Tables\Columns\TextColumn::make('book_reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('url')->searchable()->sortable()
-                    ->url(fn (Recipe $record): string => $record->url)
+                    ->limit('30')
+                    ->url(fn (Recipe $record): string => $record->url ? $record->url : '')
                     ->openUrlInNewTab(),
             ])
             ->filters([
-                SelectFilter::make('family')->relationship('family', 'name'),
+                //
+            ])
+            ->actions([
+                //
             ]);
     }
 
