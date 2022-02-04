@@ -17,7 +17,9 @@ trait BelongsToFamily
         static::addGlobalScope(new JustMyFamilyScope);
 
         static::creating(function($model) {
-            $model->family_id = session(key:'family_id');
+            if(session()->has('family_id')) {
+                $model->family_id = session(key:'family_id');
+            }
         });
     }
 
