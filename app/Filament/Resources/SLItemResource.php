@@ -19,8 +19,8 @@ class SLItemResource extends Resource
     protected static ?string $label = 'Shopping List - Item';
     protected static ?string $pluralLabel = 'Shopping List - Items';
 
-    protected static ?string $navigationGroup = 'Shopping Lists';
-    public static ?int $navigationSort = 430;
+    protected static ?string $navigationGroup = 'OTHER';
+    public static ?int $navigationSort = 999;
 
     public static function form(Form $form): Form
     {

@@ -18,8 +18,8 @@ class RecipeResource extends Resource
 
     protected static ?string $navigationIcon = 'bi-journal-text';
 
-    protected static ?string $navigationGroup = 'Recipes';
-    public static ?int $navigationSort = 310;
+    protected static ?string $navigationGroup = 'OTHER';
+    public static ?int $navigationSort = 950;
 
     public static function form(Form $form): Form
     {

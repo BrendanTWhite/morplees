@@ -18,8 +18,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'lineawesome-apple-alt-solid';
          
-    protected static ?string $navigationGroup = 'People & Products';
-    public static ?int $navigationSort = 220;
+    protected static ?string $navigationGroup = 'OTHER';
+    public static ?int $navigationSort = 940;
 
     public static function form(Form $form): Form
     {

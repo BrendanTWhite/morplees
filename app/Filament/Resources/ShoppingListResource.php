@@ -18,8 +18,8 @@ class ShoppingListResource extends Resource
 
     protected static ?string $navigationIcon = 'bi-file-text';
 
-    protected static ?string $navigationGroup = 'Shopping Lists';
-    public static ?int $navigationSort = 410;
+    protected static ?string $navigationGroup = 'OTHER';
+    public static ?int $navigationSort = 980;
 
     public static function form(Form $form): Form
     {

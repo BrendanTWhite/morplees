@@ -17,8 +17,8 @@ class StepResource extends Resource
 
     protected static ?string $navigationIcon = 'bi-list-ol';
 
-    protected static ?string $navigationGroup = 'Recipes';
-    public static ?int $navigationSort = 330;
+    protected static ?string $navigationGroup = 'OTHER';
+    public static ?int $navigationSort = 970;
 
     public static function form(Form $form): Form
     {

@@ -19,8 +19,8 @@ class SLRecipeResource extends Resource
     protected static ?string $label = 'Shopping List - Recipe';
     protected static ?string $pluralLabel = 'Shopping List - Recipes';
 
-    protected static ?string $navigationGroup = 'Shopping Lists';
-    public static ?int $navigationSort = 420;
+    protected static ?string $navigationGroup = 'OTHER';
+    public static ?int $navigationSort = 990;
 
     public static function form(Form $form): Form
     {
