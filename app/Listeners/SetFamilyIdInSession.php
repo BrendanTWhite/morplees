@@ -27,5 +27,6 @@ class SetFamilyIdInSession
     {
         if($event->user->family_id) {
             session()->put('family_id', $event->user->family_id);
-    }}
+        }
+    }
 }
