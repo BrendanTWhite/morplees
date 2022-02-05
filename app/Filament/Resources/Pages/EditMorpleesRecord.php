@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Pages;
 
-use App\Filament\Resources\Pages\EditMorpleesRecord;
+use Filament\Resources\Pages\EditRecord;
 
-class EditMorpleesRecord extends EditMorpleesRecord
+class EditMorpleesRecord extends EditRecord
 {
 
     protected function getRedirectUrl(): ?string

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Pages;
 
-use App\Filament\Resources\Pages\CreateMorpleesRecord;
+use Filament\Resources\Pages\CreateRecord;
 
-class CreateMorpleesRecord extends CreateMorpleesRecord
+class CreateMorpleesRecord extends CreateRecord
 {
 
     protected function getRedirectUrl(): ?string
