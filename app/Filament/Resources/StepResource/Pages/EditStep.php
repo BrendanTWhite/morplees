@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\StepResource\Pages;
 
 use App\Filament\Resources\StepResource;
-use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\Pages\EditFilamentRecord;
 
-class EditStep extends EditRecord
+class EditStep extends EditFilamentRecord
 {
     protected static string $resource = StepResource::class;
 }

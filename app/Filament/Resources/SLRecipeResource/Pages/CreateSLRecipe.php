@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\SLRecipeResource\Pages;
 
 use App\Filament\Resources\SLRecipeResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\CreateFilamentRecord;
 
-class CreateSLRecipe extends CreateRecord
+class CreateSLRecipe extends CreateFilamentRecord
 {
     protected static string $resource = SLRecipeResource::class;
 }

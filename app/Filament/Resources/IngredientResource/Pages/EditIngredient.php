@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\IngredientResource\Pages;
 
 use App\Filament\Resources\IngredientResource;
-use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\Pages\EditFilamentRecord;
 
-class EditIngredient extends EditRecord
+class EditIngredient extends EditFilamentRecord
 {
     protected static string $resource = IngredientResource::class;
 }

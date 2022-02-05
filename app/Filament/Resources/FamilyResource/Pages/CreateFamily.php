@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\FamilyResource\Pages;
 
 use App\Filament\Resources\FamilyResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\CreateFilamentRecord;
 
-class CreateFamily extends CreateRecord
+class CreateFamily extends CreateFilamentRecord
 {
     protected static string $resource = FamilyResource::class;
 }

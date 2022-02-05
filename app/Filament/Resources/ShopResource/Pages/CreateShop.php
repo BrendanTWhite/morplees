@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\ShopResource\Pages;
 
 use App\Filament\Resources\ShopResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\CreateFilamentRecord;
 
-class CreateShop extends CreateRecord
+class CreateShop extends CreateFilamentRecord
 {
     protected static string $resource = ShopResource::class;
 }

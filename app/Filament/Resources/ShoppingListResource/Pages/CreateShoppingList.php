@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\ShoppingListResource\Pages;
 
 use App\Filament\Resources\ShoppingListResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\CreateFilamentRecord;
 
-class CreateShoppingList extends CreateRecord
+class CreateShoppingList extends CreateFilamentRecord
 {
     protected static string $resource = ShoppingListResource::class;
 }

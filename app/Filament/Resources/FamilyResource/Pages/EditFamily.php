@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\FamilyResource\Pages;
 
 use App\Filament\Resources\FamilyResource;
-use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\Pages\EditFilamentRecord;
 
-class EditFamily extends EditRecord
+class EditFamily extends EditFilamentRecord
 {
     protected static string $resource = FamilyResource::class;
 }

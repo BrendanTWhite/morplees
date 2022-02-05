@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\SLRecipeResource\Pages;
 
 use App\Filament\Resources\SLRecipeResource;
-use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\Pages\EditFilamentRecord;
 
-class EditSLRecipe extends EditRecord
+class EditSLRecipe extends EditFilamentRecord
 {
     protected static string $resource = SLRecipeResource::class;
 }

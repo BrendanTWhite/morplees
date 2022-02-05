@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\StepResource\Pages;
 
 use App\Filament\Resources\StepResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\CreateFilamentRecord;
 
-class CreateStep extends CreateRecord
+class CreateStep extends CreateFilamentRecord
 {
     protected static string $resource = StepResource::class;
 }

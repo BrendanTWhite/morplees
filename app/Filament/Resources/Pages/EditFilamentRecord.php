@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Pages;
 
-use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\Pages\EditFilamentRecord;
 
-class EditFilamentRecord extends EditRecord
+class EditFilamentRecord extends EditFilamentRecord
 {
 
     protected function getRedirectUrl(): ?string

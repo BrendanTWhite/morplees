@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
-use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\Pages\EditFilamentRecord;
 
-class EditUser extends EditRecord
+class EditUser extends EditFilamentRecord
 {
     protected static string $resource = UserResource::class;
 }

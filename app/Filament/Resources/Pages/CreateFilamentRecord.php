@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Pages;
 
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\CreateFilamentRecord;
 
-class CreateFilamentRecord extends CreateRecord
+class CreateFilamentRecord extends CreateFilamentRecord
 {
 
     protected function getRedirectUrl(): ?string

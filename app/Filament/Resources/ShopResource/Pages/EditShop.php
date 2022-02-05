@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\ShopResource\Pages;
 
 use App\Filament\Resources\ShopResource;
-use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\Pages\EditFilamentRecord;
 
-class EditShop extends EditRecord
+class EditShop extends EditFilamentRecord
 {
     protected static string $resource = ShopResource::class;
 }
