@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\IngredientResource\Pages;
 
 use App\Filament\Resources\IngredientResource;
-use App\Filament\Resources\Pages\EditFilamentRecord;
+use App\Filament\Resources\Pages\EditMorpleesRecord;
 
-class EditIngredient extends EditFilamentRecord
+class EditIngredient extends EditMorpleesRecord
 {
     protected static string $resource = IngredientResource::class;
 }

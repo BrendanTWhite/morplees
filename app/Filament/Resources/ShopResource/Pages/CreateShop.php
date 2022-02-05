@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\ShopResource\Pages;
 
 use App\Filament\Resources\ShopResource;
-use App\Filament\Resources\Pages\CreateFilamentRecord;
+use App\Filament\Resources\Pages\CreateMorpleesRecord;
 
-class CreateShop extends CreateFilamentRecord
+class CreateShop extends CreateMorpleesRecord
 {
     protected static string $resource = ShopResource::class;
 }

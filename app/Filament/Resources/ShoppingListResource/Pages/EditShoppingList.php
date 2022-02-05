@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\ShoppingListResource\Pages;
 
 use App\Filament\Resources\ShoppingListResource;
-use App\Filament\Resources\Pages\EditFilamentRecord;
+use App\Filament\Resources\Pages\EditMorpleesRecord;
 
-class EditShoppingList extends EditFilamentRecord
+class EditShoppingList extends EditMorpleesRecord
 {
     protected static string $resource = ShoppingListResource::class;
 }

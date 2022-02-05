@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Pages;
 
-use App\Filament\Resources\Pages\CreateFilamentRecord;
+use App\Filament\Resources\Pages\CreateMorpleesRecord;
 
-class CreateFilamentRecord extends CreateFilamentRecord
+class CreateMorpleesRecord extends CreateMorpleesRecord
 {
 
     protected function getRedirectUrl(): ?string

@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\ProductResource\Pages;
 
 use App\Filament\Resources\ProductResource;
-use App\Filament\Resources\Pages\CreateFilamentRecord;
+use App\Filament\Resources\Pages\CreateMorpleesRecord;
 
-class CreateProduct extends CreateFilamentRecord
+class CreateProduct extends CreateMorpleesRecord
 {
     protected static string $resource = ProductResource::class;
 

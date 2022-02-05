@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Pages;
 
-use App\Filament\Resources\Pages\EditFilamentRecord;
+use App\Filament\Resources\Pages\EditMorpleesRecord;
 
-class EditFilamentRecord extends EditFilamentRecord
+class EditMorpleesRecord extends EditMorpleesRecord
 {
 
     protected function getRedirectUrl(): ?string

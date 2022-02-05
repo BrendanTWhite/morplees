@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\SLItemResource\Pages;
 
 use App\Filament\Resources\SLItemResource;
-use App\Filament\Resources\Pages\EditFilamentRecord;
+use App\Filament\Resources\Pages\EditMorpleesRecord;
 
-class EditSLItem extends EditFilamentRecord
+class EditSLItem extends EditMorpleesRecord
 {
     protected static string $resource = SLItemResource::class;
 }
