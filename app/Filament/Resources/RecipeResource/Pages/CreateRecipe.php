@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\RecipeResource\Pages;
 
 use App\Filament\Resources\RecipeResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\CreateFilamentRecord;
 
-class CreateRecipe extends CreateRecord
+class CreateRecipe extends CreateFilamentRecord
 {
     protected static string $resource = RecipeResource::class;
 }
