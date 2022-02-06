@@ -19,7 +19,7 @@ class CreateIngredientsTable extends Migration
             $table->foreignId('recipe_id')->constrained();
             $table->foreignId('product_id')->constrained();
 
-            $table->integer('sequence');
+            $table->integer('sequence')->default(999);
             $table->text('quantity');
 
             $table->timestamps();

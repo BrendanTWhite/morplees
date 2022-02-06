@@ -18,7 +18,7 @@ class CreateStepsTable extends Migration
             $table->foreignId('family_id')->constrained();
             $table->foreignId('recipe_id')->constrained();
 
-            $table->integer('sequence');
+            $table->integer('sequence')->default(999);
             $table->text('instructions');
 
             $table->timestamps();
