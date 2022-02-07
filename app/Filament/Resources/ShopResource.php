@@ -60,11 +60,4 @@ class ShopResource extends Resource
         ];
     }
 
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->withGlobalScope('family', JustMyFamilyScope::Class);
-    }
-
-
 }
