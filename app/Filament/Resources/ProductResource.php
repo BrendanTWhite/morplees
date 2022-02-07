@@ -18,8 +18,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'lineawesome-apple-alt-solid';
          
-    protected static ?string $navigationGroup = 'OTHER';
-    public static ?int $navigationSort = 940;
+    protected static ?string $navigationGroup = '';
+    public static ?int $navigationSort = 110;
 
     public static function form(Form $form): Form
     {
@@ -39,9 +39,21 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('shop.name')->searchable()->sortable(),
-                Tables\Columns\BooleanColumn::make('default_in_list')->sortable(),
-                Tables\Columns\BooleanColumn::make('needed_soon')->sortable(),
+
+                Tables\Columns\BooleanColumn::make('default_in_list')->sortable()          
+                ->action(function (Product $record): void {
+                    $record->toggleDefaultInList();
+                }),
+
+                Tables\Columns\BooleanColumn::make('needed_soon')->sortable()
+                ->action(function (Product $record): void {
+                    $record->toggleNeededSoon();
+                }),
+
             ])
+            ->actions([
+                //
+            ])            
             ->filters([
                 SelectFilter::make('shop')->relationship('shop', 'name'),
             ]);
@@ -50,7 +62,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //RelationManagers\IngredientsRelationManager::class,
+            RelationManagers\IngredientsRelationManager::class,
         ];
     }
 

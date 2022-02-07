@@ -25,6 +25,19 @@ class Product extends Model
     ];
 
 
+    public function toggleDefaultInList() 
+    {
+        $this->default_in_list = ! $this->default_in_list;
+        $this->save();
+    }
+
+    public function toggleNeededSoon() 
+    {
+        $this->needed_soon = ! $this->needed_soon;
+        $this->save();
+    }
+
+
     /**
      * Get the shop that owns the product.
      */
