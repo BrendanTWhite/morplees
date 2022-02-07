@@ -18,15 +18,15 @@ class ShoppingListResource extends Resource
 
     protected static ?string $navigationIcon = 'bi-file-text';
 
-    protected static ?string $navigationGroup = 'OTHER';
-    public static ?int $navigationSort = 980;
+    protected static ?string $navigationGroup = '';
+    public static ?int $navigationSort = 130;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\BelongsToSelect::make('family_id')
-                    ->relationship('family', 'name'),
+                Forms\Components\TextInput::make('created_at')
+                    ->disabled(),
                 Forms\Components\TextInput::make('override_name')
                     ->placeholder('If not specified, the create date will be used'),
             ]);
@@ -36,12 +36,12 @@ class ShoppingListResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('family.name')->sortable(),
-                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('name')->label('Shopping List')->searchable(['override_name']),
+                Tables\Columns\TextColumn::make('slrecipes_count')->counts('slrecipes')->label('Recipes'),
+                Tables\Columns\TextColumn::make('slitems_count')->counts('slitems')->label('Total Items'),
             ])
-            ->filters([
-                SelectFilter::make('family')->relationship('family', 'name'),
-            ]);
+            ->actions([]) 
+            ;
     }
 
     public static function getRelations(): array
