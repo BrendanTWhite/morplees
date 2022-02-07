@@ -37,17 +37,28 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+
+                Tables\Columns\BooleanColumn::make('needed_soon')->sortable()
+                ->label('Need Now')
+                ->trueIcon('heroicon-o-check')
+                ->trueColor('success')
+                ->falseIcon('heroicon-o-minus-sm')
+                ->falseColor('secondary')
+                ->action(function (Product $record): void {
+                    $record->toggleNeededSoon();
+                }),
+
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('shop.name')->searchable()->sortable(),
 
                 Tables\Columns\BooleanColumn::make('default_in_list')->sortable()          
+                ->label('Usually Need')
+                ->trueIcon('heroicon-o-check')
+                ->trueColor('success')
+                ->falseIcon('heroicon-o-minus-sm')
+                ->falseColor('secondary')
                 ->action(function (Product $record): void {
                     $record->toggleDefaultInList();
-                }),
-
-                Tables\Columns\BooleanColumn::make('needed_soon')->sortable()
-                ->action(function (Product $record): void {
-                    $record->toggleNeededSoon();
                 }),
 
             ])
