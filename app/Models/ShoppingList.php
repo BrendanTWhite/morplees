@@ -39,20 +39,20 @@ public function getDefaultNameAttribute()
 }
 
 
-/**
- * Get the shopping list's display name.
- *
- * @return string
- */
-public function getNameAttribute()
-{
-	if ($this->override_name)  
-    	{
-    		return $this->override_name;
-    	} else { 
-    		return $this->default_name;
-    	}
-}
+    /**
+     * Get the shopping list's display name.
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+    	if ($this->override_name)  
+        	{
+        		return $this->override_name;
+        	} else { 
+        		return $this->default_name;
+        	}
+    }
 
 
     /**
