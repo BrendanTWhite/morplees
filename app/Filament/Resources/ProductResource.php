@@ -39,7 +39,7 @@ class ProductResource extends Resource
             ->columns([
 
                 Tables\Columns\BooleanColumn::make('needed_soon')->sortable()
-                ->label('Need Now')
+                ->label('Need Soon')
                 ->trueIcon('heroicon-o-check')
                 ->trueColor('success')
                 ->falseIcon('heroicon-o-minus-sm')
