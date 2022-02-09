@@ -20,6 +20,7 @@ class ShoppingList extends Model
      */
     protected $fillable = [
         'override_name',
+        'active',
         'family_id',
     ];
 

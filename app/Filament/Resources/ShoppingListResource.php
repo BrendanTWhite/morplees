@@ -29,6 +29,7 @@ class ShoppingListResource extends Resource
                     ->disabled(),
                 Forms\Components\TextInput::make('override_name')
                     ->placeholder('If not specified, the create date will be used'),
+                Forms\Components\Checkbox::make('active'),
             ]);
     }
 
@@ -39,6 +40,7 @@ class ShoppingListResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Shopping List')->searchable(['override_name']),
                 Tables\Columns\TextColumn::make('slrecipes_count')->counts('slrecipes')->label('Recipes'),
                 Tables\Columns\TextColumn::make('slitems_count')->counts('slitems')->label('Total Items'),
+                Tables\Columns\BooleanColumn::make('active'),
             ])
             ->actions([]) 
             ;
