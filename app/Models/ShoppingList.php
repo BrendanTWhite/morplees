@@ -60,12 +60,6 @@ public function getDefaultNameAttribute()
 
 
     protected static function boot() {
-        parent::boot();
-
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('created_at', 'desc');
-        });
-
         ShoppingList::observe(ShoppingListObserver::class);
     }
 
