@@ -20,8 +20,8 @@ class CreateSLItemsTable extends Migration
             $table->foreignId('product_id')->constrained();
             $table->foreignId('ingredient_id')->nullable()->constrained(); // not all items are from a recipe ingredient
 
-            $table->boolean('already_own');
-            $table->boolean('in_basket');            
+            $table->boolean('already_own')->default(FALSE);
+            $table->boolean('in_basket')->default(FALSE);            
 
             $table->timestamps();
         });

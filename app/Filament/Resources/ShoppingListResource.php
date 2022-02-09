@@ -28,8 +28,7 @@ class ShoppingListResource extends Resource
                 Forms\Components\TextInput::make('created_at')
                     ->disabled(),
                 Forms\Components\TextInput::make('override_name')
-                    ->placeholder('If not specified, the create date will be used'),
-                Forms\Components\Checkbox::make('active'),
+                    ->placeholder('If not specified, the create date will be used')
             ]);
     }
 

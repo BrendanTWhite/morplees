@@ -20,8 +20,6 @@ class SLItem extends Model
         'shopping_list_id',
         'product_id',
         'ingredient_id',
-        'already_own',
-        'in_basket',
     ];
 
 
