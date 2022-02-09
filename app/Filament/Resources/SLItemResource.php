@@ -30,8 +30,8 @@ class SLItemResource extends Resource
                     ->relationship('shopping_list', 'created_at')
                     ->required(),
 
-                Forms\Components\Checkbox::make('needed'),
-                Forms\Components\Checkbox::make('bought'),
+                Forms\Components\Checkbox::make('already_own'),
+                Forms\Components\Checkbox::make('in_basket'),
 
 
                 Forms\Components\Select::make('itemable_type')
@@ -50,8 +50,8 @@ class SLItemResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('shopping_list.name'),
-                Tables\Columns\BooleanColumn::make('needed'),
-                Tables\Columns\BooleanColumn::make('bought'),
+                Tables\Columns\BooleanColumn::make('already_own'),
+                Tables\Columns\BooleanColumn::make('in_basket'),
 //                Tables\Columns\TextColumn::make('itemable_type'),
                 Tables\Columns\IconColumn::make('itemable_type')
                     ->options([

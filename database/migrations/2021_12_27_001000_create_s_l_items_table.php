@@ -21,8 +21,8 @@ class CreateSLItemsTable extends Migration
             // Polymorphic relationship for either Ingredient or Product
             $table->morphs('itemable');
 
-            $table->boolean('needed');
-            $table->boolean('bought');            
+            $table->boolean('already_own');
+            $table->boolean('in_basket');            
 
             $table->timestamps();
         });
