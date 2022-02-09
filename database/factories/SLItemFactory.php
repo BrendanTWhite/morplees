@@ -14,8 +14,8 @@ class SLItemFactory extends Factory
     public function definition()
     {
         return [
-            'needed' => $this->faker->boolean(),
-            'bought' => $this->faker->boolean(),
+            'already_own' => $this->faker->boolean(),
+            'in_basket' => $this->faker->boolean(),
         ];
     }
 }

@@ -25,6 +25,19 @@ class SLItem extends Model
     ];
 
 
+    public function toggleAlreadyOwn() 
+    {
+        $this->already_own = ! $this->already_own;
+        $this->save();
+    }
+
+    public function toggleInBasket() 
+    {
+        $this->in_basket = ! $this->in_basket;
+        $this->save();
+    }
+
+
 
     /**
      * Get the shopping list that owns this record.
