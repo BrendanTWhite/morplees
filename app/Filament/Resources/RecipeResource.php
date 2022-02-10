@@ -39,7 +39,7 @@ class RecipeResource extends Resource
                         Forms\Components\TextInput::make('book_reference'),
                     ])->columns(3),
                     
-                    Forms\Components\TextInput::make('url'),
+                    Forms\Components\TextInput::make('url')->url(),
 
                     Forms\Components\Grid::make()
                     ->schema([

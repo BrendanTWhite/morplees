@@ -58,8 +58,8 @@ class DatabaseSeeder extends Seeder
 
             -> has (
                 $shopping_list = ShoppingList::factory()
-                    ->count(10)
-                    ->hasSLRecipes(10, 
+                    ->count(20)
+                    ->hasSLRecipes(7, 
                         function (array $attributes, ShoppingList $shopping_list) {
                             return [
                                 'family_id' => $shopping_list->family->id,

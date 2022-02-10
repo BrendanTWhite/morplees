@@ -30,18 +30,16 @@ class SLItemResource extends Resource
                     ->relationship('shopping_list', 'created_at')
                     ->required(),
 
-                Forms\Components\Checkbox::make('needed'),
-                Forms\Components\Checkbox::make('bought'),
+                Forms\Components\Checkbox::make('already_own'),
+                Forms\Components\Checkbox::make('in_basket'),
 
+                Forms\Components\BelongsToSelect::make('product_id')
+                    ->relationship('product', 'name')
+                    ->required(),
 
-                Forms\Components\Select::make('itemable_type')
-                    ->options([
-                        'App\Models\Product' => 'Product',
-                        'App\Models\Ingredient' => 'Recipe Ingredient',
-                    ])->required()->disablePlaceholderSelection(),
+                Forms\Components\BelongsToSelect::make('ingredient_id')
+                    ->relationship('ingredient', 'quantity'),
 
-                // Forms\Components\TextInput::make('itemable_type')->required(),
-                Forms\Components\TextInput::make('itemable_id')->required(),
             ]);
     }
 
@@ -50,20 +48,12 @@ class SLItemResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('shopping_list.name'),
-                Tables\Columns\BooleanColumn::make('needed'),
-                Tables\Columns\BooleanColumn::make('bought'),
-//                Tables\Columns\TextColumn::make('itemable_type'),
-                Tables\Columns\IconColumn::make('itemable_type')
-                    ->options([
-                        'heroicon-o-x-circle',
-                        'bi-list-ul' => 'App\Models\Ingredient',
-                        'lineawesome-apple-alt-solid' => 'App\Models\Product',
-                    ]),
-                Tables\Columns\TextColumn::make('itemable_id'),
-            ])
-            ->filters([
-                //
-            ]);
+                Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
+                Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
+                Tables\Columns\BooleanColumn::make('already_own'),
+                Tables\Columns\BooleanColumn::make('in_basket'),            
+        ]);
     }
 
     public static function getRelations(): array

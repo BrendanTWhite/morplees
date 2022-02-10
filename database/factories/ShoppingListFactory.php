@@ -15,7 +15,8 @@ class ShoppingListFactory extends Factory
     {
         return [
             'override_name' => null,
-            'created_at' => $this->faker->dateTimeBetween('-6 month', '-1 day'),
+            'active'    => ($this->faker->randomDigit()) < 3, // we want 3 in 10 to be TRUE
+            'created_at' => $this->faker->dateTimeBetween('-6 month', '-2 days'),
         ];
     }
 }

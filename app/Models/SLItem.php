@@ -18,11 +18,22 @@ class SLItem extends Model
      */
     protected $fillable = [
         'shopping_list_id',
-        'itemable_type',
-        'itemable_id',
-        'needed',
-        'bought',
+        'product_id',
+        'ingredient_id',
     ];
+
+
+    public function toggleAlreadyOwn() 
+    {
+        $this->already_own = ! $this->already_own;
+        $this->save();
+    }
+
+    public function toggleInBasket() 
+    {
+        $this->in_basket = ! $this->in_basket;
+        $this->save();
+    }
 
 
 
@@ -35,50 +46,27 @@ class SLItem extends Model
     }
 
     /**
-     * Get the model (either Ingredient or Product) for this SLItem.
+     * Get the product that owns this record.
      */
-    public function itemable()
+    public function product()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Product::class);
     }
 
     /**
-     * Get the Ingredient (if there is one) for this SLItem.
+     * Get the ingredient that owns this record.
      */
-    public function ingredient(): ?Model\Ingredient
+    public function ingredient()
     {
-        $itemable = $this->itemable;
-        if($itemable instanceof Model\Ingredient) {
-            return $itemable;
-        } else {
-            return null;
-        }
+        return $this->belongsTo(Ingredient::class);
     }
 
     /**
-     * Get the Recipe (if there is one) for this SLItem.
+     * Get the SL Recipe that owns this record.
      */
-    public function recipe(): ?Model\Recipe
+    public function s_l_recipe()
     {
-        $itemable = $this->itemable;
-        if($itemable instanceof Model\Ingredient) {
-            return $itemable->recipe;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Get the Product (either directly or via an Ingredient) for this SLItem.
-     */
-    public function product(): Model\Product
-    {
-        $itemable = $this->itemable;
-        if($itemable instanceof Model\Ingredient) {
-            return $itemable->product;
-        } else {
-            return $itemable;
-        }        
+        return $this->belongsTo(SLRecipe::class);
     }
 
 }

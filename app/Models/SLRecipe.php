@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BelongsToFamily;
+use App\Observers\SLRecipeObserver;
 
 class SLRecipe extends Model
 {
@@ -22,7 +23,7 @@ class SLRecipe extends Model
     ];
 
     
-
+    
 
     /**
      * Get the shopping list that owns this record.
@@ -38,6 +39,22 @@ class SLRecipe extends Model
     public function recipe()
     {
         return $this->belongsTo(Recipe::class);
+    }
+
+    /**
+     * Get the SL Items for this record.
+     */
+    public function s_l_items() // snake for Filament
+    {
+        return $this->hasMany(SLItem::class);
+    }
+
+    /**
+     * Get the SL Items for this record.
+     */
+    public function sLItems() // Camel for seeder
+    {
+        return $this->hasMany(SLItem::class);
     }
 
 }

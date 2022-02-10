@@ -18,6 +18,7 @@ class CreateShoppingListsTable extends Migration
             $table->foreignId('family_id')->constrained();
 
             $table->text('override_name')->nullable();
+            $table->boolean('active')->default(TRUE);
 
             $table->timestamps();
         });
