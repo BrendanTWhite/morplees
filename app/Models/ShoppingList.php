@@ -27,6 +27,12 @@ class ShoppingList extends Model
 
 
 
+    public function toggleActive() 
+    {
+        $this->active = ! $this->active;
+        $this->save();
+    }
+
 /**
  * Get the shopping list's default name, based on the create date.
  *
