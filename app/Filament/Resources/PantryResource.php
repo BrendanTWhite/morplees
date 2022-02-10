@@ -21,8 +21,8 @@ class PantryResource extends Resource
     protected static ?string $pluralLabel = 'Pantry';
     protected static ?string $slug = 'pantry';
 
-    protected static ?string $navigationGroup = '';
-    public static ?int $navigationSort = 140;
+    protected static ?string $navigationGroup = 'Shopping Lists';
+    public static ?int $navigationSort = 220;
 
     public static function form(Form $form): Form
     {
