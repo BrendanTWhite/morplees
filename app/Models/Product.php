@@ -71,4 +71,12 @@ class Product extends Model
     }
 
 
+    /**
+     * The recipes that belong to the product.
+     */
+    public function recipes()
+    {
+        return $this->belongsToMany(Recipe::class, 'ingredients');
+    }
+
 }
