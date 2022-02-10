@@ -17,9 +17,9 @@ class JustMyFamilyScope implements Scope
      * @return void
      */
     public function apply(Builder $builder, Model $model)
-    {
+    { 
         if(session()->has('family_id')) {
-            $builder->where('family_id', '=', session(key: 'family_id'));            
+            $builder->where($builder->getQuery()->from . '.family_id', '=', session(key: 'family_id'));            
         }
     }
 

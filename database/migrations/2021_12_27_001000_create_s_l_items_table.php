@@ -17,12 +17,12 @@ class CreateSLItemsTable extends Migration
             $table->id();
             $table->foreignId('family_id')->constrained();
             $table->foreignId('shopping_list_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('ingredient_id')->nullable()->constrained(); // not all items are from a recipe ingredient
+            $table->foreignId('s_l_recipe_id')->nullable()->constrained(); // not all items are from a recipe ingredient
 
-            // Polymorphic relationship for either Ingredient or Product
-            $table->morphs('itemable');
-
-            $table->boolean('needed');
-            $table->boolean('bought');            
+            $table->boolean('already_own')->default(FALSE);
+            $table->boolean('in_basket')->default(FALSE);            
 
             $table->timestamps();
         });

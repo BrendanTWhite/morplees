@@ -45,11 +45,20 @@ class Ingredient extends Model
     }
 
     /**
-     * Get all of the ingredient's SL items.
+     * Get the SL Items for this record.
      */
-    public function s_l_items()
+    public function s_l_items() // snake for Filament
     {
-        return $this->morphMany('App\Models\SLItem', 'itemable');
+        return $this->hasMany(SLItem::class);
     }
+
+    /**
+     * Get the SL Items for this record.
+     */
+    public function sLItems() // Camel for seeder
+    {
+        return $this->hasMany(SLItem::class);
+    }
+
 
 }

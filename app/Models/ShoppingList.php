@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BelongsToFamily;
+use Illuminate\Database\Eloquent\Builder;
+use Carbon\CarbonInterface;
+use App\Observers\ShoppingListObserver;
 
 class ShoppingList extends Model
 {
@@ -18,6 +21,7 @@ class ShoppingList extends Model
      */
     protected $fillable = [
         'override_name',
+        'active',
         'family_id',
     ];
 
@@ -30,29 +34,30 @@ class ShoppingList extends Model
  */
 public function getDefaultNameAttribute()
 {
-	// If it's less than a week old, say eg "3 days ago" or "12 hours ago"
-	if ( $this->created_at->diffInDays() < 7 ) {
-		return $this->created_at->diffForHumans();
-	} else { // if it's more than a week old, just show the date
+	// If it's less than a month old, say eg "3 days ago" or "12 hours ago"
+	if ( $this->created_at->diffInDays() < 28 ) {
+		return $this->created_at->diffForHumans(null, CarbonInterface::DIFF_RELATIVE_AUTO, false, 2);
+	} else { // if it's more than a month old, just show the date
 		return $this->created_at->toFormattedDateString();
 	}
 }
 
 
-/**
- * Get the shopping list's display name.
- *
- * @return string
- */
-public function getNameAttribute()
-{
-	if ($this->override_name)  
-    	{
-    		return $this->override_name;
-    	} else { 
-    		return $this->default_name;
-    	}
-}
+    /**
+     * Get the shopping list's display name.
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+    	if ($this->override_name)  
+        	{
+        		return $this->override_name;
+        	} else { 
+        		return $this->default_name;
+        	}
+    }
+
 
 
     /**

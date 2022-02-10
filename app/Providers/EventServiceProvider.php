@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Listeners\RemoveFamilyIdFromSession;
-use App\Listeners\SetFamilyIdInSession;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Models;
+use App\Observers;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -56,6 +56,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Models\ShoppingList::observe(Observers\ShoppingListObserver::class);
+        Models\SLRecipe::observe(Observers\SLRecipeObserver::class);
+
     }
 }

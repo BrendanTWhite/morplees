@@ -62,4 +62,13 @@ class Recipe extends Model
         return $this->hasMany(SLRecipe::class);
     }
 
+
+    /**
+     * The products that belong to the recipe.
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'ingredients');
+    }
+
 }
