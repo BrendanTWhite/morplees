@@ -59,9 +59,6 @@ public function getDefaultNameAttribute()
     }
 
 
-    protected static function boot() {
-        ShoppingList::observe(ShoppingListObserver::class);
-    }
 
     /**
      * Get the family that owns the shopping list.

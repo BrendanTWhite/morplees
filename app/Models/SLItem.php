@@ -61,4 +61,12 @@ class SLItem extends Model
         return $this->belongsTo(Ingredient::class);
     }
 
+    /**
+     * Get the SL Recipe that owns this record.
+     */
+    public function s_l_recipe()
+    {
+        return $this->belongsTo(SLRecipe::class);
+    }
+
 }
