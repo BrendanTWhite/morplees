@@ -54,7 +54,7 @@ class MenuResource extends Resource
                     }),
 
             ])
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('name', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('active')
                     ->default()
