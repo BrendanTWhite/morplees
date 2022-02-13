@@ -7,6 +7,23 @@ use App\Models;
 
 class ShoppingListObserver
 {
+
+    /**
+     * Handle the ShoppingList "creating" event.
+     *
+     * @param  \App\Models\ShoppingList  $shoppingList
+     * @return void
+     */
+    public function creating(ShoppingList $shoppingList)
+    {
+        // Set all Shopping Lists that are already in the database
+        //  to be no longer Active
+        Models\ShoppingList::whereActive(TRUE)->get()
+        ->each(function (Models\ShoppingList $other_shopping_list, $key) {
+            $other_shopping_list->toggleActive();
+        });
+    }
+
     /**
      * Handle the ShoppingList "created" event.
      *
