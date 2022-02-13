@@ -20,6 +20,7 @@ class MenuResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $label = 'Menu';
     protected static ?string $pluralLabel = 'Menu';
+    protected static ?string $navigationLabel = 'Menu';
     protected static ?string $createButtonLabel = 'Shopping List';
     protected static ?string $slug = 'menu';
 
@@ -30,9 +31,8 @@ class MenuResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('created_at')
-                    ->disabled(),
                 Forms\Components\TextInput::make('override_name')
+                    ->label('Shopping List Name (optional)')
                     ->placeholder('If not specified, the create date will be used')
             ]);
     }
@@ -44,7 +44,6 @@ class MenuResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Shopping List')->sortable(['created_at'])->searchable(['override_name']),
                 Tables\Columns\TextColumn::make('slrecipes_count')->counts('slrecipes')->label('Recipes'),
                 Tables\Columns\TextColumn::make('slitems_count')->counts('slitems')->label('Total Items'),
-                Tables\Columns\TextColumn::make('created_at')->label('Created')->sortable(),
                 Tables\Columns\BooleanColumn::make('active')
                     ->trueIcon('heroicon-o-check')
                     ->trueColor('success')
