@@ -7,5 +7,5 @@ use App\Filament\Resources\Pages\CreateMorpleesRecord;
 
 class CreateMenu extends CreateMorpleesRecord
 {
-    protected static string $resource = ShoppingListResource::class;
+    protected static string $resource = MenuResource::class;
 }
