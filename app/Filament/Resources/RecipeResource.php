@@ -59,9 +59,6 @@ class RecipeResource extends Resource
                                         'md' => 3,
                                     ]),
 
-                                //Forms\Components\TextInput::make('product_id'), // not needed
-                                //Forms\Components\TextInput::make('product.name'), // not working
-
                                 Forms\Components\Select::make('product_id')
                                     //->columns(3)
                                     ->label('')
