@@ -21,7 +21,7 @@ class CreateMenu extends CreateMorpleesRecord
         ];
     }
 
-    protected function getRedirectUrl(): ?string
+    protected function getRedirectUrl(): string
     {
         return static::$resource::getUrl('index');
     }
