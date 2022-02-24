@@ -15,9 +15,9 @@ class CreateMenu extends CreateMorpleesRecord
     protected function getFormActions(): array
     {
         return [
-            $this->getCreateButtonFormAction(),
-            //$this->getCreateAndCreateAnotherButtonFormAction(),
-            $this->getCancelButtonFormAction(),
+            $this->getCreateFormAction(),
+            //$this->getCreateAndCreateAnotherFormAction(),
+            $this->getCancelFormAction(),            
         ];
     }
 
