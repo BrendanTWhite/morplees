@@ -9,5 +9,11 @@ class ViewMenu extends ViewRecord
 {
     protected static string $resource = MenuResource::class;
 
-    //protected static string $view = 'filament.resources.shopping-list-resource.pages.view-shopping-list';
+
+
+    protected function getActions(): array
+    {
+        return [];
+    }
+
 }

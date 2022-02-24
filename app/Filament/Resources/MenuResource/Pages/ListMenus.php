@@ -17,7 +17,7 @@ class ListMenus extends ListRecords
     {
         return function (Model $record): ?string {
             $resource = static::getResource();
-            return $resource::getUrl('view', ['record' => $record]);
+            return $resource::getUrl('edit', ['record' => $record]);
         };
     }
 

@@ -13,6 +13,8 @@ use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 
+use App\Models;
+
 class MenuResource extends Resource
 {
     protected static ?string $model = ShoppingList::class;
@@ -31,10 +33,29 @@ class MenuResource extends Resource
     {
         return $form
             ->schema([
+
                 Forms\Components\TextInput::make('override_name')
                     ->label('Shopping List Name (optional)')
                     ->placeholder('If not specified, the create date will be used')
-            ]);
+                    ->visible(fn ($livewire) => $livewire instanceof Pages\CreateMenu),
+
+                Forms\Components\HasManyRepeater::make('s_l_recipes')
+                    ->label('Recipes')
+                    ->visible(fn ($livewire) => $livewire instanceof Pages\EditMenu)
+                    ->relationship('s_l_recipes')
+                    ->schema([
+
+                        Forms\Components\Select::make('recipe_id')
+                            ->label('')
+                            ->options(Models\Recipe::query()->pluck('name', 'id'))
+                            ->required()
+                            ->reactive()
+                            ,
+                    ])
+                    ->createItemButtonLabel('Add Recipe'),
+            ])
+            //->getActions([])
+            ;
     }
 
     public static function table(Table $table): Table
@@ -74,7 +95,7 @@ class MenuResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\SLRecipesRelationManager::class,
+            //RelationManagers\SLRecipesRelationManager::class,
         ];
     }
 
