@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BelongsToFamily;
 use App\Observers\SLRecipeObserver;
+use Illuminate\Support\Facades\Log;
+use App\Models;
 
 class SLRecipe extends Model
 {
@@ -22,8 +24,38 @@ class SLRecipe extends Model
         'recipe_id',
     ];
 
-    
-    
+
+
+    /**
+     * Create Required SLItems for this SLRecipe.
+     */
+    public function createSLItems()
+    {
+        $this->recipe->ingredients->each(
+
+            function(Models\Ingredient $ingredient) {
+                $newSLItem = Models\SLItem::create([
+                    'shopping_list_id' => $this->shopping_list_id,
+                    'product_id' => $ingredient->product->id,
+                    'ingredient_id' => $ingredient->id,
+                    's_l_recipe_id' => $this->id,
+                ]);
+            }
+
+        );
+    }
+
+    /**
+     * Delete All SLItems for this SLRecipe.
+     */
+    public function deleteSLItems()
+    {
+        $this->s_l_items->each(function(Models\SLItem $s_l_item) {
+             $s_l_item->delete();
+        });
+    }
+
+
 
     /**
      * Get the shopping list that owns this record.

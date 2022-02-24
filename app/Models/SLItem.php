@@ -20,6 +20,7 @@ class SLItem extends Model
         'shopping_list_id',
         'product_id',
         'ingredient_id',
+        's_l_recipe_id',
     ];
 
 
