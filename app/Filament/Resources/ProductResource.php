@@ -26,7 +26,7 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\BelongsToSelect::make('shop_id')
+                Forms\Components\BelongsToSelect::make('shop_id')->required()
                     ->relationship('shop', 'name'),
                 Forms\Components\Checkbox::make('default_in_list'),
                 Forms\Components\Checkbox::make('needed_soon'),
