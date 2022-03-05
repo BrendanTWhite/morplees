@@ -33,23 +33,23 @@ class ShoppingList extends Model
         $this->save();
     }
 
-/**
- * Get the shopping list's default name, based on the create date.
- *
- * @return string
- */
-public function getDefaultNameAttribute()
-{
-    // If it's less than five minutes old, say "just now"
-    if ( $this->created_at->diffInMinutes() < 5 ) {
-        return 'Just Now';
-    } else  // If it's less than a month old, say eg "3 days ago" or "12 hours ago"
-    if ( $this->created_at->diffInDays() < 28 ) {
-        return $this->created_at->diffForHumans(null, CarbonInterface::DIFF_RELATIVE_AUTO, false, 2);
-    } else { // if it's more than a month old, just show the date
-		return $this->created_at->toFormattedDateString();
-	}
-}
+    /**
+     * Get the shopping list's default name, based on the create date.
+     *
+     * @return string
+     */
+    public function getDefaultNameAttribute()
+    {
+        // If it's less than five minutes old, say "just now"
+        if ( $this->created_at->diffInMinutes() < 5 ) {
+            return 'Just Now';
+        } else  // If it's less than a month old, say eg "3 days ago" or "12 hours ago"
+        if ( $this->created_at->diffInDays() < 28 ) {
+            return $this->created_at->diffForHumans(null, CarbonInterface::DIFF_RELATIVE_AUTO, false, 2);
+        } else { // if it's more than a month old, just show the date
+    		return $this->created_at->toFormattedDateString();
+    	}
+    }
 
 
     /**
