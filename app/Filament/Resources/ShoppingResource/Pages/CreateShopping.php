@@ -7,5 +7,5 @@ use App\Filament\Resources\Pages\CreateMorpleesRecord;
 
 class CreateShopping extends CreateMorpleesRecord
 {
-    protected static string $resource = ShoppingListResource::class;
+    protected static string $resource = ShoppingResource::class;
 }

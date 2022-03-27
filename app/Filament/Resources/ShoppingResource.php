@@ -4,21 +4,25 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ShoppingResource\Pages;
 use App\Filament\Resources\ShoppingResource\RelationManagers;
-use App\Models\ShoppingList;
+use App\Models;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters;
+use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 
 class ShoppingResource extends Resource
 {
-    protected static ?string $model = ShoppingList::class;
+    protected static ?string $model = Models\SLItem::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
-    protected static ?string $label = 'Shopping';
-    protected static ?string $pluralLabel = 'Shopping';
+    protected static ?string $navigationLabel = 'Shopping';
+
+    protected static ?string $label = 'Shopping List Item';
+    protected static ?string $pluralLabel = 'Shopping List Items';
     protected static ?string $slug = 'shopping';
 
     protected static ?string $navigationGroup = 'Shopping Lists';
@@ -28,10 +32,7 @@ class ShoppingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('created_at')
-                    ->disabled(),
-                Forms\Components\TextInput::make('override_name')
-                    ->placeholder('If not specified, the create date will be used')
+                //
             ]);
     }
 
@@ -39,26 +40,46 @@ class ShoppingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label('Shopping List')->searchable(['override_name']),
-                Tables\Columns\TextColumn::make('slitems_count')->counts('slitems')->label('Total Items'),
-                Tables\Columns\BooleanColumn::make('active')
-                ->trueIcon('heroicon-o-check')
-                ->trueColor('success')
-                ->falseIcon('heroicon-o-minus-sm')
-                ->falseColor('secondary')
-                ->action(function (ShoppingList $record): void {
-                    $record->toggleActive();
-                }),
+
+                Tables\Columns\BooleanColumn::make('in_basket')
+                    ->label('In Basket')
+                    ->trueIcon('heroicon-o-check')
+                    ->trueColor('success')
+                    ->falseIcon('heroicon-o-minus-sm')
+                    ->falseColor('secondary')
+                    ->action(function (Models\SLItem $record): void {
+                        $record->toggleInBasket();
+                    }),
+
+                Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
+                Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
 
             ])
-            ->actions([]) 
+
+            ->actions([
+                //
+            ])              
+            ->bulkActions([
+                //
+            ])   
+            ;
+    }
+
+
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('shopping_list_id', Models\ShoppingList::getActiveSLID())
+            ->where('already_own', false)
             ;
     }
 
     public static function getRelations(): array
     {
         return [
-            RelationManagers\SLRecipesRelationManager::class,
+            //
         ];
     }
 
@@ -67,9 +88,8 @@ class ShoppingResource extends Resource
         return [
             'index' => Pages\ListShoppings::route('/'),
             'create' => Pages\CreateShopping::route('/create'),
-            'view' => Pages\ViewShopping::route('/{record}'),
             'edit' => Pages\EditShopping::route('/{record}/edit'),
         ];
     }
-
+    
 }
