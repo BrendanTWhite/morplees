@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\PantryResource\Pages;
 
 use App\Filament\Resources\PantryResource;
-use App\Filament\Resources\Pages\ListMorpleesRecords;
+use Filament\Resources\Pages\ListRecords;
 
-class ListPantrys extends ListMorpleesRecords
+class ListPantrys extends ListRecords
 {
     protected static string $resource = PantryResource::class;
 
