@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\PantryResource\Pages;
+namespace App\Filament\Resources\ShoppingResource\Pages;
 
-use App\Filament\Resources\PantryResource;
+use App\Filament\Resources\ShoppingResource;
 use Filament\Resources\Pages\ListRecords;
 
-class ListPantrys extends ListRecords
+class ListShoppings extends ListRecords
 {
-    protected static string $resource = PantryResource::class;
+    protected static string $resource = ShoppingResource::class;
 
     protected function getActions(): array
     {

@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PantryResource\Pages;
-use App\Filament\Resources\PantryResource\RelationManagers;
+use App\Filament\Resources\ShoppingResource\Pages;
+use App\Filament\Resources\ShoppingResource\RelationManagers;
 use App\Models;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -14,19 +14,19 @@ use Filament\Tables\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 
-class PantryResource extends Resource
+class ShoppingResource extends Resource
 {
     protected static ?string $model = Models\SLItem::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
-    protected static ?string $navigationLabel = 'Pantry';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+    protected static ?string $navigationLabel = 'Shopping';
 
-    protected static ?string $label = 'Pantry Check Item';
-    protected static ?string $pluralLabel = 'Pantry Check Items';
-    protected static ?string $slug = 'pantry';
+    protected static ?string $label = 'Shopping List Item';
+    protected static ?string $pluralLabel = 'Shopping List Items';
+    protected static ?string $slug = 'shopping';
 
     protected static ?string $navigationGroup = 'Shopping Lists';
-    public static ?int $navigationSort = 220;
+    public static ?int $navigationSort = 230;
 
     public static function form(Form $form): Form
     {
@@ -41,20 +41,19 @@ class PantryResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
-                Tables\Columns\TextColumn::make('product.name'),
-                Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
-
-                Tables\Columns\BooleanColumn::make('already_own')
-                    ->label('Got')
+                Tables\Columns\BooleanColumn::make('in_basket')
+                    ->label('In Basket')
                     ->trueIcon('heroicon-o-check')
                     ->trueColor('success')
                     ->falseIcon('heroicon-o-minus-sm')
                     ->falseColor('secondary')
                     ->action(function (Models\SLItem $record): void {
-                        $record->toggleAlreadyOwn();
+                        $record->toggleInBasket();
                     }),
 
+                Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
+                Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
 
             ])
 
@@ -72,7 +71,9 @@ class PantryResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->where('shopping_list_id', Models\ShoppingList::getActiveSLID());
+            ->where('shopping_list_id', Models\ShoppingList::getActiveSLID())
+            ->where('already_own', false)
+            ;
     }
 
     public static function getRelations(): array
@@ -85,9 +86,9 @@ class PantryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPantrys::route('/'),
-            'create' => Pages\CreatePantry::route('/create'),
-            'edit' => Pages\EditPantry::route('/{record}/edit'),
+            'index' => Pages\ListShoppings::route('/'),
+            'create' => Pages\CreateShopping::route('/create'),
+            'edit' => Pages\EditShopping::route('/{record}/edit'),
         ];
     }
     
