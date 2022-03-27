@@ -39,6 +39,7 @@ class SLRecipe extends Model
                     'product_id' => $ingredient->product->id,
                     'ingredient_id' => $ingredient->id,
                     's_l_recipe_id' => $this->id,
+                    'family_id'     => $this->family_id,
                 ]);
             }
 
