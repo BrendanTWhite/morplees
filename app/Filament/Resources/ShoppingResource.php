@@ -21,8 +21,8 @@ class ShoppingResource extends Resource
     protected static ?string $pluralLabel = 'Shopping';
     protected static ?string $slug = 'shopping';
 
-    protected static ?string $navigationGroup = 'Shopping Lists';
-    public static ?int $navigationSort = 230;
+    protected static ?string $navigationGroup = 'OTHER';
+    public static ?int $navigationSort = 999;
 
     public static function form(Form $form): Form
     {

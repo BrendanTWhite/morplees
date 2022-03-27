@@ -67,7 +67,13 @@ class ShoppingList extends Model
         	}
     }
 
-
+    /**
+     * Get the ID of the currently active shopping list.
+     */
+    public static function getActiveSLID(): int 
+    {
+        return self::where('active', true)->first()->id;
+    }
 
     /**
      * Get the family that owns the shopping list.
