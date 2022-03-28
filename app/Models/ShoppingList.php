@@ -70,9 +70,9 @@ class ShoppingList extends Model
     /**
      * Get the ID of the currently active shopping list.
      */
-    public static function getActiveSLID(): int 
+    public static function getActiveSL(): ?ShoppingList 
     {
-        return self::where('active', true)->first()->id;
+        return self::where('active', true)->first();
     }
 
     /**
