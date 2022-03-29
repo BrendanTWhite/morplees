@@ -72,7 +72,7 @@ class PantryResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->where('shopping_list_id', Models\ShoppingList::getActiveSL());
+            ->where('shopping_list_id', Models\ShoppingList::getActiveSL()?->id);
     }
 
     public static function getRelations(): array

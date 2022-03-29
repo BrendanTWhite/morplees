@@ -71,7 +71,7 @@ class ShoppingResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->where('shopping_list_id', Models\ShoppingList::getActiveSLID())
+            ->where('shopping_list_id', Models\ShoppingList::getActiveSL()?->id)
             ->where('already_own', false)
             ;
     }
