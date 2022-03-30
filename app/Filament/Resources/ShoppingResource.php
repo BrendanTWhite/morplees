@@ -52,12 +52,12 @@ class ShoppingResource extends Resource
                     }),
 
                 Tables\Columns\TextColumn::make('product.name')->sortable(),
-                Tables\Columns\TextColumn::make('product.shop.name')->label('Shop'),
+                Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['shop_id']),
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
 
             ])
-
+            ->defaultSort('product.shop_name')
             ->actions([
                 //
             ])              
