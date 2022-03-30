@@ -51,12 +51,13 @@ class ShoppingResource extends Resource
                         $record->toggleInBasket();
                     }),
 
-                Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('product.name')->sortable(),
+                Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['shop_id']),
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
 
             ])
-
+            ->defaultSort('product.shop_name')
             ->actions([
                 //
             ])              
@@ -71,8 +72,9 @@ class ShoppingResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->where('shopping_list_id', Models\ShoppingList::getActiveSLID())
+            ->where('shopping_list_id', Models\ShoppingList::getActiveSL()?->id)
             ->where('already_own', false)
+            ->orderby('in_basket')
             ;
     }
 

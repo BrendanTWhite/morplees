@@ -39,6 +39,15 @@ class Product extends Model
 
 
     /**
+     * Get the name of the shop that owns the product.
+     */
+    public function getShopNameAttribute():?String
+    {
+        return $this->shop->name;
+    }
+
+
+    /**
      * Get the shop that owns the product.
      */
     public function shop()
