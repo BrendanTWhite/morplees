@@ -50,6 +50,7 @@ class MenuResource extends Resource
                             ->options(Models\Recipe::query()->pluck('name', 'id'))
                             ->required()
                             ->reactive()
+                            ->searchable()
                             ,
                     ])
                     ->createItemButtonLabel('Add Recipe'),
