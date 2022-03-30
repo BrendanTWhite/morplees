@@ -64,6 +64,7 @@ class RecipeResource extends Resource
                                     ->label('')
                                     ->options(Product::query()->pluck('name', 'id'))
                                     ->required()
+                                    ->searchable()
                                     ->columnSpan([
                                         'md' => 7,
                                     ])
