@@ -42,8 +42,9 @@ class PantryResource extends Resource
             ->columns([
 
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
-                Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('product.name')->sortable(),
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
+                Tables\Columns\TextColumn::make('product.shop.name')->label('Shop'),
 
                 Tables\Columns\BooleanColumn::make('already_own')
                     ->label('Got')
