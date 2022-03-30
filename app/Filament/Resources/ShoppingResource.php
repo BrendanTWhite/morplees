@@ -52,7 +52,7 @@ class ShoppingResource extends Resource
                     }),
 
                 Tables\Columns\TextColumn::make('product.name')->sortable(),
-                Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['shop_id']),
+                Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['name','shop_id']),
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Qty'),
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
 
