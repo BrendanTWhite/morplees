@@ -26,13 +26,7 @@ class SLItem extends Model
 
 
     public function toggleAlreadyOwn() 
-    {
-        // pause to display the Loading state
-        // ... but only in local dev environment    
-        if (App::environment('local')) {
-            sleep(2);
-        }
-    
+    {    
         $this->already_own = ! $this->already_own;
         $this->save();
     }
