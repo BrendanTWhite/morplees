@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BelongsToFamily;
+use Illuminate\Support\Facades\App;
 
 class SLItem extends Model
 {
@@ -25,7 +26,7 @@ class SLItem extends Model
 
 
     public function toggleAlreadyOwn() 
-    {
+    {    
         $this->already_own = ! $this->already_own;
         $this->save();
     }
@@ -37,6 +38,19 @@ class SLItem extends Model
     }
 
 
+
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::creating(function ($sLItem) {
+           $sLItem->shopping_list_id = ShoppingList::getActiveSL()->id; 
+        });
+    }
 
     /**
      * Get the shopping list that owns this record.

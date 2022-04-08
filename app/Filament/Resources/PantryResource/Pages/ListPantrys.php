@@ -4,16 +4,17 @@ namespace App\Filament\Resources\PantryResource\Pages;
 
 use App\Filament\Resources\PantryResource;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Pages\Actions\ButtonAction;
 
 class ListPantrys extends ListRecords
 {
     protected static string $resource = PantryResource::class;
 
-    protected function getActions(): array
+
+    protected function getCreateAction(): ButtonAction
     {
-        return [
-        	//
-        ];
+        return parent::getCreateAction()
+            ->label('New Item');
     }
 
 }

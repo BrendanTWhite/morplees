@@ -32,7 +32,10 @@ class PantryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\BelongsToSelect::make('product_id')
+                    ->relationship('product', 'name')
+                    ->searchable()
+                    ->required(),
             ]);
     }
 
