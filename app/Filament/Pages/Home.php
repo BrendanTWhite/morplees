@@ -44,10 +44,9 @@ class Home extends Page
 	protected function getHeaderWidgets(): array
 	{
 	    return [
+            Widgets\MenuButton::class,
             Widgets\PantryButton::class,
-            // Widgets\PantryButton::class,
-            // Widgets\PantryButton::class,
-            // Widgets\FilamentInfoWidget::class,
+            Widgets\ShoppingButton::class,
         ];
 	}    	
 
