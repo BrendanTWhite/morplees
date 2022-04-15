@@ -23,7 +23,8 @@
 	                    ])
 	                >
 	                
-	                    1234 Products
+	                    {{ App\Models\ShoppingList::getActiveSL()->sLItems->count() }}
+	                    Products
 
 	                </span>
 	            </div>

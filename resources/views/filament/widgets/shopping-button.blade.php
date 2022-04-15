@@ -23,7 +23,8 @@
 	                    ])
 	                >
 	                
-	                    321 Products
+	                    {{ App\Models\ShoppingList::getActiveSL()->sLItems->where('already_own',false)->count() }}
+	                    Products
 
 	                </span>
 	            </div>

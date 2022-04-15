@@ -23,7 +23,8 @@
 	                    ])
 	                >
 	                
-	                    123 Recipes
+	                    {{ App\Models\ShoppingList::getActiveSL()->sLRecipes->count() }}
+	                    Recipes
 
 	                </span>
 	            </div>
