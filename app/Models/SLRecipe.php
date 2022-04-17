@@ -46,6 +46,21 @@ class SLRecipe extends Model
         );
     }
 
+
+    protected static function booted()
+    {
+        static::creating(function ($SLRecipe) { 
+
+            // If we don't already have a SL ID set, 
+            // then get a sensible default
+            if ( ! $SLRecipe->shopping_list_id ) {
+               $SLRecipe->shopping_list_id = ShoppingList::getActiveSL()->id; 
+            }
+
+        });
+    }
+
+
     /**
      * Delete All SLItems for this SLRecipe.
      */
