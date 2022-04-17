@@ -2,35 +2,28 @@
 
 namespace App\Filament\Resources\MenuResource\Pages;
 
-use App\Filament\Resources\MenuResource;
+use App\Filament\Resources;
 use Filament\Resources\Pages\ListRecords;
-use Filament\Pages\Actions\ButtonAction;
 
+use Filament\Pages\Actions\ButtonAction;
 use Closure;
-use Illuminate\Database\Eloquent\Model;
+use App\Models;
 
 class ListMenus extends ListRecords
 {
-    protected static string $resource = MenuResource::class;
+    protected static string $resource = Resources\MenuResource::class;
 
     protected function getTableRecordUrlUsing(): ?Closure
     {
-        return function (Model $record): ?string {
-            $resource = static::getResource();
-            return $resource::getUrl('edit', ['record' => $record]);
+        return function (Models\SLRecipe $record): ?string {
+            return Resources\RecipeResource::getUrl('view', ['record' => $record->recipe]);
         };
     }
 
-
-    protected function getCreateButtonAction(): ButtonAction
+    protected function getCreateAction(): ButtonAction
     {
-        $resource = static::getResource();
-        //$label = $resource::getLabel();
-		$label = $resource::getCreateButtonLabel();
-
-        return ButtonAction::make('create')
-            ->label(__('filament::resources/pages/list-records.actions.create.label', ['label' => $label]))
-            ->url(fn () => $resource::getUrl('create'));
+        return parent::getCreateAction()
+            ->label('Add Recipe');
     }
 
 }

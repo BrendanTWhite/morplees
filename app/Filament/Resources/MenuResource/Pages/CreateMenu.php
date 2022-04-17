@@ -3,27 +3,30 @@
 namespace App\Filament\Resources\MenuResource\Pages;
 
 use App\Filament\Resources\MenuResource;
-use App\Filament\Resources\Pages\CreateMorpleesRecord;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Pages\Actions\ButtonAction;
 
-class CreateMenu extends CreateMorpleesRecord
+class CreateMenu extends CreateRecord
 {
     protected static string $resource = MenuResource::class;
-    protected static ?string $title = 'Create Shopping List';
+    protected static ?string $title = 'Recipe to Add to Menu';
 
-
-
-    protected function getFormActions(): array
-    {
-        return [
-            $this->getCreateFormAction(),
-            //$this->getCreateAndCreateAnotherFormAction(),
-            $this->getCancelFormAction(),            
-        ];
-    }
 
     protected function getRedirectUrl(): string
     {
         return static::$resource::getUrl('index');
+    }
+
+    protected function getCreateFormAction(): ButtonAction
+    {
+        return parent::getCreateFormAction()
+            ->label('Add');
+    }
+
+    protected function getCreateAndCreateAnotherFormAction(): ButtonAction
+    {
+        return parent::getCreateAndCreateAnotherFormAction()
+            ->label('Add & add another');
     }
 
 }
