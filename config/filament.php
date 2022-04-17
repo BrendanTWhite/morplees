@@ -15,7 +15,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 return [
-    
+
     // Allow Dark Mode
     'dark_mode' => true,
 
@@ -141,6 +141,13 @@ return [
     */
 
     'layout' => [
+
+        // Move Toast notifications to bottom right
+        'notifications' => [
+            'vertical_alignment' => 'bottom',
+            'alignment' => 'right',
+        ],
+
         'forms' => [
             'actions' => [
                 'alignment' => 'left',
