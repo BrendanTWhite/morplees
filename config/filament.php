@@ -16,6 +16,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 return [
 
+    // Allow Dark Mode
+    'dark_mode' => true,
+
     /*
     |--------------------------------------------------------------------------
     | Filament Path
@@ -138,6 +141,13 @@ return [
     */
 
     'layout' => [
+
+        // Move Toast notifications to bottom right
+        'notifications' => [
+            'vertical_alignment' => 'bottom',
+            'alignment' => 'right',
+        ],
+
         'forms' => [
             'actions' => [
                 'alignment' => 'left',
