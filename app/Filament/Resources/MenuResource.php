@@ -49,6 +49,7 @@ class MenuResource extends Resource
             ])
             ->actions([
                 Tables\Actions\LinkAction::make('delete')
+                    ->label('Remove')
                     ->action(fn (Models\SLRecipe $record) => $record->delete())
                     ->requiresConfirmation()
                         ->modalHeading('Remove Recipe')
