@@ -28,5 +28,25 @@ class AppServiceProvider extends ServiceProvider
         Filament::registerStyles([
             asset('css/custom-filament.css'),
         ]);
+
+        // Add environment-specific colours
+        switch (\App::environment()) {
+            case "local":
+                Filament::registerStyles([
+                    asset('css/custom-filament-local.css'),
+                ]);
+                break;
+            case "staging":
+                Filament::registerStyles([
+                    asset('css/custom-filament-staging.css'),
+                ]);
+                break;
+            case "production":
+                // no custom required for production
+                break;
+            default :
+                dd(\App::environment());
+        }
+
     }
 }
