@@ -72,7 +72,7 @@ class ShoppingList extends Model
      */
     public static function getActiveSL(): ?ShoppingList 
     {
-        return self::where('active', true)->first();
+        return self::firstOrCreate(['active' => true]);
     }
 
     /**
