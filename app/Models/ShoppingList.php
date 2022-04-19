@@ -23,9 +23,15 @@ class ShoppingList extends Model
         'override_name',
         'active',
         'family_id',
+        'include_need_soon',
+        'include_usually_need',
     ];
 
 
+    protected $casts = [
+        'include_need_soon'    => 'boolean',
+        'include_usually_need' => 'boolean',
+    ];
 
     public function toggleActive() 
     {

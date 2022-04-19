@@ -13,7 +13,16 @@ class UpdateShoppingListTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('shopping_lists', function (Blueprint $table) {
+
+            $table->boolean('include_need_soon')
+                ->default(true)
+                ->after('active');
+            $table->boolean('include_usually_need')
+                ->default(true)
+                ->after('active');
+                
+        });
     }
 
     /**
@@ -23,6 +32,9 @@ class UpdateShoppingListTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('shopping_lists', function (Blueprint $table) {
+            $table->dropColumn('include_need_soon');
+            $table->dropColumn('votes');
+        });
     }
 }
