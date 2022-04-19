@@ -31,4 +31,11 @@ class CreateShoppingList extends CreateMorpleesRecord
 	    {
 	    	return Home::getUrl();
 	    }
+
+
+    protected function getCancelFormAction(): ButtonAction
+    {
+        return parent::getCancelFormAction()
+            ->url(Home::getUrl());
+    }
 }
