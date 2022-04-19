@@ -25,10 +25,10 @@ class ShoppingListResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('created_at')
-                    ->disabled(),
-                Forms\Components\TextInput::make('override_name')
-                    ->placeholder('If not specified, the create date will be used')
+                Forms\Components\Toggle::make('include_need_soon')
+                    ->default(true),
+                Forms\Components\Toggle::make('include_usually_need')
+                    ->default(true),
             ]);
     }
 

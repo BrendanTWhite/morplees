@@ -17,7 +17,8 @@ class Home extends Page
 
     protected function getTitle(): string
     {
-        return Models\ShoppingList::getActiveSL()->name;
+        return 'Shopping List from '
+            .Models\ShoppingList::getActiveSL()->name;
     }
 
     protected function getActions(): array

@@ -33,51 +33,59 @@ class ShoppingListObserver
     public function created(ShoppingList $shoppingList)
     {
 
-        // Get the Product IDs of every product that should default in the list
-        $product_ids = Models\Product::whereDefaultInList(TRUE)
-            ->pluck('id');
 
-        // Start with an empty array of new itmes
-        $new_items = collect([]);
+        if ($shoppingList->include_usually_need) {
 
-        // For each product ID, insert it in the new SL Items
-        foreach ($product_ids as $product_id) {
-            $new_items->push([
-                'product_id' => $product_id,
-                'shopping_list_id' => $shoppingList->id,
-                'family_id'  => $shoppingList->family_id,
-            ]);
+            // Get the Product IDs of every product that should default in the list
+            $product_ids = Models\Product::whereDefaultInList(TRUE)
+                ->pluck('id');
+
+            // Start with an empty array of new itmes
+            $new_items = collect([]);
+
+            // For each product ID, insert it in the new SL Items
+            foreach ($product_ids as $product_id) {
+                $new_items->push([
+                    'product_id' => $product_id,
+                    'shopping_list_id' => $shoppingList->id,
+                    'family_id'  => $shoppingList->family_id,
+                ]);
+            }
+
+            // and add the new items to the database
+            Models\SLItem::insert($new_items->all()); 
+
         }
 
-        // and add the new items to the database
-        Models\SLItem::insert($new_items->all()); 
 
+        if ($shoppingList->include_need_soon) {
 
-       
-        // Now the Product IDs of products with Need Soon flag set
-        $product_ids = Models\Product::whereNeededSoon(TRUE)
-            ->pluck('id');
+            // Now the Product IDs of products with Need Soon flag set
+            $product_ids = Models\Product::whereNeededSoon(TRUE)
+                ->pluck('id');
 
-        // Start with an empty array of new itmes
-        $new_items = collect([]);
+            // Start with an empty array of new itmes
+            $new_items = collect([]);
 
-        // For each product ID, insert it in the new SL Items
-        foreach ($product_ids as $product_id) {
-            $new_items->push([
-                'product_id' => $product_id,
-                'shopping_list_id' => $shoppingList->id,
-                'family_id'  => $shoppingList->family_id,
-            ]);
+            // For each product ID, insert it in the new SL Items
+            foreach ($product_ids as $product_id) {
+                $new_items->push([
+                    'product_id' => $product_id,
+                    'shopping_list_id' => $shoppingList->id,
+                    'family_id'  => $shoppingList->family_id,
+                ]);
+            }
+
+            // and add the new items to the database
+            Models\SLItem::insert($new_items->all()); 
+
+            // Then reset the Needed Soon flag on those products
+            Models\Product::whereNeededSoon(TRUE)
+            ->each(function (Models\Product $product, $key) {
+                $product->toggleNeededSoon();
+            });
+
         }
-
-        // and add the new items to the database
-        Models\SLItem::insert($new_items->all()); 
-
-        // Then reset the Needed Soon flag on those products
-        Models\Product::whereNeededSoon(TRUE)
-        ->each(function (Models\Product $product, $key) {
-            $product->toggleNeededSoon();
-        });
 
 
     }
