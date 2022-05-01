@@ -9,7 +9,7 @@ use Filament\Pages\Actions\ButtonAction;
 class CreateMenu extends CreateRecord
 {
     protected static string $resource = MenuResource::class;
-    protected static ?string $title = 'Recipe to Add to Menu';
+    protected static ?string $title = 'Add Recipe to Menu';
 
 
     protected function getRedirectUrl(): string

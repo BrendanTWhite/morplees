@@ -51,10 +51,27 @@ class ShoppingResource extends Resource
                         $record->toggleInBasket();
                     }),
 
-                Tables\Columns\TextColumn::make('product.name')->sortable(),
-                Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['name','shop_id']),
+                Tables\Columns\TextColumn::make('product.name')->sortable()
+                    ->url(
+                        fn (Models\SLItem $record): string => 
+                            route('filament.resources.products.view', ['record' => $record->product])
+                    ),
+
+                Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['name','shop_id'])
+                    ->url(
+                        fn (Models\SLItem $record): string => 
+                            route('filament.resources.shops.view', ['record' => $record->product->shop])
+                    ),
+                
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Qty'),
-                Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
+                
+                Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe')
+                    ->url(
+                        fn (Models\SLItem $record): string => 
+                            ($record->s_l_recipe)
+                            ? route('filament.resources.recipes.view', ['record' => $record->s_l_recipe->recipe])
+                            : ''
+                    ),
 
             ])
             ->defaultSort('product.shop_name')

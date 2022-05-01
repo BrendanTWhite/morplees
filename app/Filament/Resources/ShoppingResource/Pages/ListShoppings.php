@@ -16,4 +16,24 @@ class ListShoppings extends ListRecords
         ];
     }
 
+    protected function getTableEmptyStateIcon(): ?string 
+    {
+        return 'heroicon-o-emoji-sad';
+    }
+ 
+    protected function getTableEmptyStateHeading(): ?string
+    {
+        return 'No Items Yet.';
+    }
+ 
+    protected function getTableEmptyStateActions(): array
+    {
+        return [
+            \Filament\Tables\Actions\Action::make('create')
+                ->label('Add an item?')
+                ->url(route('filament.resources.pantry.create'))
+                ->icon('heroicon-o-plus'),
+        ];
+    } 
+
 }
