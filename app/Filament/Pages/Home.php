@@ -39,6 +39,10 @@ class Home extends Page
             Widgets\MenuButton::class,
             Widgets\PantryButton::class,
             Widgets\ShoppingButton::class,
+            
+            Widgets\RecipeButton::class,
+            Widgets\ProductButton::class,
+            Widgets\ShopButton::class,
         ];
 	}    	
 
