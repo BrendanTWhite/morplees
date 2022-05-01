@@ -1,3 +1,4 @@
-.filament-sidebar-header {
+.filament-sidebar-header, 
+.filament-sidebar-open-button {
 	background-color: Blue;
 }
