@@ -13,7 +13,9 @@ class UpdateIngredientsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('ingredients', function (Blueprint $table) {
+            $table->text('quantity')->nullable()->change();
+        });
     }
 
     /**
