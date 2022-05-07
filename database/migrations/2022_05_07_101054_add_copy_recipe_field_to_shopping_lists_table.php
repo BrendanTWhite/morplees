@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCopyRecipeFieldToShoppingListTable extends Migration
+class AddCopyRecipeFieldToShoppingListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddCopyRecipeFieldToShoppingListTable extends Migration
      */
     public function up()
     {
-        Schema::table('shopping_list', function (Blueprint $table) {
+        Schema::table('shopping_lists', function (Blueprint $table) {
             //
         });
     }
@@ -25,7 +25,7 @@ class AddCopyRecipeFieldToShoppingListTable extends Migration
      */
     public function down()
     {
-        Schema::table('shopping_list', function (Blueprint $table) {
+        Schema::table('shopping_lists', function (Blueprint $table) {
             //
         });
     }
