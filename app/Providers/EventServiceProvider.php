@@ -58,6 +58,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Models\ShoppingList::observe(Observers\ShoppingListObserver::class);
         Models\SLRecipe::observe(Observers\SLRecipeObserver::class);
+        Models\Product::observe(Observers\ProductObserver::class);
 
     }
 }
