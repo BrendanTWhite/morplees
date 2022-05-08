@@ -17,9 +17,9 @@ class AddSortOrderFieldsToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->unsignedBigInteger('pantry_sort_order')
-                ->default(0)->after('needed_soon');
+                ->default(0)->index()->after('needed_soon');
             $table->unsignedBigInteger('shop_sort_order')
-                ->default(0)->after('needed_soon');
+                ->default(0)->index()->after('needed_soon');
         });
 
         // Default sort order to equal the id.
