@@ -16,12 +16,21 @@ class ShoppingListObserver
      */
     public function creating(ShoppingList $shoppingList)
     {
+
+        // Save old active shopping list ID (if there is one)
+        $previous_list = Models\ShoppingList::whereActive(TRUE)->first();
+            if($previous_list) {
+            session()->now('previous_list_id',
+                $previous_list->id);
+        }
+
         // Set all Shopping Lists that are already in the database
         //  to be no longer Active
         Models\ShoppingList::whereActive(TRUE)->get()
         ->each(function (Models\ShoppingList $other_shopping_list, $key) {
             $other_shopping_list->toggleActive();
         });
+
     }
 
     /**
@@ -33,6 +42,25 @@ class ShoppingListObserver
     public function created(ShoppingList $shoppingList)
     {
 
+        // If the user wanted to copy recipes from the previous list...
+        if ($shoppingList->copy_recipes) {
+
+            /// ... and there actually IS a previous list...
+            if ($previous_list = Models\ShoppingList::find(session('previous_list_id'))) {
+
+                // ... then loop through the SLRecipes for the previous list                
+                // and create a new SLR for the same recipe in the new list
+                foreach ($previous_list->s_l_recipes as $oldSLR) {
+                    Models\SLRecipe::create([
+                        'shopping_list_id' => $shoppingList->id,
+                        'recipe_id' => $oldSLR->recipe_id,
+                    ]);
+                }
+            }    
+        }
+        // and in any case, clean up the session
+        session()->forget('previous_list_id');
+        
 
         if ($shoppingList->include_usually_need) {
 
