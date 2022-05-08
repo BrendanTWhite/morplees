@@ -29,6 +29,9 @@ class ShoppingListResource extends Resource
                     ->default(true),
                 Forms\Components\Toggle::make('include_usually_need')
                     ->default(true),
+                Forms\Components\Toggle::make('copy_recipes')
+                    ->label('Copy recipes from previous shopping list')
+                    ->default(false),
             ]);
     }
 
