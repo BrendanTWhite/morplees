@@ -25,12 +25,14 @@ class ShoppingList extends Model
         'family_id',
         'include_need_soon',
         'include_usually_need',
+        'copy_recipes',
     ];
 
 
     protected $casts = [
         'include_need_soon'    => 'boolean',
         'include_usually_need' => 'boolean',
+        'copy_recipes'         => 'boolean',
     ];
 
     public function toggleActive() 
