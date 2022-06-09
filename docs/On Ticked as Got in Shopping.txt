@@ -1,0 +1,26 @@
+On Ticked as Got in Shopping
+
+WAS
+ 2 Milk     - GOT
+ 4 Bread
+ 6 Eggs
+ 8 Butter
+10 Chocolate
+
+WANT
+10 Milk - which then sorts to bottom
+ 2 Bread
+ 4 Eggs
+ 6 Butter
+ 8 Chocolate
+
+
+PSEUDO-CODE
+
+$prev_item = $milk
+
+For Bread through Chocolate
+- $this->SO = prev_item->old_SO
+- prev_item = $this
+
+$milk->SO = prev_item->old_SO
