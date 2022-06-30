@@ -64,6 +64,8 @@ class ShoppingResource extends Resource
                     ),
                 
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Qty'),
+
+                Tables\Columns\TextColumn::make('product.shop_sort_order')->label('asdf')->sortable(),
                 
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe')
                     ->url(
@@ -91,7 +93,10 @@ class ShoppingResource extends Resource
         return parent::getEloquentQuery()
             ->where('shopping_list_id', Models\ShoppingList::getActiveSL()?->id)
             ->where('already_own', false)
+            // ->join('products', 'product_id', '=', 'products.id')
             ->orderby('in_basket')
+            // ->orderby('products.shop_sort_order')
+            // ->orderby('products.shop_id')
             ;
     }
 
