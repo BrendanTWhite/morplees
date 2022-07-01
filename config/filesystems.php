@@ -53,6 +53,14 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+
+        'snapshots' => [
+            'driver' => 'ftp',
+            'host' => env('SNAPSHOTS_FTP_HOST'),
+            'username' => env('SNAPSHOTS_FTP_USERNAME'),
+            'password' => env('SNAPSHOTS_FTP_PASSWORD'),
+        ],        
+
     ],
 
     /*
