@@ -19,6 +19,8 @@ class ShopResource extends Resource
 {
     protected static ?string $model = Shop::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+    
     protected static ?string $navigationIcon = 'bi-shop';
 
     protected static ?string $navigationGroup = 'OTHER';

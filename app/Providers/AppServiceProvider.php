@@ -5,6 +5,34 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Filament\Facades\Filament;
 
+use Filament\Navigation\UserMenuItem;
+
+
+
+Filament::serving(function () {
+    Filament::registerUserMenuItems([
+
+        UserMenuItem::make()
+            ->label('Shops')
+            ->url(route('filament.resources.shops.index'))
+            ->icon('bi-shop'),
+
+        UserMenuItem::make()
+            ->label('Products')
+            ->url(route('filament.resources.products.index'))
+            ->icon('lineawesome-apple-alt-solid'),
+
+        UserMenuItem::make()
+            ->label('Family')
+            ->url(route('filament.resources.families.index'))
+            ->icon('heroicon-o-user-group'),
+
+    ]);
+});
+
+
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
