@@ -15,6 +15,8 @@ class SLRecipeResource extends Resource
 {
     protected static ?string $model = SLRecipe::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-database';
     protected static ?string $label = 'Shopping List - Recipe';
     protected static ?string $pluralLabel = 'Shopping List - Recipes';

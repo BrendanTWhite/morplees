@@ -15,6 +15,8 @@ class IngredientResource extends Resource
 {
     protected static ?string $model = Ingredient::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'bi-list-ul';
 
     protected static ?string $navigationGroup = 'OTHER';
