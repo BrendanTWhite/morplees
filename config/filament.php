@@ -148,6 +148,11 @@ return [
             'alignment' => 'right',
         ],
 
+        // Switch on collapsible navbar for all screen sizes
+        'sidebar' => [
+            'is_collapsible_on_desktop' => true,
+        ],
+
         'forms' => [
             'actions' => [
                 'alignment' => 'left',
