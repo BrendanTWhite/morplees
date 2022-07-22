@@ -1071,12 +1071,12 @@
             "version": "v2.11.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel-filament/support.git",
+                "url": "https://github.com/filamentphp/support.git",
                 "reference": "a568aceb6fe34a800ffc28c61887f8d8793c4c3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-filament/support/zipball/a568aceb6fe34a800ffc28c61887f8d8793c4c3e",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/a568aceb6fe34a800ffc28c61887f8d8793c4c3e",
                 "reference": "a568aceb6fe34a800ffc28c61887f8d8793c4c3e",
                 "shasum": ""
             },
