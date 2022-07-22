@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Filament\Facades\Filament;
 
+use Filament\Navigation\UserMenuItem;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,6 +26,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        // Add extra items to User menu
+        Filament::serving(function () {
+            Filament::registerUserMenuItems([
+
+                UserMenuItem::make()
+                    ->label('Shops')
+                    ->url(route('filament.resources.shops.index'))
+                    ->icon('bi-shop'),
+
+                UserMenuItem::make()
+                    ->label('Products')
+                    ->url(route('filament.resources.products.index'))
+                    ->icon('lineawesome-apple-alt-solid'),
+
+                UserMenuItem::make()
+                    ->label('Family')
+                    ->url(route('filament.resources.families.index'))
+                    ->icon('heroicon-o-user-group'),
+
+            ]);
+        });
+
         // Register custom CSS
         Filament::registerStyles([
             asset('css/custom-filament.css'),

@@ -15,6 +15,8 @@ class SLItemResource extends Resource
 {
     protected static ?string $model = SLItem::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-database';
     protected static ?string $label = 'Shopping List - Item';
     protected static ?string $pluralLabel = 'Shopping List - Items';
