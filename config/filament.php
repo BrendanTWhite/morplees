@@ -148,6 +148,11 @@ return [
             'alignment' => 'right',
         ],
 
+        // Switch on collapsible navbar for all screen sizes
+        'sidebar' => [
+            'is_collapsible_on_desktop' => true,
+        ],
+
         'forms' => [
             'actions' => [
                 'alignment' => 'left',
@@ -156,7 +161,7 @@ return [
         'footer' => [
             'should_show_logo' => false,
         ],
-        'max_content_width' => null,
+        'max_content_width' => 'full',
         'tables' => [
             'actions' => [
                 'type' => \Filament\Tables\Actions\LinkAction::class,

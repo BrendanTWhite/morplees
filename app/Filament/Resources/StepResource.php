@@ -15,6 +15,8 @@ class StepResource extends Resource
 {
     protected static ?string $model = Step::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'bi-list-ol';
 
     protected static ?string $navigationGroup = 'OTHER';

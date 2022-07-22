@@ -16,6 +16,8 @@ class ShoppingListResource extends Resource
 {
     protected static ?string $model = ShoppingList::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'bi-file-text';
 
     protected static ?string $navigationGroup = 'OTHER';
