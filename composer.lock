@@ -1014,12 +1014,12 @@
             "version": "v2.11.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel-filament/forms.git",
+                "url": "https://github.com/filamentphp/forms.git",
                 "reference": "1ec5244240e56df6e46520da26980ca551206ccb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-filament/forms/zipball/1ec5244240e56df6e46520da26980ca551206ccb",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/1ec5244240e56df6e46520da26980ca551206ccb",
                 "reference": "1ec5244240e56df6e46520da26980ca551206ccb",
                 "shasum": ""
             },
