@@ -16,6 +16,11 @@ class ListShoppings extends ListRecords
         ];
     }
 
+    protected function isTablePaginationEnabled(): bool 
+    {
+        return false;
+    } 
+    
     protected function getTableEmptyStateIcon(): ?string 
     {
         return 'heroicon-o-emoji-sad';
