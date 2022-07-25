@@ -4,7 +4,7 @@ namespace App\Filament\Resources\PantryResource\Pages;
 
 use App\Filament\Resources\PantryResource;
 use App\Filament\Resources\Pages\CreateMorpleesRecord;
-use Filament\Pages\Actions\ButtonAction;
+use Filament\Pages\Actions\Action;
 
 class CreatePantry extends CreateMorpleesRecord
 {
@@ -24,7 +24,7 @@ class CreatePantry extends CreateMorpleesRecord
         ];
     }
 
-    protected function getCreateFormAction(): ButtonAction
+    protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
             ->label('Add');
