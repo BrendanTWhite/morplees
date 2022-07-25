@@ -4,18 +4,20 @@ namespace App\Filament\Resources\PantryResource\Pages;
 
 use App\Filament\Resources\PantryResource;
 use Filament\Resources\Pages\ListRecords;
-use Filament\Pages\Actions\ButtonAction;
+use Filament\Pages\Actions\Action;
 
 class ListPantrys extends ListRecords
 {
     protected static string $resource = PantryResource::class;
 
-
-    protected function getCreateAction(): ButtonAction
+    protected function getActions(): array
     {
-        return parent::getCreateAction()
-            ->label('Add Item');
-    }
+        return [
+            Action::make('add_item')
+                ->label('Add Item')
+                ->url(route('filament.resources.pantry.create')),
+        ];
+    }     
 
     protected function getTableEmptyStateIcon(): ?string 
     {
