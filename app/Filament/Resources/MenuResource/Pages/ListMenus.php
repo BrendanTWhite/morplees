@@ -8,6 +8,7 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Pages\Actions\ButtonAction;
 use Closure;
 use App\Models;
+use Filament\Pages\Actions\Action;
 
 class ListMenus extends ListRecords
 {
@@ -19,12 +20,15 @@ class ListMenus extends ListRecords
             return Resources\RecipeResource::getUrl('view', ['record' => $record->recipe]);
         };
     }
-
-    protected function getCreateAction(): ButtonAction
+ 
+    protected function getActions(): array
     {
-        return parent::getCreateAction()
-            ->label('Add Recipe');
-    }
+        return [
+            Action::make('add_recipe')
+                ->label('Add Recipe')
+                ->url(route('filament.resources.menu.create')),
+        ];
+    }       
 
     protected function getTableEmptyStateIcon(): ?string 
     {
