@@ -4,7 +4,7 @@ namespace App\Filament\Resources\MenuResource\Pages;
 
 use App\Filament\Resources\MenuResource;
 use Filament\Resources\Pages\CreateRecord;
-use Filament\Pages\Actions\ButtonAction;
+use Filament\Pages\Actions\Action;
 
 class CreateMenu extends CreateRecord
 {
@@ -17,15 +17,15 @@ class CreateMenu extends CreateRecord
         return static::$resource::getUrl('index');
     }
 
-    protected function getCreateFormAction(): ButtonAction
+    protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
             ->label('Add');
     }
 
-    protected function getCreateAndCreateAnotherFormAction(): ButtonAction
+    protected function getCreateAnotherFormAction(): Action
     {
-        return parent::getCreateAndCreateAnotherFormAction()
+        return parent::getCreateAnotherFormAction()
             ->label('Add & add another');
     }
 
