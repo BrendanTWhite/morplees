@@ -66,11 +66,14 @@ class AppServiceProvider extends ServiceProvider
                     asset('css/custom-filament-staging.css'),
                 ]);
                 break;
+            case "testing":
+                // no custom required for testing
+                break;
             case "production":
                 // no custom required for production
                 break;
             default :
-                dd(\App::environment());
+                dd('Unknown Environment in app/Providers/AppServiceProvider: '.\App::environment());
         }
 
     }
