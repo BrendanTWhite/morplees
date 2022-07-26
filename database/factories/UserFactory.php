@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Database\Factories\FamilyFactory;
 
 class UserFactory extends Factory
 {
@@ -20,6 +21,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => 'password', // gets hashed by the setPasswordAttribute mutator
             'remember_token' => Str::random(10),
+            'family_id' => FamilyFactory::new()->create()->id,
         ];
     }
 
