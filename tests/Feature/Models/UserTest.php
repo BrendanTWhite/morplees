@@ -5,6 +5,7 @@ namespace Tests\Feature\Models;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class UserTest extends TestCase
 {
@@ -15,6 +16,14 @@ class UserTest extends TestCase
      */
     public function test_example()
     {
+
+        $user = User::factory()->create();
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
         $response = $this->get('/');
 
         $response->assertStatus(200);
