@@ -39,12 +39,12 @@ class ShopTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/shops/');
+            ->get('/shops/create');
 
         $response->assertStatus(200);
         $this->assertAuthenticated();
-        $response->assertSee('Shops');
-        $response->assertSee('New shop');
+        $response->assertSee('Create shop');
+        $response->assertSee('create another');
     }
 
 }
