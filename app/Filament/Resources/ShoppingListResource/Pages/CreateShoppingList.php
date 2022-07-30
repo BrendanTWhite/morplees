@@ -4,7 +4,7 @@ namespace App\Filament\Resources\ShoppingListResource\Pages;
 
 use App\Filament\Resources;
 use App\Filament\Resources\Pages\CreateMorpleesRecord;
-use Filament\Pages\Actions\ButtonAction;
+use Filament\Pages\Actions\Action;
 use App\Filament\Pages\Home;
 
 class CreateShoppingList extends CreateMorpleesRecord
@@ -21,7 +21,7 @@ class CreateShoppingList extends CreateMorpleesRecord
         ];
     }
 
-    protected function getCreateFormAction(): ButtonAction
+    protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
             ->label('Yes!');
@@ -33,7 +33,7 @@ class CreateShoppingList extends CreateMorpleesRecord
 	    }
 
 
-    protected function getCancelFormAction(): ButtonAction
+    protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
             ->url(Home::getUrl());
