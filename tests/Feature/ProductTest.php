@@ -3,9 +3,14 @@
 // use App\Models\Product;
 // use App\Models\User;
 
+$user = null;
+$shop = null;
+
 beforeEach(function () {
+
+    global $user, $shop;
     $user = App\Models\User::factory()->create();
-    $product1 = App\Models\Product::factory()->create();
+    $shop = App\Models\Shop::factory(['family_id' => $user->family_id])->create();
 
     $response = $this->post('/login', [
         'email' => $user->email,
@@ -29,34 +34,51 @@ it('can render empty Products list')
     ]);
 
 
-// it('can render populated Products list', function() {
+it('can render populated Products list', function() {
 
-// 	$product1 = Product::factory()->create();
-// 	$product2 = Product::factory()->create();
-// 	$product3 = Product::factory()->create();
+    global $user, $shop;
 
-//     $response = $this
-//         ->get('/products');
+    $product1 = App\Models\Product::factory([
+        'family_id' => $user->family_id,
+        'shop_id'   => $shop->id,
+        ])->create();
+    
+    $product2 = App\Models\Product::factory([
+        'family_id' => $user->family_id,
+        'shop_id'   => $shop->id,
+        ])->create();
 
-//     $response->assertStatus(200);
-//     $this->assertAuthenticated();
-//     $response->assertSee('Shops');
-//     $response->assertSee('New shop');
+    $product3 = App\Models\Product::factory([
+        'family_id' => $user->family_id,
+        'shop_id'   => $shop->id,
+        ])->create();
 
-//     $response
-//     ->assertSeeInOrder([
-//     	'Products',
-//     	'New product',
-//     	'Needed Soon',
-//     	'Name',
-//     	'Shop',
-//     	'Usually Need',
-//     	$product1->name,
-//     ])
-//     ->assertSee($product2->name)
-//     ->assertSee($product3->name);
 
-// });
+    $response = $this
+        ->get('/products')
+        ->assertStatus(200);
+    $this->assertAuthenticated();
+
+    $response
+        ->assertSeeInOrder([
+            'Products',
+            'New product',            
+        ])
+        //->assertSee('No records found')
+        ->assertSeeInOrder([
+            'Need Soon',
+            'Name',
+            'Shop',
+            'Usually Need',
+        ])
+        ->assertSeeInOrder([
+            $product1->name,
+            $product2->name,
+            $product3->name,
+        ]);        
+
+
+});
 
  
 it('can render empty New Product form')
