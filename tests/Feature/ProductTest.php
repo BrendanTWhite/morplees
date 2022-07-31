@@ -63,15 +63,10 @@ it('can render populated Products list', function() {
         ->assertSeeInOrder([
             'Products',
             'New product',            
-        ])
-        //->assertSee('No records found')
-        ->assertSeeInOrder([
             'Need Soon',
             'Name',
             'Shop',
             'Usually Need',
-        ])
-        ->assertSeeInOrder([
             $product1->name,
             $product2->name,
             $product3->name,
