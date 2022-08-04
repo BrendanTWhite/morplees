@@ -39,7 +39,13 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+
+/**
+ * Set the currently logged in user for the application.
+ *
+ * @return TestCase
+ */
+function actingAs(Authenticatable $user, string $driver = null)
 {
-    // ..
+    return test()->actingAs($user, $driver);
 }

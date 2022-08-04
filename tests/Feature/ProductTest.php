@@ -1,37 +1,27 @@
 <?php
 
-// use App\Models\Product;
-// use App\Models\User;
-
 $user = null;
 $shop = null;
 
 beforeEach(function () {
-
     global $user, $shop;
     $user = App\Models\User::factory()->create();
     $shop = App\Models\Shop::factory(['family_id' => $user->family_id])->create();
-
-    $response = $this->post('/login', [
-        'email' => $user->email,
-        'password' => 'password',
-    ]);
-});
-
-test('example', function () {
-    $response = $this->get('/');
-
-    $response->assertStatus(200);
 });
 
  
-it('can render empty Products list')
-    ->get('/products')
-    ->assertSeeInOrder([
-    	'Products',
-    	'New product',
-    	'No records found',
-    ]);
+it('can render empty Products list', function(){
+    global $user;
+
+    $this->actingAs($user)
+        ->get('/products')
+        ->assertOk()
+        ->assertSeeInOrder([
+            'Products',
+            'New product',
+            'No records found',
+        ]);
+});
 
 
 it('can render populated Products list', function() {
@@ -56,7 +46,7 @@ it('can render populated Products list', function() {
 
     $response = $this
         ->get('/products')
-        ->assertStatus(200);
+        ->assertOk();
     $this->assertAuthenticated();
 
     $response
