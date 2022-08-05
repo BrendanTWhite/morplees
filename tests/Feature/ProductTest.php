@@ -9,8 +9,7 @@ beforeEach(function () {
     $shop = App\Models\Shop::factory(['family_id' => $user->family_id])->create();
 });
 
- 
-it('can render empty Products list', function(){
+it('can render empty Products list', function () {
     global $user;
 
     $this->actingAs($user)
@@ -24,15 +23,14 @@ it('can render empty Products list', function(){
 });
 
 
-it('can render populated Products list', function() {
-
+it('can render populated Products list', function () {
     global $user, $shop;
 
     $product1 = App\Models\Product::factory([
         'family_id' => $user->family_id,
         'shop_id'   => $shop->id,
         ])->create();
-    
+
     $product2 = App\Models\Product::factory([
         'family_id' => $user->family_id,
         'shop_id'   => $shop->id,
@@ -52,7 +50,7 @@ it('can render populated Products list', function() {
     $response
         ->assertSeeInOrder([
             'Products',
-            'New product',            
+            'New product',
             'Need Soon',
             'Name',
             'Shop',
@@ -60,35 +58,32 @@ it('can render populated Products list', function() {
             $product1->name,
             $product2->name,
             $product3->name,
-        ]);        
-
-
+        ]);
 });
 
- 
+
 it('can render empty New Product form')
     ->get('/products/create')
     ->assertSeeInOrder([
-    	'Create product',
-    	'Name',
-    	'Select an option',
-    	'Default in list',
-    	'Needed soon',
-    	'Create',
-    	'Create & create another',
-		'Cancel',
-    ]); 
+        'Create product',
+        'Name',
+        'Select an option',
+        'Default in list',
+        'Needed soon',
+        'Create',
+        'Create & create another',
+        'Cancel',
+    ]);
 
 it('can render populated New Product form')
     ->get('/products/create')
     ->assertSeeInOrder([
-    	'Create product',
-    	'Name',
-    	'Select an option',
-    	'Default in list',
-    	'Needed soon',
-    	'Create',
-    	'Create & create another',
-		'Cancel',
+        'Create product',
+        'Name',
+        'Select an option',
+        'Default in list',
+        'Needed soon',
+        'Create',
+        'Create & create another',
+        'Cancel',
     ]);
-
