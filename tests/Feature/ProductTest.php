@@ -41,7 +41,6 @@ it('can render populated Products list', function () {
         'shop_id'   => $shop->id,
         ])->create();
 
-
     $response = $this
         ->get('/products')
         ->assertOk();
@@ -61,7 +60,6 @@ it('can render populated Products list', function () {
         ]);
 });
 
-
 it('can render empty New Product form')
     ->get('/products/create')
     ->assertSeeInOrder([
@@ -75,15 +73,15 @@ it('can render empty New Product form')
         'Cancel',
     ]);
 
-// it('can render populated New Product form')
-//     ->get('/products/create')
-//     ->assertSeeInOrder([
-//         'Create product',
-//         'Name',
-//         'Select an option',
-//         'Default in list',
-//         'Needed soon',
-//         'Create',
-//         'Create & create another',
-//         'Cancel',
-//     ]);
+it('can render populated New Product form')
+    ->get('/products/create')
+    ->assertSeeInOrder([
+        'Create product',
+        'Name',
+        'Shop',
+        'Default in list',
+        'Needed soon',
+        'Create',
+        'Create & create another',
+        'Cancel',
+    ]);
