@@ -85,3 +85,28 @@ it('can render populated New Product form')
         'Create & create another',
         'Cancel',
     ]);
+
+it('can create New Products', function () {
+    global $user, $shop;
+
+    $this->post('/products/create', [
+        'name' => 'Foo',
+        'shop' => $shop->id,
+    ])
+    ->assertSeeInOrder([
+        'View product',
+        'Edit',
+        'Name',
+        'Foo', 
+    ])
+    ->assertSeeInOrder([
+        'Shop',
+        $shop->name,
+    ])
+    ->assertSeeInOrder([
+        'Default in list',
+        'Needed soon',
+        'Used in',
+    ]);
+
+});
