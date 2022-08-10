@@ -73,19 +73,6 @@ it('can render empty New Product form')
         'Cancel',
     ]);
 
-it('can render populated New Product form')
-    ->get('/products/create')
-    ->assertSeeInOrder([
-        'Create product',
-        'Name',
-        'Shop',
-        'Default in list',
-        'Needed soon',
-        'Create',
-        'Create & create another',
-        'Cancel',
-    ]);
-
 it('can create New Products', function () {
     global $user, $shop;
 
