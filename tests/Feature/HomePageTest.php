@@ -1,30 +1,24 @@
 <?php
 
-namespace Tests\Feature;
+$user = null;
+$shop = null;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-use App\Models\User;
+beforeEach(function () {
+    global $user, $shop;
+    $user = App\Models\User::factory()->create();
+    $shop = App\Models\Shop::factory(['family_id' => $user->family_id])->create();
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+});
 
-class HomePageTest extends TestCase
-{
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-
-        $user = User::factory()->create();
-
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
-
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-}
+it('can render Home Page')
+    ->get('/')
+    ->assertOk()
+    ->assertSeeInOrder([
+        'New List',
+        'Menu',
+        'Pantry',
+        'Shopping',
+    ]);
