@@ -13,11 +13,13 @@ beforeEach(function () {
     ]);
 });
 
-// Test can link to 'index' from home page
+// Test can see index URL on home page
 
-// TODO: Write this test!!!!
-
-
+it('can see index URL on home page', function () {
+    $this->get('/')
+        ->assertOk()
+        ->assertSee(route('filament.resources.products.index'));
+});
 
 // Test Action 'index' at route '/foobars'
 
