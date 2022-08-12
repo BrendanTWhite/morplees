@@ -13,6 +13,12 @@ beforeEach(function () {
     ]);
 });
 
+// Test can link to 'index' from home page
+
+// TODO: Write this test!!!!
+
+
+
 // Test Action 'index' at route '/foobars'
 
 it('can render empty Products index')
