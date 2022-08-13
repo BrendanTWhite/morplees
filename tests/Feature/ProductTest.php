@@ -21,7 +21,7 @@ it('can see index URL on home page', function () {
         ->assertSee(route('filament.resources.products.index'));
 });
 
-// Test Action 'index' at route '/foobars'
+// Test Action 'index' with GET at route '/products'
 
 it('can render empty Products index')
     ->get('/products')
@@ -51,7 +51,7 @@ it('can render populated Products index', function () {
         ])->create();
 
     $response = $this
-        ->get('/products')
+        ->get(route('filament.resources.products.index'))
         ->assertOk();
     $this->assertAuthenticated();
 
@@ -69,7 +69,7 @@ it('can render populated Products index', function () {
         ]);
 });
 
-// Test Action 'create' at route '/foobars/create'
+// Test Action 'create' with GET at route '/products/create'
 
     it('can render empty New Product form')
     ->get('/products/create')
@@ -84,7 +84,7 @@ it('can render populated Products index', function () {
         'Cancel',
     ]);
 
-// Test Action 'store' at route '/foobars'
+// Test Action 'store' with POST at route '/products'
 
 it('can create New Products', function () {
     global $user, $shop;
@@ -111,8 +111,7 @@ it('can create New Products', function () {
 
 });
 
-
-// Test Action 'show' at route '/foobars/[id]'
+// Test Action 'show' with GET at route '/products/[id]'
 
 it('can show a product', function(){
     global $user, $shop;
@@ -143,11 +142,7 @@ it('can show a product', function(){
 
 });
 
-
-
-
-// Test Action 'edit' at route '/foobars/[id]/edit'
-
+// Test Action 'edit' with GET at route '/products/[id]/edit'
 
 it('can render the edit route ', function(){
     global $user, $shop;
@@ -181,12 +176,26 @@ it('can render the edit route ', function(){
 
 });
 
+// Test Action 'update' with PUT/PATCH at route '/products/[id]'
 
+it('can update a product', function(){
+     global $user, $shop;
 
-// Test Action 'update' at route '/foobars/[id]'
+    $product = App\Models\Product::factory([
+        'family_id' => $user->family_id,
+        'shop_id'   => $shop->id,
+        'name'      => 'Foo',
+        ])->create();   
 
+    $this->assertEquals('Foo',$product->name);
+    $this->assertNotEquals('Bar',$product->name);
 
-// Test Action 'destroy' at route '/foobars/[id]'
+    $this->assertEquals('Bar',$product->name);
+    $this->assertNotEquals('Foo',$product->name);
+    
+});
+
+// Test Action 'destroy' with DELETE at route '/products/[id]'
 
 
 
