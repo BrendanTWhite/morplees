@@ -258,4 +258,16 @@ it('can update a product', function(){
 // Test Action 'destroy' with DELETE at route '/products/[id]'
 
 
+it('can delete', function () {
+    global $user, $shop;
+    
+    $product = Product::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
+ 
+    livewire(ProductResource\Pages\EditProduct::class, [
+        'record' => $product->getKey(),
+    ])
+        ->callPageAction(Filament\Pages\Actions\DeleteAction::class);
+ 
+    $this->assertModelMissing($product);
+});
 
