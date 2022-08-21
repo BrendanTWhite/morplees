@@ -1,7 +1,8 @@
 <?php
 
-$user = null;
-$shop = null;
+use function Pest\Livewire\livewire;
+use App\Filament\Resources\ProductResource;
+use App\Models\Product;
 
 beforeEach(function () {
     global $user, $shop;
@@ -18,44 +19,34 @@ beforeEach(function () {
 it('can see index URL on home page', function () {
     $this->get('/')
         ->assertOk()
-        ->assertSee(route('filament.resources.products.index'));
+        ->assertSee(ProductResource::getUrl('index'));
 });
 
 // Test Action 'index' with GET at route '/products'
 
-it('can render empty Products index')
-    ->get('/products')
+it('can render empty Products index', function () {
+    $this
+    ->get(ProductResource::getUrl('index'))
     ->assertOk()
     ->assertSeeInOrder([
         'Products',
         'New product',
         'No records found',
     ]);
+});
 
 it('can render populated Products index', function () {
     global $user, $shop;
 
-    $product1 = App\Models\Product::factory([
-        'family_id' => $user->family_id,
-        'shop_id'   => $shop->id,
-        ])->create();
+    $products = Product::factory([
+            'family_id' => $user->family_id,
+            'shop_id'   => $shop->id,
+        ])
+        ->count(10)->create();
 
-    $product2 = App\Models\Product::factory([
-        'family_id' => $user->family_id,
-        'shop_id'   => $shop->id,
-        ])->create();
-
-    $product3 = App\Models\Product::factory([
-        'family_id' => $user->family_id,
-        'shop_id'   => $shop->id,
-        ])->create();
-
-    $response = $this
-        ->get(route('filament.resources.products.index'))
-        ->assertOk();
-    $this->assertAuthenticated();
-
-    $response
+    livewire(ProductResource\Pages\ListProducts::class)
+        ->assertOk()
+        ->assertCanSeeTableRecords($products)
         ->assertSeeInOrder([
             'Products',
             'New product',
@@ -63,31 +54,34 @@ it('can render populated Products index', function () {
             'Name',
             'Shop',
             'Usually Need',
-            $product1->name,
-            $product2->name,
-            $product3->name,
         ]);
+    $this->assertAuthenticated();
+
 });
 
 // Test Action 'create' with GET at route '/products/create'
 
-    it('can render empty New Product form')
-    ->get('/products/create')
-    ->assertSeeInOrder([
-        'Create product',
-        'Name',
-        'Select an option',
-        'Default in list',
-        'Needed soon',
-        'Create',
-        'Create & create another',
-        'Cancel',
-    ]);
+it('can render empty New Product form', function () {
+    $this
+        ->get(ProductResource::getUrl('create'))
+        ->assertOk()
+        ->assertSeeInOrder([
+            'Create product',
+            'Name',
+            'Select an option',
+            'Default in list',
+            'Needed soon',
+            'Create',
+            'Create & create another',
+            'Cancel',
+        ]);
+    });
 
 // Test Action 'store' with POST at route '/products'
 
 it('can create New Products', function () {
     global $user, $shop;
+    $shop->name = 'My Super Cool Shop';
 
     $this->post('/products', [
         'name' => 'Foo',
@@ -101,27 +95,52 @@ it('can create New Products', function () {
     ])
     ->assertSeeInOrder([
         'Shop',
-        $shop->name,
+        'My Super Cool Shop',
     ])
     ->assertSeeInOrder([
         'Default in list',
         'Needed soon',
         'Used in',
     ]);
-
 });
+
+it('can create', function () {
+    global $user, $shop;
+
+    $product = Product::factory()->make();
+ 
+    livewire(ProductResource\Pages\CreateProduct::class)
+        ->fillForm([
+            'name'            => $product->name,
+            'shop_id'         => $shop->id,
+            'family_id'       => $user->family_id,
+            'default_in_list' => $product->default_in_list,
+            'needed_soon'     => $product->needed_soon,
+        ])
+        ->call('create')
+        ->assertHasNoFormErrors();
+ 
+    $this->assertDatabaseHas(Product::class, [
+        'name'            => $product->name,
+        'shop_id'         => $shop->id,
+        'family_id'       => $user->family_id,
+        'default_in_list' => $product->default_in_list,
+        'needed_soon'     => $product->needed_soon,
+    ]);
+});
+
 
 // Test Action 'show' with GET at route '/products/[id]'
 
 it('can show a product', function(){
     global $user, $shop;
 
-    $product1 = App\Models\Product::factory([
+    $product = Product::factory([
         'family_id' => $user->family_id,
         'shop_id'   => $shop->id,
         ])->create();
 
-    $this->get('/products/'.$product1->id)
+    $this->get('/products/'.$product->id)
     ->assertSeeInOrder([
         'View Product',
         'Edit',
@@ -130,16 +149,14 @@ it('can show a product', function(){
     ])
     ->assertSeeInOrder([
         'Name',
-        //$product1->name, // not showing the product name in the test, dunno why ... fine in the app tho
+        //$product->name, // not showing the product name in the test, dunno why ... fine in the app tho
         'Default in list',
     ])
     ->assertSeeInOrder([
         'Shop',
-        $product1->shop->name,
+        $product->shop->name,
         'Needed soon',
-    ])
-    ;
-
+    ]);
 });
 
 // Test Action 'edit' with GET at route '/products/[id]/edit'
@@ -147,12 +164,12 @@ it('can show a product', function(){
 it('can render the edit route ', function(){
     global $user, $shop;
 
-    $product1 = App\Models\Product::factory([
+    $product = Product::factory([
         'family_id' => $user->family_id,
         'shop_id'   => $shop->id,
         ])->create();
 
-    $this->get('/products/'.$product1->id.'/edit')
+    $this->get('/products/'.$product->id.'/edit')
     ->assertSeeInOrder([
         'Edit Product',
         'View',
@@ -164,40 +181,85 @@ it('can render the edit route ', function(){
     ])
     ->assertSeeInOrder([
         'Name',
-        //$product1->name, // not showing the product name in the test, dunno why ... fine in the app tho
+        //$product->name, // not showing the product name in the test, dunno why ... fine in the app tho
         'Default in list',
     ])
     ->assertSeeInOrder([
         'Shop',
-        $product1->shop->name,
+        $product->shop->name,
         'Needed soon',
-    ])
-    ;
+    ]);
+});
 
+it('can render edit page', function () {
+    global $user, $shop;
+
+    $this->get(ProductResource::getUrl('edit', [
+            'record' => Product::factory(['shop_id'=>$shop->id])->create(),
+        ]))
+        ->assertSuccessful();
+});
+
+
+it('can retrieve data', function () {
+    global $user, $shop;
+
+    $product = Product::factory(['shop_id'=>$shop->id])->create();
+ 
+    livewire(ProductResource\Pages\EditProduct::class, [
+        'record' => $product->getKey(),
+    ])
+        ->assertFormSet([
+        'name'            => $product->name,
+        'shop_id'         => $shop->id,
+        'family_id'       => $user->family_id,
+        'default_in_list' => $product->default_in_list,
+        'needed_soon'     => $product->needed_soon,
+        ]);
 });
 
 // Test Action 'update' with PUT/PATCH at route '/products/[id]'
 
 it('can update a product', function(){
-     global $user, $shop;
+    global $user, $shop;
 
-    $product = App\Models\Product::factory([
-        'family_id' => $user->family_id,
-        'shop_id'   => $shop->id,
-        'name'      => 'Foo',
-        ])->create();   
-
-    $this->assertEquals('Foo',$product->name);
-    $this->assertNotEquals('Bar',$product->name);
-
-    // TODO: Now change the name from Foo to Bar using route '/products/[id]'
-
-    // $this->assertEquals('Bar',$product->name);
-    // $this->assertNotEquals('Foo',$product->name);
-    
+    $product = Product::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
+    $newData = Product::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->make();
+ 
+    livewire(ProductResource\Pages\EditProduct::class, [
+        'record' => $product->getKey(),
+    ])
+        ->fillForm([
+            'name'            => $newData->name,
+            'shop_id'         => $shop->getKey(),
+            'family_id'       => $user->family_id,
+            'default_in_list' => $newData->default_in_list,
+            'needed_soon'     => $newData->needed_soon,
+        ])
+        ->call('save')
+        ->assertHasNoFormErrors();
+ 
+    expect($product->refresh())
+        ->shop_id   ->toBe($newData->shop_id)
+        ->family_id ->toBe($newData->family_id)
+        ->name            ->toBe($newData->name)
+        ->default_in_list ->toBe((int)$newData->default_in_list)
+        ->needed_soon     ->toBe((int)$newData->needed_soon);
 });
 
 // Test Action 'destroy' with DELETE at route '/products/[id]'
 
 
+it('can delete', function () {
+    global $user, $shop;
+
+    $product = Product::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
+ 
+    livewire(ProductResource\Pages\EditProduct::class, [
+        'record' => $product->getKey(),
+    ])
+        ->callPageAction(Filament\Pages\Actions\DeleteAction::class);
+ 
+    $this->assertModelMissing($product);
+});
 
