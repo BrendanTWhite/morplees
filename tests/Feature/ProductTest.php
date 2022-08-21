@@ -4,9 +4,6 @@ use function Pest\Livewire\livewire;
 use App\Filament\Resources\ProductResource;
 use App\Models\Product;
 
-$user = null;
-$shop = null;
-
 beforeEach(function () {
     global $user, $shop;
     $user = App\Models\User::factory()->create();
@@ -105,7 +102,6 @@ it('can create New Products', function () {
         'Needed soon',
         'Used in',
     ]);
-
 });
 
 it('can create', function () {
@@ -139,12 +135,12 @@ it('can create', function () {
 it('can show a product', function(){
     global $user, $shop;
 
-    $product1 = Product::factory([
+    $product = Product::factory([
         'family_id' => $user->family_id,
         'shop_id'   => $shop->id,
         ])->create();
 
-    $this->get('/products/'.$product1->id)
+    $this->get('/products/'.$product->id)
     ->assertSeeInOrder([
         'View Product',
         'Edit',
@@ -153,16 +149,14 @@ it('can show a product', function(){
     ])
     ->assertSeeInOrder([
         'Name',
-        //$product1->name, // not showing the product name in the test, dunno why ... fine in the app tho
+        //$product->name, // not showing the product name in the test, dunno why ... fine in the app tho
         'Default in list',
     ])
     ->assertSeeInOrder([
         'Shop',
-        $product1->shop->name,
+        $product->shop->name,
         'Needed soon',
-    ])
-    ;
-
+    ]);
 });
 
 // Test Action 'edit' with GET at route '/products/[id]/edit'
@@ -170,12 +164,12 @@ it('can show a product', function(){
 it('can render the edit route ', function(){
     global $user, $shop;
 
-    $product1 = Product::factory([
+    $product = Product::factory([
         'family_id' => $user->family_id,
         'shop_id'   => $shop->id,
         ])->create();
 
-    $this->get('/products/'.$product1->id.'/edit')
+    $this->get('/products/'.$product->id.'/edit')
     ->assertSeeInOrder([
         'Edit Product',
         'View',
@@ -187,16 +181,14 @@ it('can render the edit route ', function(){
     ])
     ->assertSeeInOrder([
         'Name',
-        //$product1->name, // not showing the product name in the test, dunno why ... fine in the app tho
+        //$product->name, // not showing the product name in the test, dunno why ... fine in the app tho
         'Default in list',
     ])
     ->assertSeeInOrder([
         'Shop',
-        $product1->shop->name,
+        $product->shop->name,
         'Needed soon',
-    ])
-    ;
-
+    ]);
 });
 
 it('can render edit page', function () {
@@ -260,7 +252,7 @@ it('can update a product', function(){
 
 it('can delete', function () {
     global $user, $shop;
-    
+
     $product = Product::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
  
     livewire(ProductResource\Pages\EditProduct::class, [
