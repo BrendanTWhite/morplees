@@ -1,0 +1,252 @@
+<?php
+
+// Replace lower-{{class}} with {{ class }} in lower case
+
+use function Pest\Livewire\livewire;
+use App\Filament\Resources\{{ class }}Resource;
+use App\Models\{{ class }};
+
+beforeEach(function () {
+    global $user;
+    $user = App\Models\User::factory()->create();
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+});
+
+// Test can see index URL on home page
+
+it('can see index URL on home page', function () {
+    $this->get('/')
+        ->assertOk()
+        ->assertSee({{ class }}Resource::getUrl('index'));
+});
+
+// Test Action 'index' with GET at route '/lower-{{class}}s'
+
+it('can render empty {{ class }}s index', function () {
+    $this
+    ->get({{ class }}Resource::getUrl('index'))
+    ->assertOk()
+    ->assertSeeInOrder([
+        '{{ class }}s',
+        'New lower-{{class}}',
+        'No records found',
+    ]);
+});
+
+it('can render populated {{ class }}s index', function () {
+    global $user;
+
+    $lower-{{class}}s = {{ class }}::factory([
+            'family_id' => $user->family_id,
+        ])
+        ->count(10)->create();
+
+    livewire({{ class }}Resource\Pages\List{{ class }}s::class)
+        ->assertOk()
+        ->assertCanSeeTableRecords($lower-{{class}}s)
+        ->assertSeeInOrder([
+            '{{ class }}s',
+            'New lower-{{class}}',
+            'Name',
+            // 'Prep time',  // Text from the index page
+            // 'Cook time',
+            // 'Book reference',
+            // 'Url',
+        ]);
+    $this->assertAuthenticated();
+
+});
+
+// Test Action 'create' with GET at route '/lower-{{class}}s/create'
+
+it('can render empty New {{ class }} form', function () {
+    $this
+        ->get({{ class }}Resource::getUrl('create'))
+        ->assertOk()
+        ->assertSeeInOrder([
+            'Create lower-{{class}}',
+            'Name',
+            'Select an option',
+            // 'Default in list',  // Column titles from the create page
+            // 'Needed soon',
+            'Create',
+            'Create & create another',
+            'Cancel',
+        ]);
+    });
+
+// Test Action 'store' with POST at route '/lower-{{class}}s'
+
+it('can create New {{ class }}s', function () {
+    global $user;
+
+    $this->post('/lower-{{class}}s', [
+        'name' => 'Foo',
+    ])
+    ->assertSeeInOrder([
+        'View lower-{{class}}',
+        'Edit',
+        'Name',
+        'Foo', 
+    ])
+    ->assertSeeInOrder([
+        'Shop',
+    ])
+    ->assertSeeInOrder([
+        // 'Default in list',   // other fields
+        // 'Needed soon',
+        // 'Used in',
+    ]);
+});
+
+it('can create', function () {
+    global $user;
+
+    $lower-{{class}} = {{ class }}::factory()->make();
+ 
+    livewire({{ class }}Resource\Pages\Create{{ class }}::class)
+        ->fillForm([
+            'name'            => $lower-{{class}}->name,
+            'family_id'       => $user->family_id,
+            // 'default_in_list' => $lower-{{class}}->default_in_list,
+            // 'needed_soon'     => $lower-{{class}}->needed_soon,
+        ])
+        ->call('create')
+        ->assertHasNoFormErrors();
+ 
+    $this->assertDatabaseHas({{ class }}::class, [
+        'name'            => $lower-{{class}}->name,
+        'family_id'       => $user->family_id,
+        // 'default_in_list' => $lower-{{class}}->default_in_list,
+        // 'needed_soon'     => $lower-{{class}}->needed_soon,
+    ]);
+});
+
+
+// Test Action 'show' with GET at route '/lower-{{class}}s/[id]'
+
+it('can show a lower-{{class}}', function(){
+    global $user;
+
+    $lower-{{class}} = {{ class }}::factory([
+        'family_id' => $user->family_id,
+        ])->create();
+
+    $this->get('/lower-{{class}}s/'.$lower-{{class}}->id)
+    ->assertSeeInOrder([
+        'View {{ class }}',
+        'Edit',
+        // 'Prep time',   // other field titles from view page
+        // 'Cook time',
+    ])
+    ;
+});
+
+// Test Action 'edit' with GET at route '/lower-{{class}}s/[id]/edit'
+
+it('can render the edit route ', function(){
+    global $user;
+
+    $lower-{{class}} = {{ class }}::factory([
+        'family_id' => $user->family_id,
+        ])->create();
+
+    $this->get('/lower-{{class}}s/'.$lower-{{class}}->id.'/edit')
+    ->assertSeeInOrder([
+        'Edit {{ class }}',
+        'View',
+        'Delete',
+        'Save',
+        'Cancel',
+    ])
+    ->assertSeeInOrder([
+        $lower-{{class}}->name,
+        //$lower-{{class}}->bookReference,  // other fields
+        //$lower-{{class}}->bookReference,  
+        //$lower-{{class}}->bookReference,  
+        //$lower-{{class}}->bookReference,  
+        //$lower-{{class}}->bookReference,  
+    ])
+    ->assertSeeInOrder([
+        // 'Ingredients',  // Field column titles
+        // 'Steps',
+    ]);
+});
+
+it('can render edit page', function () {
+    global $user;
+
+    $this->get({{ class }}Resource::getUrl('edit', [
+            'record' => {{ class }}::factory(['family_id'=>$user->family_id])->create(),
+        ]))
+        ->assertSuccessful();
+});
+
+
+it('can retrieve data', function () {
+    global $user;
+
+    $lower-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+ 
+    livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
+        'record' => $lower-{{class}}->getKey(),
+    ])
+        ->assertFormSet([
+        'name'           => $lower-{{class}}->name,
+        // 'prep_time'      => $lower-{{class}}->prep_time,   // other fields
+        // 'cook_time'      => $lower-{{class}}->cook_time,
+        // 'book_reference' => $lower-{{class}}->book_reference,
+        // 'url'            => $lower-{{class}}->url,
+        ]);
+});
+
+// Test Action 'update' with PUT/PATCH at route '/lower-{{class}}s/[id]'
+
+it('can update a lower-{{class}}', function(){
+    global $user;
+
+    $lower-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+    $newData = {{ class }}::factory(['family_id'=>$user->family_id])->make();
+ 
+    livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
+        'record' => $lower-{{class}}->getKey(),
+    ])
+        ->fillForm([
+            'name'           => $newData->name,
+            // 'prep_time'      => $newData->prep_time,   // Other fields
+            // 'cook_time'      => $newData->cook_time,
+            // 'book_reference' => $newData->book_reference,
+            // 'url'            => $newData->url,
+        ])
+        ->call('save')
+        ->assertHasNoFormErrors();
+ 
+    expect($lower-{{class}}->refresh())
+        ->family_id      ->toBe($newData->family_id)
+        ->name           ->toBe($newData->name)
+        // ->prep_time      ->toBe((int)$newData->prep_time) // other INTEGEr field
+        // ->cook_time      ->toBe((int)$newData->cook_time)
+        // ->book_reference ->toBe($newData->book_reference)  // other text field
+        // ->url            ->toBe($newData->url)
+        ;
+});
+
+// Test Action 'destroy' with DELETE at route '/lower-{{class}}s/[id]'
+
+
+it('can delete', function () {
+    global $user;
+
+    $lower-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+ 
+    livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
+        'record' => $lower-{{class}}->getKey(),
+    ])
+        ->callPageAction(Filament\Pages\Actions\DeleteAction::class);
+ 
+    $this->assertModelMissing($lower-{{class}});
+});
+
