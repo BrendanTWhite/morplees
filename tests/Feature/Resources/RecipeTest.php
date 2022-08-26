@@ -163,18 +163,14 @@ it('can render the edit route ', function(){
         'Delete',
         'Save',
         'Cancel',
-        'Used in',
-        'No records found',
     ])
     ->assertSeeInOrder([
-        'Name',
-        //$recipe->name, // not showing the recipe name in the test, dunno why ... fine in the app tho
-        'Default in list',
+        $recipe->name,
+        $recipe->bookReference,
     ])
     ->assertSeeInOrder([
-        'Shop',
-        $recipe->shop->name,
-        'Needed soon',
+        'Ingredients',
+        'Steps',
     ]);
 });
 
@@ -182,7 +178,7 @@ it('can render edit page', function () {
     global $user, $shop;
 
     $this->get(RecipeResource::getUrl('edit', [
-            'record' => Recipe::factory(['shop_id'=>$shop->id])->create(),
+            'record' => Recipe::factory(['family_id'=>$user->family_id])->create(),
         ]))
         ->assertSuccessful();
 });
@@ -191,17 +187,17 @@ it('can render edit page', function () {
 it('can retrieve data', function () {
     global $user, $shop;
 
-    $recipe = Recipe::factory(['shop_id'=>$shop->id])->create();
+    $recipe = Recipe::factory(['family_id'=>$user->family_id])->create();
  
     livewire(RecipeResource\Pages\EditRecipe::class, [
         'record' => $recipe->getKey(),
     ])
         ->assertFormSet([
-        'name'            => $recipe->name,
-        'shop_id'         => $shop->id,
-        'family_id'       => $user->family_id,
-        // 'default_in_list' => $recipe->default_in_list,
-        // 'needed_soon'     => $recipe->needed_soon,
+        'name'           => $recipe->name,
+        'prep_time'      => $recipe->prep_time,
+        'cook_time'      => $recipe->cook_time,
+        'book_reference' => $recipe->book_reference,
+        'url'            => $recipe->url,
         ]);
 });
 
@@ -210,28 +206,29 @@ it('can retrieve data', function () {
 it('can update a recipe', function(){
     global $user, $shop;
 
-    $recipe = Recipe::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
-    $newData = Recipe::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->make();
+    $recipe = Recipe::factory(['family_id'=>$user->family_id])->create();
+    $newData = Recipe::factory(['family_id'=>$user->family_id])->make();
  
     livewire(RecipeResource\Pages\EditRecipe::class, [
         'record' => $recipe->getKey(),
     ])
         ->fillForm([
-            'name'            => $newData->name,
-            'shop_id'         => $shop->getKey(),
-            'family_id'       => $user->family_id,
-            // 'default_in_list' => $newData->default_in_list,
-            // 'needed_soon'     => $newData->needed_soon,
+            'name'           => $newData->name,
+            'prep_time'      => $newData->prep_time,
+            'cook_time'      => $newData->cook_time,
+            'book_reference' => $newData->book_reference,
+            'url'            => $newData->url,
         ])
         ->call('save')
         ->assertHasNoFormErrors();
  
     expect($recipe->refresh())
-        ->shop_id   ->toBe($newData->shop_id)
-        ->family_id ->toBe($newData->family_id)
-        ->name            ->toBe($newData->name)
-        // ->default_in_list ->toBe((int)$newData->default_in_list)
-        // ->needed_soon     ->toBe((int)$newData->needed_soon)
+        ->family_id      ->toBe($newData->family_id)
+        ->name           ->toBe($newData->name)
+        ->prep_time      ->toBe((int)$newData->prep_time)
+        ->cook_time      ->toBe((int)$newData->cook_time)
+        ->book_reference ->toBe($newData->book_reference)
+        ->url            ->toBe($newData->url)
         ;
 });
 
@@ -239,9 +236,9 @@ it('can update a recipe', function(){
 
 
 it('can delete', function () {
-    global $user, $shop;
+    global $user;
 
-    $recipe = Recipe::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
+    $recipe = Recipe::factory(['family_id'=>$user->family_id])->create();
  
     livewire(RecipeResource\Pages\EditRecipe::class, [
         'record' => $recipe->getKey(),
