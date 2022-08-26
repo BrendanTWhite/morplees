@@ -1,6 +1,6 @@
 <?php
 
-// Replace lower-{{class}} with {{ class }} in lower case
+// Replace snake-{{class}} with {{ class }} in snake_case
 
 use function Pest\Livewire\livewire;
 use App\Filament\Resources\{{ class }}Resource;
@@ -23,7 +23,7 @@ it('can see index URL on home page', function () {
         ->assertSee({{ class }}Resource::getUrl('index'));
 });
 
-// Test Action 'index' with GET at route '/lower-{{class}}s'
+// Test Action 'index' with GET at route '/snake-{{class}}s'
 
 it('can render empty {{ class }}s index', function () {
     $this
@@ -31,7 +31,7 @@ it('can render empty {{ class }}s index', function () {
     ->assertOk()
     ->assertSeeInOrder([
         '{{ class }}s',
-        'New lower-{{class}}',
+        'New snake-{{class}}',
         'No records found',
     ]);
 });
@@ -39,17 +39,17 @@ it('can render empty {{ class }}s index', function () {
 it('can render populated {{ class }}s index', function () {
     global $user;
 
-    $lower-{{class}}s = {{ class }}::factory([
+    $snake-{{class}}s = {{ class }}::factory([
             'family_id' => $user->family_id,
         ])
         ->count(10)->create();
 
     livewire({{ class }}Resource\Pages\List{{ class }}s::class)
         ->assertOk()
-        ->assertCanSeeTableRecords($lower-{{class}}s)
+        ->assertCanSeeTableRecords($snake-{{class}}s)
         ->assertSeeInOrder([
             '{{ class }}s',
-            'New lower-{{class}}',
+            'New snake-{{class}}',
             'Name',
             // 'Prep time',  // Text from the index page
             // 'Cook time',
@@ -60,14 +60,14 @@ it('can render populated {{ class }}s index', function () {
 
 });
 
-// Test Action 'create' with GET at route '/lower-{{class}}s/create'
+// Test Action 'create' with GET at route '/snake-{{class}}s/create'
 
 it('can render empty New {{ class }} form', function () {
     $this
         ->get({{ class }}Resource::getUrl('create'))
         ->assertOk()
         ->assertSeeInOrder([
-            'Create lower-{{class}}',
+            'Create snake-{{class}}',
             'Name',
             'Select an option',
             // 'Default in list',  // Column titles from the create page
@@ -78,16 +78,16 @@ it('can render empty New {{ class }} form', function () {
         ]);
     });
 
-// Test Action 'store' with POST at route '/lower-{{class}}s'
+// Test Action 'store' with POST at route '/snake-{{class}}s'
 
 it('can create New {{ class }}s', function () {
     global $user;
 
-    $this->post('/lower-{{class}}s', [
+    $this->post('/snake-{{class}}s', [
         'name' => 'Foo',
     ])
     ->assertSeeInOrder([
-        'View lower-{{class}}',
+        'View snake-{{class}}',
         'Edit',
         'Name',
         'Foo', 
@@ -105,37 +105,37 @@ it('can create New {{ class }}s', function () {
 it('can create', function () {
     global $user;
 
-    $lower-{{class}} = {{ class }}::factory()->make();
+    $snake-{{class}} = {{ class }}::factory()->make();
  
     livewire({{ class }}Resource\Pages\Create{{ class }}::class)
         ->fillForm([
-            'name'            => $lower-{{class}}->name,
+            'name'            => $snake-{{class}}->name,
             'family_id'       => $user->family_id,
-            // 'default_in_list' => $lower-{{class}}->default_in_list,
-            // 'needed_soon'     => $lower-{{class}}->needed_soon,
+            // 'default_in_list' => $snake-{{class}}->default_in_list,
+            // 'needed_soon'     => $snake-{{class}}->needed_soon,
         ])
         ->call('create')
         ->assertHasNoFormErrors();
  
     $this->assertDatabaseHas({{ class }}::class, [
-        'name'            => $lower-{{class}}->name,
+        'name'            => $snake-{{class}}->name,
         'family_id'       => $user->family_id,
-        // 'default_in_list' => $lower-{{class}}->default_in_list,
-        // 'needed_soon'     => $lower-{{class}}->needed_soon,
+        // 'default_in_list' => $snake-{{class}}->default_in_list,
+        // 'needed_soon'     => $snake-{{class}}->needed_soon,
     ]);
 });
 
 
-// Test Action 'show' with GET at route '/lower-{{class}}s/[id]'
+// Test Action 'show' with GET at route '/snake-{{class}}s/[id]'
 
-it('can show a lower-{{class}}', function(){
+it('can show a snake-{{class}}', function(){
     global $user;
 
-    $lower-{{class}} = {{ class }}::factory([
+    $snake-{{class}} = {{ class }}::factory([
         'family_id' => $user->family_id,
         ])->create();
 
-    $this->get('/lower-{{class}}s/'.$lower-{{class}}->id)
+    $this->get('/snake-{{class}}s/'.$snake-{{class}}->id)
     ->assertSeeInOrder([
         'View {{ class }}',
         'Edit',
@@ -145,16 +145,16 @@ it('can show a lower-{{class}}', function(){
     ;
 });
 
-// Test Action 'edit' with GET at route '/lower-{{class}}s/[id]/edit'
+// Test Action 'edit' with GET at route '/snake-{{class}}s/[id]/edit'
 
 it('can render the edit route ', function(){
     global $user;
 
-    $lower-{{class}} = {{ class }}::factory([
+    $snake-{{class}} = {{ class }}::factory([
         'family_id' => $user->family_id,
         ])->create();
 
-    $this->get('/lower-{{class}}s/'.$lower-{{class}}->id.'/edit')
+    $this->get('/snake-{{class}}s/'.$snake-{{class}}->id.'/edit')
     ->assertSeeInOrder([
         'Edit {{ class }}',
         'View',
@@ -163,12 +163,12 @@ it('can render the edit route ', function(){
         'Cancel',
     ])
     ->assertSeeInOrder([
-        $lower-{{class}}->name,
-        //$lower-{{class}}->bookReference,  // other fields
-        //$lower-{{class}}->bookReference,  
-        //$lower-{{class}}->bookReference,  
-        //$lower-{{class}}->bookReference,  
-        //$lower-{{class}}->bookReference,  
+        $snake-{{class}}->name,
+        //$snake-{{class}}->bookReference,  // other fields
+        //$snake-{{class}}->bookReference,  
+        //$snake-{{class}}->bookReference,  
+        //$snake-{{class}}->bookReference,  
+        //$snake-{{class}}->bookReference,  
     ])
     ->assertSeeInOrder([
         // 'Ingredients',  // Field column titles
@@ -189,30 +189,30 @@ it('can render edit page', function () {
 it('can retrieve data', function () {
     global $user;
 
-    $lower-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+    $snake-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
  
     livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
-        'record' => $lower-{{class}}->getKey(),
+        'record' => $snake-{{class}}->getKey(),
     ])
         ->assertFormSet([
-        'name'           => $lower-{{class}}->name,
-        // 'prep_time'      => $lower-{{class}}->prep_time,   // other fields
-        // 'cook_time'      => $lower-{{class}}->cook_time,
-        // 'book_reference' => $lower-{{class}}->book_reference,
-        // 'url'            => $lower-{{class}}->url,
+        'name'           => $snake-{{class}}->name,
+        // 'prep_time'      => $snake-{{class}}->prep_time,   // other fields
+        // 'cook_time'      => $snake-{{class}}->cook_time,
+        // 'book_reference' => $snake-{{class}}->book_reference,
+        // 'url'            => $snake-{{class}}->url,
         ]);
 });
 
-// Test Action 'update' with PUT/PATCH at route '/lower-{{class}}s/[id]'
+// Test Action 'update' with PUT/PATCH at route '/snake-{{class}}s/[id]'
 
-it('can update a lower-{{class}}', function(){
+it('can update a snake-{{class}}', function(){
     global $user;
 
-    $lower-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+    $snake-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
     $newData = {{ class }}::factory(['family_id'=>$user->family_id])->make();
  
     livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
-        'record' => $lower-{{class}}->getKey(),
+        'record' => $snake-{{class}}->getKey(),
     ])
         ->fillForm([
             'name'           => $newData->name,
@@ -224,7 +224,7 @@ it('can update a lower-{{class}}', function(){
         ->call('save')
         ->assertHasNoFormErrors();
  
-    expect($lower-{{class}}->refresh())
+    expect($snake-{{class}}->refresh())
         ->family_id      ->toBe($newData->family_id)
         ->name           ->toBe($newData->name)
         // ->prep_time      ->toBe((int)$newData->prep_time) // other INTEGEr field
@@ -234,19 +234,19 @@ it('can update a lower-{{class}}', function(){
         ;
 });
 
-// Test Action 'destroy' with DELETE at route '/lower-{{class}}s/[id]'
+// Test Action 'destroy' with DELETE at route '/snake-{{class}}s/[id]'
 
 
 it('can delete', function () {
     global $user;
 
-    $lower-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+    $snake-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
  
     livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
-        'record' => $lower-{{class}}->getKey(),
+        'record' => $snake-{{class}}->getKey(),
     ])
         ->callPageAction(Filament\Pages\Actions\DeleteAction::class);
  
-    $this->assertModelMissing($lower-{{class}});
+    $this->assertModelMissing($snake-{{class}});
 });
 
