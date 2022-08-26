@@ -5,9 +5,8 @@ use App\Filament\Resources\RecipeResource;
 use App\Models\Recipe;
 
 beforeEach(function () {
-    global $user, $shop;
+    global $user;
     $user = App\Models\User::factory()->create();
-    $shop = App\Models\Shop::factory(['family_id' => $user->family_id])->create();
     $response = $this->post('/login', [
         'email' => $user->email,
         'password' => 'password',
@@ -36,7 +35,7 @@ it('can render empty Recipes index', function () {
 });
 
 it('can render populated Recipes index', function () {
-    global $user, $shop;
+    global $user;
 
     $recipes = Recipe::factory([
             'family_id' => $user->family_id,
@@ -80,12 +79,10 @@ it('can render empty New Recipe form', function () {
 // Test Action 'store' with POST at route '/recipes'
 
 it('can create New Recipes', function () {
-    global $user, $shop;
-    $shop->name = 'My Super Cool Shop';
+    global $user;
 
     $this->post('/recipes', [
         'name' => 'Foo',
-        'shop' => $shop->id,
     ])
     ->assertSeeInOrder([
         'View recipe',
@@ -95,7 +92,6 @@ it('can create New Recipes', function () {
     ])
     ->assertSeeInOrder([
         'Shop',
-        'My Super Cool Shop',
     ])
     ->assertSeeInOrder([
         // 'Default in list',
@@ -105,7 +101,7 @@ it('can create New Recipes', function () {
 });
 
 it('can create', function () {
-    global $user, $shop;
+    global $user;
 
     $recipe = Recipe::factory()->make();
  
@@ -150,7 +146,7 @@ it('can show a recipe', function(){
 // Test Action 'edit' with GET at route '/recipes/[id]/edit'
 
 it('can render the edit route ', function(){
-    global $user, $shop;
+    global $user;
 
     $recipe = Recipe::factory([
         'family_id' => $user->family_id,
@@ -175,7 +171,7 @@ it('can render the edit route ', function(){
 });
 
 it('can render edit page', function () {
-    global $user, $shop;
+    global $user;
 
     $this->get(RecipeResource::getUrl('edit', [
             'record' => Recipe::factory(['family_id'=>$user->family_id])->create(),
@@ -185,7 +181,7 @@ it('can render edit page', function () {
 
 
 it('can retrieve data', function () {
-    global $user, $shop;
+    global $user;
 
     $recipe = Recipe::factory(['family_id'=>$user->family_id])->create();
  
@@ -204,7 +200,7 @@ it('can retrieve data', function () {
 // Test Action 'update' with PUT/PATCH at route '/recipes/[id]'
 
 it('can update a recipe', function(){
-    global $user, $shop;
+    global $user;
 
     $recipe = Recipe::factory(['family_id'=>$user->family_id])->create();
     $newData = Recipe::factory(['family_id'=>$user->family_id])->make();
