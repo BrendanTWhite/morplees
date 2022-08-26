@@ -1,8 +1,8 @@
 <?php
 
 use function Pest\Livewire\livewire;
-use App\Filament\Resources\ProductResource;
-use App\Models\Product;
+use App\Filament\Resources\RecipeResource;
+use App\Models\Recipe;
 
 beforeEach(function () {
     global $user, $shop;
@@ -19,76 +19,76 @@ beforeEach(function () {
 it('can see index URL on home page', function () {
     $this->get('/')
         ->assertOk()
-        ->assertSee(ProductResource::getUrl('index'));
+        ->assertSee(RecipeResource::getUrl('index'));
 });
 
-// Test Action 'index' with GET at route '/products'
+// Test Action 'index' with GET at route '/recipes'
 
-it('can render empty Products index', function () {
+it('can render empty Recipes index', function () {
     $this
-    ->get(ProductResource::getUrl('index'))
+    ->get(RecipeResource::getUrl('index'))
     ->assertOk()
     ->assertSeeInOrder([
-        'Products',
-        'New product',
+        'Recipes',
+        'New recipe',
         'No records found',
     ]);
 });
 
-it('can render populated Products index', function () {
+it('can render populated Recipes index', function () {
     global $user, $shop;
 
-    $products = Product::factory([
+    $recipes = Recipe::factory([
             'family_id' => $user->family_id,
-            'shop_id'   => $shop->id,
         ])
         ->count(10)->create();
 
-    livewire(ProductResource\Pages\ListProducts::class)
+    livewire(RecipeResource\Pages\ListRecipes::class)
         ->assertOk()
-        ->assertCanSeeTableRecords($products)
+        ->assertCanSeeTableRecords($recipes)
         ->assertSeeInOrder([
-            'Products',
-            'New product',
-            'Need Soon',
+            'Recipes',
+            'New recipe',
             'Name',
-            'Shop',
-            'Usually Need',
+            'Prep time',
+            'Cook time',
+            'Book reference',
+            'Url',
         ]);
     $this->assertAuthenticated();
 
 });
 
-// Test Action 'create' with GET at route '/products/create'
+// Test Action 'create' with GET at route '/recipes/create'
 
-it('can render empty New Product form', function () {
+it('can render empty New Recipe form', function () {
     $this
-        ->get(ProductResource::getUrl('create'))
+        ->get(RecipeResource::getUrl('create'))
         ->assertOk()
         ->assertSeeInOrder([
-            'Create product',
+            'Create recipe',
             'Name',
             'Select an option',
-            'Default in list',
-            'Needed soon',
+            // 'Default in list',
+            // 'Needed soon',
             'Create',
             'Create & create another',
             'Cancel',
         ]);
     });
 
-// Test Action 'store' with POST at route '/products'
+// Test Action 'store' with POST at route '/recipes'
 
-it('can create New Products', function () {
+it('can create New Recipes', function () {
     global $user, $shop;
     $shop->name = 'My Super Cool Shop';
 
-    $this->post('/products', [
+    $this->post('/recipes', [
         'name' => 'Foo',
         'shop' => $shop->id,
     ])
     ->assertSeeInOrder([
-        'View product',
+        'View recipe',
         'Edit',
         'Name',
         'Foo', 
@@ -98,80 +98,67 @@ it('can create New Products', function () {
         'My Super Cool Shop',
     ])
     ->assertSeeInOrder([
-        'Default in list',
-        'Needed soon',
-        'Used in',
+        // 'Default in list',
+        // 'Needed soon',
+        // 'Used in',
     ]);
 });
 
 it('can create', function () {
     global $user, $shop;
 
-    $product = Product::factory()->make();
+    $recipe = Recipe::factory()->make();
  
-    livewire(ProductResource\Pages\CreateProduct::class)
+    livewire(RecipeResource\Pages\CreateRecipe::class)
         ->fillForm([
-            'name'            => $product->name,
-            'shop_id'         => $shop->id,
+            'name'            => $recipe->name,
             'family_id'       => $user->family_id,
-            'default_in_list' => $product->default_in_list,
-            'needed_soon'     => $product->needed_soon,
+            // 'default_in_list' => $recipe->default_in_list,
+            // 'needed_soon'     => $recipe->needed_soon,
         ])
         ->call('create')
         ->assertHasNoFormErrors();
  
-    $this->assertDatabaseHas(Product::class, [
-        'name'            => $product->name,
-        'shop_id'         => $shop->id,
+    $this->assertDatabaseHas(Recipe::class, [
+        'name'            => $recipe->name,
         'family_id'       => $user->family_id,
-        'default_in_list' => $product->default_in_list,
-        'needed_soon'     => $product->needed_soon,
+        // 'default_in_list' => $recipe->default_in_list,
+        // 'needed_soon'     => $recipe->needed_soon,
     ]);
 });
 
 
-// Test Action 'show' with GET at route '/products/[id]'
+// Test Action 'show' with GET at route '/recipes/[id]'
 
-it('can show a product', function(){
-    global $user, $shop;
+it('can show a recipe', function(){
+    global $user;
 
-    $product = Product::factory([
+    $recipe = Recipe::factory([
         'family_id' => $user->family_id,
-        'shop_id'   => $shop->id,
         ])->create();
 
-    $this->get('/products/'.$product->id)
+    $this->get('/recipes/'.$recipe->id)
     ->assertSeeInOrder([
-        'View Product',
+        'View Recipe',
         'Edit',
-        'Used in',
-        'No records found',
+        'Prep time',
+        'Cook time',
     ])
-    ->assertSeeInOrder([
-        'Name',
-        //$product->name, // not showing the product name in the test, dunno why ... fine in the app tho
-        'Default in list',
-    ])
-    ->assertSeeInOrder([
-        'Shop',
-        $product->shop->name,
-        'Needed soon',
-    ]);
+    ;
 });
 
-// Test Action 'edit' with GET at route '/products/[id]/edit'
+// Test Action 'edit' with GET at route '/recipes/[id]/edit'
 
 it('can render the edit route ', function(){
     global $user, $shop;
 
-    $product = Product::factory([
+    $recipe = Recipe::factory([
         'family_id' => $user->family_id,
-        'shop_id'   => $shop->id,
         ])->create();
 
-    $this->get('/products/'.$product->id.'/edit')
+    $this->get('/recipes/'.$recipe->id.'/edit')
     ->assertSeeInOrder([
-        'Edit Product',
+        'Edit Recipe',
         'View',
         'Delete',
         'Save',
@@ -181,12 +168,12 @@ it('can render the edit route ', function(){
     ])
     ->assertSeeInOrder([
         'Name',
-        //$product->name, // not showing the product name in the test, dunno why ... fine in the app tho
+        //$recipe->name, // not showing the recipe name in the test, dunno why ... fine in the app tho
         'Default in list',
     ])
     ->assertSeeInOrder([
         'Shop',
-        $product->shop->name,
+        $recipe->shop->name,
         'Needed soon',
     ]);
 });
@@ -194,8 +181,8 @@ it('can render the edit route ', function(){
 it('can render edit page', function () {
     global $user, $shop;
 
-    $this->get(ProductResource::getUrl('edit', [
-            'record' => Product::factory(['shop_id'=>$shop->id])->create(),
+    $this->get(RecipeResource::getUrl('edit', [
+            'record' => Recipe::factory(['shop_id'=>$shop->id])->create(),
         ]))
         ->assertSuccessful();
 });
@@ -204,62 +191,63 @@ it('can render edit page', function () {
 it('can retrieve data', function () {
     global $user, $shop;
 
-    $product = Product::factory(['shop_id'=>$shop->id])->create();
+    $recipe = Recipe::factory(['shop_id'=>$shop->id])->create();
  
-    livewire(ProductResource\Pages\EditProduct::class, [
-        'record' => $product->getKey(),
+    livewire(RecipeResource\Pages\EditRecipe::class, [
+        'record' => $recipe->getKey(),
     ])
         ->assertFormSet([
-        'name'            => $product->name,
+        'name'            => $recipe->name,
         'shop_id'         => $shop->id,
         'family_id'       => $user->family_id,
-        'default_in_list' => $product->default_in_list,
-        'needed_soon'     => $product->needed_soon,
+        // 'default_in_list' => $recipe->default_in_list,
+        // 'needed_soon'     => $recipe->needed_soon,
         ]);
 });
 
-// Test Action 'update' with PUT/PATCH at route '/products/[id]'
+// Test Action 'update' with PUT/PATCH at route '/recipes/[id]'
 
-it('can update a product', function(){
+it('can update a recipe', function(){
     global $user, $shop;
 
-    $product = Product::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
-    $newData = Product::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->make();
+    $recipe = Recipe::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
+    $newData = Recipe::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->make();
  
-    livewire(ProductResource\Pages\EditProduct::class, [
-        'record' => $product->getKey(),
+    livewire(RecipeResource\Pages\EditRecipe::class, [
+        'record' => $recipe->getKey(),
     ])
         ->fillForm([
             'name'            => $newData->name,
             'shop_id'         => $shop->getKey(),
             'family_id'       => $user->family_id,
-            'default_in_list' => $newData->default_in_list,
-            'needed_soon'     => $newData->needed_soon,
+            // 'default_in_list' => $newData->default_in_list,
+            // 'needed_soon'     => $newData->needed_soon,
         ])
         ->call('save')
         ->assertHasNoFormErrors();
  
-    expect($product->refresh())
+    expect($recipe->refresh())
         ->shop_id   ->toBe($newData->shop_id)
         ->family_id ->toBe($newData->family_id)
         ->name            ->toBe($newData->name)
-        ->default_in_list ->toBe((int)$newData->default_in_list)
-        ->needed_soon     ->toBe((int)$newData->needed_soon);
+        // ->default_in_list ->toBe((int)$newData->default_in_list)
+        // ->needed_soon     ->toBe((int)$newData->needed_soon)
+        ;
 });
 
-// Test Action 'destroy' with DELETE at route '/products/[id]'
+// Test Action 'destroy' with DELETE at route '/recipes/[id]'
 
 
 it('can delete', function () {
     global $user, $shop;
 
-    $product = Product::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
+    $recipe = Recipe::factory(['shop_id'=>$shop->id,'family_id'=>$user->family_id])->create();
  
-    livewire(ProductResource\Pages\EditProduct::class, [
-        'record' => $product->getKey(),
+    livewire(RecipeResource\Pages\EditRecipe::class, [
+        'record' => $recipe->getKey(),
     ])
         ->callPageAction(Filament\Pages\Actions\DeleteAction::class);
  
-    $this->assertModelMissing($product);
+    $this->assertModelMissing($recipe);
 });
 
