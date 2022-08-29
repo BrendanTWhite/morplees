@@ -57,14 +57,14 @@ class ShoppingResource extends Resource
                             route('filament.resources.products.view', ['record' => $record->product])
                     ),
 
+                Tables\Columns\TextColumn::make('ingredient.quantity')->label('Qty'),
+
                 Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['name','shop_id'])
                     ->url(
                         fn (Models\SLItem $record): string => 
                             route('filament.resources.shops.view', ['record' => $record->product->shop])
                     ),
-                
-                Tables\Columns\TextColumn::make('ingredient.quantity')->label('Qty'),
-                
+                                
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe')
                     ->url(
                         fn (Models\SLItem $record): string => 
