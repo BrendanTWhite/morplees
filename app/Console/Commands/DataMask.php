@@ -11,14 +11,14 @@ class DataMask extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'datamask:mask {model}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Mask sensitive data with Faker';
 
     /**
      * Create a new command instance.
