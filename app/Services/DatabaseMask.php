@@ -10,7 +10,7 @@ use Spatie\DbSnapshots\Snapshot;
 
 class DatabaseMask
 {
-    
+
     /**
      * Create a backup.
      *
@@ -21,9 +21,10 @@ class DatabaseMask
         $connectionName = config('db-snapshots.default_connection')
             ?? config('database.default');
 
+        $appName = config('app.name');
         $environmentName = App::environment();
         $currentTimeString = Carbon::now()->format('Y-m-d_H-i-s');
-        $snapshotName = $environmentName.'_'.$currentTimeString;
+        $snapshotName = $appName.'_'.$environmentName.'_'.$currentTimeString;
 
         $compress = config('db-snapshots.compress', false);
 
