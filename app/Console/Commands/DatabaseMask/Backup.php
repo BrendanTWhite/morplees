@@ -37,6 +37,8 @@ class Backup extends Command
      */
     public function handle()
     {
+        $this->info('Running DatabaseMask\'s Backup!');
+
         return 0;
     }
 }

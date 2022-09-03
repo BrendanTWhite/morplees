@@ -11,7 +11,7 @@ class Restore extends Command
      *
      * @var string
      */
-    protected $signature = 'dbm:restore';
+    protected $signature = 'dbm:restore {filename? : The backup file to restore}';
 
     /**
      * The console command description.
@@ -37,6 +37,9 @@ class Restore extends Command
      */
     public function handle()
     {
+        $filename = $this->argument('filename') ?? $this->ask('What filename?');
+        $this->info("Running DatabaseMask's Restore from $filename!");
+
         return 0;
     }
 }
