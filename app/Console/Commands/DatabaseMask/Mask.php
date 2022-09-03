@@ -37,7 +37,7 @@ class Mask extends Command
      */
     public function handle()
     {
-        $this->info('Running DatabaseMask\'s Mask!');
+        $this->info('Running DatabaseMask Mask');
 
         return Command::SUCCESS;
     }
