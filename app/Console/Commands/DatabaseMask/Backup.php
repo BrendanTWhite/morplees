@@ -42,22 +42,6 @@ class Backup extends Command
     {
         $this->info('Running DatabaseMask Backup');
 
-        // if we're backing up Production, that's great.
-        // if we're backing up some other environment, check first.
-
-        $environment = App::environment();
-        if ($environment == 'production') {
-                $this->info("You are backing up a '$environment' environment.");
-        } else {
-                $this->warn("You are backing up a '$environment' environment.");
-                if (!$this->confirm('Do you wish to continue?')) {
-                    $this->info('Backup cancelled.');
-                    return Command::SUCCESS;
-                }
-        } 
-
-        // OK. Now let's create this backup.
-
         $this->line('Starting backup...');
         $backup = DatabaseMask::backup();
         $this->line('... backup finished.');
