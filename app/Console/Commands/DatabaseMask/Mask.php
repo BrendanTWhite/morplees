@@ -39,6 +39,6 @@ class Mask extends Command
     {
         $this->info('Running DatabaseMask\'s Mask!');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

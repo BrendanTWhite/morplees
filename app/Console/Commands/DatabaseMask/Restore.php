@@ -40,6 +40,6 @@ class Restore extends Command
         $filename = $this->argument('filename') ?? $this->ask('What filename?');
         $this->info("Running DatabaseMask's Restore from $filename!");
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
