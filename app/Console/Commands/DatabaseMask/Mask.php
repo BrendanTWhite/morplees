@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\DatabaseMask;
 
 use Illuminate\Console\Command;
 
-class DataMask extends Command
+class Mask extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'datamask:mask {model}';
+    protected $signature = 'dbm:mask';
 
     /**
      * The console command description.
