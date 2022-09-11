@@ -41,17 +41,13 @@ class Restore extends Command
     {
         $this->info("Running DatabaseMask Restore");
 
+        // We will NEVER restore a backup to a Production environment
+
         $environment = App::environment();
         if ($environment == 'production') {
                 $this->info("DBM will not restore to a '$environment' environment.");
                 return Command::INVALID;
         } 
-         
-        $this->warn("You are restoring to a '$environment' environment.");
-        if (!$this->confirm('Do you wish to continue?')) {
-            $this->info('Restore cancelled.');
-            return Command::SUCCESS;
-        }
          
         // If we don't have a filename specified, give the user a list to choose from
 
@@ -72,57 +68,23 @@ class Restore extends Command
                 'Which backup should we restore?',
                 $list_of_backups->pluck('name')->all(),
                 MOST_RECENT_BACKUP
-            );
-
-            dd($filename);
+            );    
         }
 
-
-
-
-
-
-
-
-        $useLatestSnapshot = $this->option('latest') ?: false;
-
-        $name = $useLatestSnapshot
-            ? $backups->first()->name
-            : ($this->argument('name') ?: $this->askForSnapshotName());
+        // OK. We have a filename. Let's get the snapshot with that name.
 
         /** @var \Spatie\DbSnapshots\Snapshot $snapshot */
-        $snapshot = app(SnapshotRepository::class)->findByName($name);
+        $snapshot = app(SnapshotRepository::class)->findByName($filename);
 
         if (! $snapshot) {
-            $this->warn("Snapshot `{$name}` does not exist!");
-
+            $this->warn("Snapshot `{$filename}` does not exist!");    
             return Command::INVALID;
         }
 
-        if ($this->option('stream') ?: false) {
-            $snapshot->useStream();
-        }
+        // We are good to go. Let's load this thing.
 
-        $snapshot->load($this->option('connection'), (bool) $this->option('drop-tables'));
-
-        $this->info("Snapshot `{$name}` loaded!");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        $snapshot->load();
+        $this->info("This `{$environment}` environment has been refreshed from `{$filename}`.");
         return Command::SUCCESS;
     }
 }
