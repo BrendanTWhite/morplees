@@ -3,7 +3,7 @@
 namespace App\Console\Commands\DatabaseMask;
 
 use Illuminate\Console\Command;
-use App\Services\DatabaseMask;
+use App\Services\DatabaseMaskService;
 use Illuminate\Support\Facades\App;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -44,7 +44,7 @@ class Mask extends Command
         $this->info('Running DatabaseMask Mask');
     
         try {
-            DatabaseMask::mask();
+            DatabaseMaskService::mask();
         } catch (Exception $exception) {
             $this->warn($exception->getMessage());
             return Command::INVALID;

@@ -12,9 +12,9 @@ use Exception;
 use Spatie\DbSnapshots\SnapshotRepository;
 use Faker\Factory;
 
-class DatabaseMask
-{
 
+class DatabaseMaskService
+{
     /**
      * Create a backup.
      *
