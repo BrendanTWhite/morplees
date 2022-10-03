@@ -3,6 +3,10 @@
 namespace App\Console\Commands\DatabaseMask;
 
 use Illuminate\Console\Command;
+use App\Services\DatabaseMask;
+use Illuminate\Support\Facades\App;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class Mask extends Command
 {
@@ -38,6 +42,18 @@ class Mask extends Command
     public function handle()
     {
         $this->info('Running DatabaseMask Mask');
+    
+        try {
+            DatabaseMask::mask();
+        } catch (Exception $exception) {
+            $this->warn($exception->getMessage());
+            return Command::INVALID;
+        }
+
+        // All done. The masking completed successfully. Let's tell the user.
+
+        $environment = App::environment();
+        $this->info("This `{$environment}` environment has been masked.");
 
         return Command::SUCCESS;
     }
