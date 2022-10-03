@@ -69,6 +69,14 @@ class DatabaseMask
     }
 
     public static function mask(){
-        
+
+        // https://newbedev.com/php-how-to-get-a-list-of-classes-that-implement-certain-interface
+
+        // https://stackoverflow.com/questions/34053585/how-do-i-get-a-list-of-all-models-in-laravel
+
+        // isset($thing) vs empty($thing)
+
+
+
     }
 }
