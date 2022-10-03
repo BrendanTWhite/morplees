@@ -58,7 +58,7 @@ return [
             // for testing or local dev, use a local disk for speed
             // for Prod (or Staging or anything else) use the real FTP server
             'driver' => in_array(env('APP_ENV'), ['testing','local']) ? 'local' : 'ftp',
-            'root' => storage_path('snapshots'), // for local
+            'root' => in_array(env('APP_ENV'), ['testing','local']) ? storage_path('snapshots') : '',
             'host' => env('SNAPSHOTS_FTP_HOST'),
             'username' => env('SNAPSHOTS_FTP_USERNAME'),
             'password' => env('SNAPSHOTS_FTP_PASSWORD'),
