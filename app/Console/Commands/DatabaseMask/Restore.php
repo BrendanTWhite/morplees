@@ -5,6 +5,8 @@ namespace App\Console\Commands\DatabaseMask;
 use Illuminate\Console\Command;
 use Spatie\DbSnapshots\SnapshotRepository;
 use Illuminate\Support\Facades\App;
+use App\Services\DatabaseMask;
+use Exception;
 
 class Restore extends Command
 {
@@ -40,14 +42,6 @@ class Restore extends Command
     public function handle()
     {
         $this->info("Running DatabaseMask Restore");
-
-        // We will NEVER restore a backup to a Production environment
-
-        $environment = App::environment();
-        if ($environment == 'production') {
-                $this->info("DBM will not restore to a '$environment' environment.");
-                return Command::INVALID;
-        } 
          
         // If we don't have a filename specified, give the user a list to choose from
 
@@ -71,20 +65,20 @@ class Restore extends Command
             );    
         }
 
-        // OK. We have a filename. Let's get the snapshot with that name.
+        // OK. We have a filename. Let's try to get the snapshot with that name.
 
-        /** @var \Spatie\DbSnapshots\Snapshot $snapshot */
-        $snapshot = app(SnapshotRepository::class)->findByName($filename);
-
-        if (! $snapshot) {
-            $this->warn("Snapshot `{$filename}` does not exist!");    
+        try {
+            DatabaseMask::restore($filename);
+        } catch (Exception $exception) {
+            $this->warn($exception->getMessage());
             return Command::INVALID;
         }
 
-        // We are good to go. Let's load this thing.
+        // All done. The restore completed successfully. Let's tell the user.
 
-        $snapshot->load();
+        $environment = App::environment();
         $this->info("This `{$environment}` environment has been refreshed from `{$filename}`.");
+
         return Command::SUCCESS;
     }
 }
