@@ -23,6 +23,16 @@ class Family extends Model
 
 
 
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = [
+        'name',
+    ];
+
+
 
     /**
      * Get the users for the family.
