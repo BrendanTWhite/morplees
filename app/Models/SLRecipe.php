@@ -24,6 +24,13 @@ class SLRecipe extends Model
         'recipe_id',
     ];
 
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = [];
+
 
 
     /**
