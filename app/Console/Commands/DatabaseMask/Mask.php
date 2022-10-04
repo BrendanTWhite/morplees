@@ -44,7 +44,7 @@ class Mask extends Command
         $this->info('Running DatabaseMask Mask');
     
         try {
-            DatabaseMaskService::mask();
+            DatabaseMaskService::maskAllModels();
         } catch (Exception $exception) {
             $this->warn($exception->getMessage());
             return Command::INVALID;
@@ -53,7 +53,7 @@ class Mask extends Command
         // All done. The masking completed successfully. Let's tell the user.
 
         $environment = App::environment();
-        $this->info("This `{$environment}` environment has been masked.");
+        $this->info("This `{$environment}` environment has been masked. OR WILL BE WHEN WE HAVE FINISHED BUILDING THIS!");
 
         return Command::SUCCESS;
     }
