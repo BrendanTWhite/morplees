@@ -61,20 +61,23 @@ class MaskDatabase
 
         // then, for each with contents, mask records for that model
         if($modelsWithPopulatedMaskedFields) {
+            $modelCount = $modelsWithPopulatedMaskedFields->count();
             $modelsString = implode(', ', $modelsWithPopulatedMaskedFields->all());
-            $command->info("Models to Mask: $modelsString");    
+            $command->info("$modelCount models to Mask: $modelsString");    
         }
 
         // then, for each *empty* one, just log as empty / NFA
         if($modelsWithEmptyMaskedFields) {
+            $modelCount = $modelsWithEmptyMaskedFields->count();
             $modelsString = implode(', ', $modelsWithEmptyMaskedFields->all());
-            $command->line("Models to skip: $modelsString");    
+            $command->line("$modelCount models to skip: $modelsString");    
         }
 
         // then, for each *missing* one, log as missing / problem
         if($modelsMissingMaskedFields) {
+            $modelCount = $modelsMissingMaskedFields->count();
             $modelsString = implode(', ', $modelsMissingMaskedFields->all());
-            $command->warn("MODELS NOT SPECIFIED: $modelsString");    
+            $command->warn("$modelCount MODELS NOT SPECIFIED: $modelsString");    
         }
         
 
