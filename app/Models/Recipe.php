@@ -27,6 +27,12 @@ class Recipe extends Model
 
 
 
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = null;
 
     /**
      * Get the family that owns the recipe.
