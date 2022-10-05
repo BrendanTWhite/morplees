@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\DatabaseMask;
 
-use App\Actions\DatabaseMask;
+use App\Actions\DatabaseMask\BackupDatabase;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
 use Spatie\DbSnapshots\Helpers\Format;
@@ -43,7 +43,7 @@ class Backup extends Command
         $this->info('Running DatabaseMask Backup');
 
         $this->line('Starting backup...');
-        $backup = DatabaseMask\BackupDatabase::backup();
+        $backup = BackupDatabase::backup();
         $this->line('... backup finished.');
 
         $size = Format::humanReadableSize($backup->size());

@@ -33,6 +33,8 @@ class MaskDatabase
 
     public static function maskAllModels(){
 
+        Log::debug("  --- starting masking");
+
         // first, get all models
         $allModels = self::getModels();
 
@@ -40,8 +42,6 @@ class MaskDatabase
         $modelsMissingMaskedFields = $modelsWithEmptyMaskedFields = $modelsWithPopulatedMaskedFields = Collect();
 
         foreach($allModels as $thisModel){
-
-            Log::debug("  --- starting model $thisModel");
 
             $reflection = new \ReflectionClass($thisModel);
             $defaultProperties = $reflection->getDefaultProperties();             
