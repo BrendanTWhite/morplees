@@ -32,7 +32,7 @@ class RestoreDatabase
     }
 
 
-    public static function restore($filename){
+    public function __invoke($filename){
 
             // We will NEVER restore a backup to a Production environment
 

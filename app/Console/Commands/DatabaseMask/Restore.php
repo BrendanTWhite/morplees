@@ -39,7 +39,7 @@ class Restore extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(RestoreDatabase $restoreDatabase)
     {
         $this->info("Running DatabaseMask Restore");
          
@@ -68,7 +68,7 @@ class Restore extends Command
         // OK. We have a filename. Let's try to get the snapshot with that name.
 
         try {
-            RestoreDatabase::restore($filename);
+            $restoreDatabase($filename);
         } catch (Exception $exception) {
             $this->warn($exception->getMessage());
             return Command::INVALID;

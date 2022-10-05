@@ -36,7 +36,7 @@ class BackupDatabase
      *
      * @return Snapshot
      */
-    public static function backup(){
+    public function __invoke(){
 
         $connectionName = config('db-snapshots.default_connection')
             ?? config('database.default');

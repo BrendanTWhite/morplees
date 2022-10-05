@@ -31,7 +31,7 @@ class MaskDatabase
         $this->logger = $logger;
     }
 
-    public static function maskAllModels(){
+    public function __invoke(){
 
         Log::debug("  --- starting masking");
 
@@ -69,7 +69,7 @@ class MaskDatabase
 
     }
 
-    public static function getModels(): Collection
+    public function getModels(): Collection
     // from https://stackoverflow.com/questions/34053585/how-do-i-get-a-list-of-all-models-in-laravel#answer-60310985
     {
         $models = collect(File::allFiles(app_path()))

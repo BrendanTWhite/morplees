@@ -39,12 +39,12 @@ class Mask extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(MaskDatabase $maskDatabase)
     {
         $this->info('Running DatabaseMask Mask');
     
         try {
-            MaskDatabase::maskAllModels();
+            $maskDatabase();
         } catch (Exception $exception) {
             $this->warn($exception->getMessage());
             return Command::INVALID;
