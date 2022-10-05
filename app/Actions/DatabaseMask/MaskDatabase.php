@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 
+use App\Actions\DatabaseMask\MaskModel;
+
 class MaskDatabase
 {
 
@@ -64,6 +66,11 @@ class MaskDatabase
             $modelCount = $modelsWithPopulatedMaskedFields->count();
             $modelsString = implode(', ', $modelsWithPopulatedMaskedFields->all());
             $command->info("$modelCount models to Mask: $modelsString");    
+
+            foreach($modelsWithPopulatedMaskedFields as $thisModel){
+                $maskModel = new MaskModel();
+                $maskModel($thisModel, $command);
+            }
         }
 
         // then, for each *empty* one, just log as empty / NFA
