@@ -5,7 +5,7 @@ namespace App\Console\Commands\DatabaseMask;
 use Illuminate\Console\Command;
 use Spatie\DbSnapshots\SnapshotRepository;
 use Illuminate\Support\Facades\App;
-use App\Services\DatabaseMaskService;
+use App\Actions\DatabaseMask;
 use Exception;
 
 class Restore extends Command
@@ -68,7 +68,7 @@ class Restore extends Command
         // OK. We have a filename. Let's try to get the snapshot with that name.
 
         try {
-            DatabaseMaskService::restore($filename);
+            DatabaseMask\RestoreDatabase::restore($filename);
         } catch (Exception $exception) {
             $this->warn($exception->getMessage());
             return Command::INVALID;
