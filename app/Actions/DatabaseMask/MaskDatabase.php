@@ -19,27 +19,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 
-use Psr\Log\LoggerInterface;
-
 class MaskDatabase
 {
 
-
-    private $logger;
-    public function __construct(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
-
-    public function __invoke(){
-
-        Log::debug("  --- starting masking");
+    public function __invoke(Command $command){
 
         // first, get all models
         $allModels = self::getModels();
 
         // start with empty collections for missing, empty, and populated $masked value
-        $modelsMissingMaskedFields = $modelsWithEmptyMaskedFields = $modelsWithPopulatedMaskedFields = Collect();
+        $modelsMissingMaskedFields = Collect();
+        $modelsWithEmptyMaskedFields = Collect();
+        $modelsWithPopulatedMaskedFields = Collect();
 
         foreach($allModels as $thisModel){
 
@@ -47,24 +38,44 @@ class MaskDatabase
             $defaultProperties = $reflection->getDefaultProperties();             
             
             if (!array_key_exists( 'masked',  $defaultProperties)) {
-                Log::debug($thisModel.' - MISSING!!!');
+                // The 'masked' field is mising.
+                $modelsMissingMaskedFields->push($thisModel);
+
             } else {
+
+                // Get the 'maksed' property
                 $masked = $defaultProperties['masked']; 
 
-                if ($masked){
-                    Log::debug($thisModel.' - '.implode('/',$masked));
+                if ($masked && is_array($masked)){
+                    // It's an array, and it's populated
+                    $modelsWithPopulatedMaskedFields->push($thisModel);
+
                 } else {
-                    Log::debug($thisModel.' (empty) ');                    
+                    // It's not an array, or it's not populated
+                    $modelsWithEmptyMaskedFields->push($thisModel);     
+
                 }
             }        
 
-            // Log::debug("ending model $thisModel");
-
             } // next model
 
-        // then, for each *empty* one, just log as empty / NFA
-        // then, for each *missing* one, log as missing / problem
         // then, for each with contents, mask records for that model
+        if($modelsWithPopulatedMaskedFields) {
+            $modelsString = implode(', ', $modelsWithPopulatedMaskedFields->all());
+            $command->info("Models to Mask: $modelsString");    
+        }
+
+        // then, for each *empty* one, just log as empty / NFA
+        if($modelsWithEmptyMaskedFields) {
+            $modelsString = implode(', ', $modelsWithEmptyMaskedFields->all());
+            $command->line("Models to skip: $modelsString");    
+        }
+
+        // then, for each *missing* one, log as missing / problem
+        if($modelsMissingMaskedFields) {
+            $modelsString = implode(', ', $modelsMissingMaskedFields->all());
+            $command->warn("MODELS NOT SPECIFIED: $modelsString");    
+        }
         
 
     }

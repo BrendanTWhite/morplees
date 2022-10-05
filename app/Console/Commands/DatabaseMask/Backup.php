@@ -40,8 +40,6 @@ class Backup extends Command
      */
     public function handle(BackupDatabase $backupDatabase)
     {
-        $this->info('Running DatabaseMask Backup');
-
         $this->line('Starting backup...');
         $backup = $backupDatabase();
         $this->line('... backup finished.');

@@ -40,9 +40,7 @@ class Restore extends Command
      * @return int
      */
     public function handle(RestoreDatabase $restoreDatabase)
-    {
-        $this->info("Running DatabaseMask Restore");
-         
+    {         
         // If we don't have a filename specified, give the user a list to choose from
 
         $filename = $this->argument('filename');

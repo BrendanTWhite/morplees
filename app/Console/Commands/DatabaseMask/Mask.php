@@ -40,21 +40,17 @@ class Mask extends Command
      * @return int
      */
     public function handle(MaskDatabase $maskDatabase)
-    {
-        $this->info('Running DatabaseMask Mask');
-    
+    {    
         try {
-            $maskDatabase();
+            $maskDatabase($this);
         } catch (Exception $exception) {
             $this->warn($exception->getMessage());
             return Command::INVALID;
         }
 
         // All done. The masking completed successfully. Let's tell the user.
-
         $environment = App::environment();
         $this->info("This `{$environment}` environment has been masked. OR WILL BE WHEN WE HAVE FINISHED BUILDING THIS!");
-
         return Command::SUCCESS;
     }
 }
