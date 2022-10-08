@@ -54,7 +54,7 @@ class MaskDatabase
         } // next model
 
         // For each model we can mask, go ahead and do it
-        if ($modelsToMask) {
+        if ($modelsToMask->isNotEmpty()) {
             $modelCount = $modelsToMask->count();
             $modelsString = implode(', ', $modelsToMask->all());
 
@@ -68,21 +68,21 @@ class MaskDatabase
         }
 
         // then, for each *empty* one, just log as empty / NFA
-        if ($modelsWithEmptyMaskedFields) {
+        if ($modelsWithEmptyMaskedFields->isNotEmpty()) {
             $modelCount = $modelsWithEmptyMaskedFields->count();
             $modelsString = implode(', ', $modelsWithEmptyMaskedFields->all());
             $command->line("$modelCount Models to skip: $modelsString");
         }
 
         // then, for each *missing* one, log as missing / problem
-        if ($modelsMissingMaskedFields) {
+        if ($modelsMissingMaskedFields->isNotEmpty()) {
             $modelCount = $modelsMissingMaskedFields->count();
             $modelsString = implode(', ', $modelsMissingMaskedFields->all());
             $command->warn("$modelCount Models with mo 'masked' parameter specified: $modelsString");
         }
 
         // then, for model we want to mask but can't because we have no Factory, complain loudly
-        if ($modelsWithNoFactory) {
+        if ($modelsWithNoFactory->isNotEmpty()) {
             $modelCount = $modelsWithNoFactory->count();
             $modelsString = implode(', ', $modelsWithNoFactory->all());
             $command->error("$modelCount Models with no Factory: $modelsString");
