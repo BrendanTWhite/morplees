@@ -4,7 +4,6 @@ namespace App\Console\Commands\DatabaseMask;
 
 use App\Actions\DatabaseMask\BackupDatabase;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\App;
 use Spatie\DbSnapshots\Helpers\Format;
 
 class Backup extends Command
@@ -45,7 +44,7 @@ class Backup extends Command
         $this->line('... backup finished.');
 
         $size = Format::humanReadableSize($backup->size());
-        
+
         $this->info("Successfully backed up the database to file '$backup->fileName' (size $size).");
 
         return Command::SUCCESS;

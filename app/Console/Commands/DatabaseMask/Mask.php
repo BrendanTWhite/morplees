@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands\DatabaseMask;
 
-use Illuminate\Console\Command;
 use App\Actions\DatabaseMask\MaskDatabase;
-use Illuminate\Support\Facades\App;
 use Exception;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\App;
 
 class Mask extends Command
 {
@@ -40,17 +39,19 @@ class Mask extends Command
      * @return int
      */
     public function handle(MaskDatabase $maskDatabase)
-    {    
+    {
         try {
             $maskDatabase($this);
         } catch (Exception $exception) {
             $this->warn($exception->getMessage());
+
             return Command::INVALID;
         }
 
         // All done. The masking completed successfully. Let's tell the user.
         $environment = App::environment();
         $this->info("This `{$environment}` environment has been masked. OR WILL BE WHEN WE HAVE FINISHED BUILDING THIS!");
+
         return Command::SUCCESS;
     }
 }

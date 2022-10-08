@@ -2,30 +2,17 @@
 
 namespace App\Actions\DatabaseMask;
 
-use Carbon\Carbon;
-use Illuminate\Support\Facades\App;
-use Spatie\DbSnapshots\Helpers\Format;
-use Spatie\DbSnapshots\SnapshotFactory;
-use Spatie\DbSnapshots\Snapshot;
 use Illuminate\Console\Command;
-use Exception;
-use Spatie\DbSnapshots\SnapshotRepository;
-use Faker\Factory;
-use Illuminate\Support\Facades\Log;
-
-
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-
-use App\Actions\DatabaseMask\MaskModel;
+use Illuminate\Support\Facades\Log;
 
 class MaskDatabase
 {
-
-    public function __invoke(Command $command){
-
+    public function __invoke(Command $command)
+    {
         // first, get all models
         $allModels = self::getModels();
 
@@ -34,60 +21,52 @@ class MaskDatabase
         $modelsWithEmptyMaskedFields = Collect();
         $modelsWithPopulatedMaskedFields = Collect();
 
-        foreach($allModels as $thisModel){
-
+        foreach ($allModels as $thisModel) {
             $reflection = new \ReflectionClass($thisModel);
-            $defaultProperties = $reflection->getDefaultProperties();             
-            
-            if (!array_key_exists( 'masked',  $defaultProperties)) {
+            $defaultProperties = $reflection->getDefaultProperties();
+
+            if (! array_key_exists('masked', $defaultProperties)) {
                 // The 'masked' field is mising.
                 $modelsMissingMaskedFields->push($thisModel);
-
             } else {
-
                 // Get the 'maksed' property
-                $masked = $defaultProperties['masked']; 
+                $masked = $defaultProperties['masked'];
 
-                if ($masked && is_array($masked)){
+                if ($masked && is_array($masked)) {
                     // It's an array, and it's populated
                     $modelsWithPopulatedMaskedFields->push($thisModel);
-
                 } else {
                     // It's not an array, or it's not populated
-                    $modelsWithEmptyMaskedFields->push($thisModel);     
-
+                    $modelsWithEmptyMaskedFields->push($thisModel);
                 }
-            }        
-
-            } // next model
+            }
+        } // next model
 
         // then, for each with contents, mask records for that model
-        if($modelsWithPopulatedMaskedFields) {
+        if ($modelsWithPopulatedMaskedFields) {
             $modelCount = $modelsWithPopulatedMaskedFields->count();
             $modelsString = implode(', ', $modelsWithPopulatedMaskedFields->all());
-            $command->info("$modelCount models to Mask: $modelsString");    
+            $command->info("$modelCount models to Mask: $modelsString");
 
-            foreach($modelsWithPopulatedMaskedFields as $thisModel){
+            foreach ($modelsWithPopulatedMaskedFields as $thisModel) {
                 $maskModel = new MaskModel();
                 $maskModel($thisModel, $command);
             }
         }
 
         // then, for each *empty* one, just log as empty / NFA
-        if($modelsWithEmptyMaskedFields) {
+        if ($modelsWithEmptyMaskedFields) {
             $modelCount = $modelsWithEmptyMaskedFields->count();
             $modelsString = implode(', ', $modelsWithEmptyMaskedFields->all());
-            $command->line("$modelCount models to skip: $modelsString");    
+            $command->line("$modelCount models to skip: $modelsString");
         }
 
         // then, for each *missing* one, log as missing / problem
-        if($modelsMissingMaskedFields) {
+        if ($modelsMissingMaskedFields) {
             $modelCount = $modelsMissingMaskedFields->count();
             $modelsString = implode(', ', $modelsMissingMaskedFields->all());
-            $command->warn("$modelCount MODELS NOT SPECIFIED: $modelsString");    
+            $command->warn("$modelCount MODELS NOT SPECIFIED: $modelsString");
         }
-        
-
     }
 
     public function getModels(): Collection
@@ -99,25 +78,21 @@ class MaskDatabase
                 $class = sprintf('\%s%s',
                     Container::getInstance()->getNamespace(),
                     strtr(substr($path, 0, strrpos($path, '.')), '/', '\\'));
-    
+
                 return $class;
             })
             ->filter(function ($class) {
                 $valid = false;
-    
+
                 if (class_exists($class)) {
                     $reflection = new \ReflectionClass($class);
                     $valid = $reflection->isSubclassOf(Model::class) &&
-                        !$reflection->isAbstract();
+                        ! $reflection->isAbstract();
                 }
-    
+
                 return $valid;
             });
-    
+
         return $models->values();
     }
-
-
-
-
 }

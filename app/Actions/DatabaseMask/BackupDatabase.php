@@ -4,28 +4,14 @@ namespace App\Actions\DatabaseMask;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
-use Spatie\DbSnapshots\Helpers\Format;
-use Spatie\DbSnapshots\SnapshotFactory;
-use Spatie\DbSnapshots\Snapshot;
-use Illuminate\Console\Command;
-use Exception;
-use Spatie\DbSnapshots\SnapshotRepository;
-use Faker\Factory;
-use Illuminate\Support\Facades\Log;
-
-
-use Illuminate\Container\Container;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
-
 use Psr\Log\LoggerInterface;
+use Spatie\DbSnapshots\Snapshot;
+use Spatie\DbSnapshots\SnapshotFactory;
 
 class BackupDatabase
 {
-
-
     private $logger;
+
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
@@ -36,8 +22,8 @@ class BackupDatabase
      *
      * @return Snapshot
      */
-    public function __invoke(){
-
+    public function __invoke()
+    {
         $connectionName = config('db-snapshots.default_connection')
             ?? config('database.default');
 
@@ -56,7 +42,5 @@ class BackupDatabase
         );
 
         return $snapshot;
-
     }
-
 }

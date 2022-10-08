@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands\DatabaseMask;
 
-use Illuminate\Console\Command;
-use Spatie\DbSnapshots\SnapshotRepository;
-use Illuminate\Support\Facades\App;
 use App\Actions\DatabaseMask\RestoreDatabase;
 use Exception;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\App;
+use Spatie\DbSnapshots\SnapshotRepository;
 
 class Restore extends Command
 {
@@ -40,11 +40,11 @@ class Restore extends Command
      * @return int
      */
     public function handle(RestoreDatabase $restoreDatabase)
-    {         
+    {
         // If we don't have a filename specified, give the user a list to choose from
 
         $filename = $this->argument('filename');
-        if (!$filename) {
+        if (! $filename) {
             $this->line('Retreiving list of backups...');
             $list_of_backups = app(SnapshotRepository::class)->getAll();
             $this->line('... list retrived.');
@@ -52,15 +52,16 @@ class Restore extends Command
             if ($list_of_backups->isEmpty()) {
                 $this->warn('No backups found.');
                 $this->warn('Run `php artisan dbm:backup` from your production environment to create a backup.');
+
                 return Command::INVALID;
             }
 
-            define("MOST_RECENT_BACKUP", 0);
+            define('MOST_RECENT_BACKUP', 0);
             $filename = $this->choice(
                 'Which backup should we restore?',
                 $list_of_backups->pluck('name')->all(),
                 MOST_RECENT_BACKUP
-            );    
+            );
         }
 
         // OK. We have a filename. Let's try to get the snapshot with that name.
@@ -69,6 +70,7 @@ class Restore extends Command
             $restoreDatabase($filename);
         } catch (Exception $exception) {
             $this->warn($exception->getMessage());
+
             return Command::INVALID;
         }
 
