@@ -30,22 +30,20 @@ class MaskDatabase
             if (! array_key_exists('masked', $defaultProperties)) {
                 // The 'masked' field is mising.
                 $modelsMissingMaskedFields->push($thisModel);
-
             } else {
                 // Get the 'masked' property
                 $masked = $defaultProperties['masked'];
 
-                if (!is_array($masked) or !$masked) {
+                if (! is_array($masked) or ! $masked) {
                     // It's not an array, or it's an empty array
                     $modelsWithEmptyMaskedFields->push($thisModel);
-
                 } else {
-
                     // Let's check if a factory exists
                     try {
                         $thisModel::factory();
                     } catch (Throwable $e) {
                         $modelsWithNoFactory->push($thisModel);
+
                         continue; // continue with the next model
                     }
 
@@ -59,7 +57,7 @@ class MaskDatabase
         if ($modelsToMask) {
             $modelCount = $modelsToMask->count();
             $modelsString = implode(', ', $modelsToMask->all());
-            
+
             $command->info("$modelCount models to Mask: $modelsString");
             $command->newLine();
 
@@ -89,7 +87,6 @@ class MaskDatabase
             $modelsString = implode(', ', $modelsWithNoFactory->all());
             $command->error("$modelCount Models with no Factory: $modelsString");
         }
-
     }
 
     public function getModels(): Collection
