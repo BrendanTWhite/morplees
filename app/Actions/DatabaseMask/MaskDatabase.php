@@ -7,7 +7,6 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class MaskDatabase
@@ -23,37 +22,40 @@ class MaskDatabase
         $modelsWithNoFactory = Collect();
         $modelsToMask = Collect();
 
+        // then assign each model to a category
         foreach ($allModels as $thisModel) {
-            $reflection = new \ReflectionClass($thisModel);
-            $defaultProperties = $reflection->getDefaultProperties();
+            $defaultProperties = (new \ReflectionClass($thisModel))->getDefaultProperties();
 
-            if (! array_key_exists('masked', $defaultProperties)) {
-                // The 'masked' field is mising.
+            // Check if the 'masked' property is mising.
+            if (! array_key_exists('masked', $defaultProperties)) {                
                 $modelsMissingMaskedFields->push($thisModel);
-            } else {
-                // Get the 'masked' property
-                $masked = $defaultProperties['masked'];
+                continue; // continue with the next model
+            } 
+        
+            // Get the 'masked' property
+            $masked = $defaultProperties['masked'];
 
-                if (! is_array($masked) or ! $masked) {
-                    // It's not an array, or it's an empty array
-                    $modelsWithEmptyMaskedFields->push($thisModel);
-                } else {
-                    // Let's check if a factory exists
-                    try {
-                        $thisModel::factory();
-                    } catch (Throwable $e) {
-                        $modelsWithNoFactory->push($thisModel);
-
-                        continue; // continue with the next model
-                    }
-
-                    // If we get this far, we can mask this model
-                    $modelsToMask->push($thisModel);
-                }
+            // Check if the 'masked' property is empty, or not an array
+            if (! is_array($masked) or ! $masked) {
+                // It's not an array, or it's an empty array
+                $modelsWithEmptyMaskedFields->push($thisModel);
+                continue; // continue with the next model
+            } 
+        
+            // Let's check if the factory is missing
+            try {
+                $thisModel::factory();
+            } catch (Throwable $e) {
+                $modelsWithNoFactory->push($thisModel);
+                continue; // continue with the next model
             }
+
+            // If we get this far, we can mask this model
+            $modelsToMask->push($thisModel);            
+            
         } // next model
 
-        // For each model we can mask, go ahead and do it
+        // For each model we can mask, go ahead and mask it
         if ($modelsToMask->isNotEmpty()) {
             $modelCount = $modelsToMask->count();
             $modelsString = implode(', ', $modelsToMask->all());
