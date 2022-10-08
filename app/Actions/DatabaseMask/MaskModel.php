@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class MaskModel
 {
@@ -14,28 +15,42 @@ class MaskModel
 
     public function __invoke(string $model, Command $command)
     {
-        $model_count = $model::count();
-        $chunk_count =  1 + intdiv($model_count-1, self::CHUNK_SIZE);
 
         $command->line("$model");
-       // $command->debug("in $chunk_count chunks of up to {self::CHUNK_SIZE}");
 
+        // Check to see if we the model has a factory
+
+
+        $model_count = $model::count();
+        $chunk_count = 1 + intdiv($model_count-1, self::CHUNK_SIZE);
+        
         $progressBar = $command->getOutput()->createProgressBar($chunk_count);
         $progressBar->setFormat('%bar%');
 
-        // get all of this model from the database in chunks https://laravel.com/docs/9.x/eloquent#chunking-results
-        $model::chunk(self::CHUNK_SIZE, function($theChunk) use ($progressBar){
-            
-            usleep(300000);
+        // try to process all of this model from the database in chunks 
+        try {
+        
+            $model::chunk(self::CHUNK_SIZE, function($thisChunk) use ($progressBar, $model){
+                    $this->maskChunk($thisChunk, $model);
+                    $progressBar->advance();
+                });
 
-            $progressBar->advance();
-        }
-    );
+        } catch (Throwable $e) {
+            //Log::info($e->__toString());
+            return;
+        } 
 
-        // for this batch of N records:
+        $progressBar->finish();
+        $command->newLine(2);
+
+    }
+
+
+    private function maskChunk($thisChunk, $model) {
+        $chunkSize = $thisChunk->count();
 
         // Create N fake records
-        // If we have no Faker for this model, return a warning and then continue with the next model
+        $fakeRecords = $model::factory()->count($chunkSize)->make();
 
         // From the fake records, keep ONLY the fields we need to mask https://laravel.com/docs/9.x/collections#method-only
 
@@ -43,9 +58,8 @@ class MaskModel
 
         // save the N records to the database
 
-        $progressBar->finish();
-        $command->newLine(2);
 
+        usleep(100000);
     }
 
 }

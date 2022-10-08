@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class MaskDatabase
 {
@@ -16,10 +17,11 @@ class MaskDatabase
         // first, get all models
         $allModels = self::getModels();
 
-        // start with empty collections for missing, empty, and populated $masked value
+        // start with empty collections for different categories of model
         $modelsMissingMaskedFields = Collect();
         $modelsWithEmptyMaskedFields = Collect();
-        $modelsWithPopulatedMaskedFields = Collect();
+        $modelsWithNoFactory = Collect();
+        $modelsToMask = Collect();
 
         foreach ($allModels as $thisModel) {
             $reflection = new \ReflectionClass($thisModel);
@@ -28,27 +30,40 @@ class MaskDatabase
             if (! array_key_exists('masked', $defaultProperties)) {
                 // The 'masked' field is mising.
                 $modelsMissingMaskedFields->push($thisModel);
+
             } else {
-                // Get the 'maksed' property
+                // Get the 'masked' property
                 $masked = $defaultProperties['masked'];
 
-                if ($masked && is_array($masked)) {
-                    // It's an array, and it's populated
-                    $modelsWithPopulatedMaskedFields->push($thisModel);
-                } else {
-                    // It's not an array, or it's not populated
+                if (!is_array($masked) or !$masked) {
+                    // It's not an array, or it's an empty array
                     $modelsWithEmptyMaskedFields->push($thisModel);
+
+                } else {
+
+                    // Let's check if a factory exists
+                    try {
+                        $thisModel::factory();
+                    } catch (Throwable $e) {
+                        $modelsWithNoFactory->push($thisModel);
+                        continue; // continue with the next model
+                    }
+
+                    // If we get this far, we can mask this model
+                    $modelsToMask->push($thisModel);
                 }
             }
         } // next model
 
-        // then, for each with contents, mask records for that model
-        if ($modelsWithPopulatedMaskedFields) {
-            $modelCount = $modelsWithPopulatedMaskedFields->count();
-            $modelsString = implode(', ', $modelsWithPopulatedMaskedFields->all());
+        // For each model we can mask, go ahead and do it
+        if ($modelsToMask) {
+            $modelCount = $modelsToMask->count();
+            $modelsString = implode(', ', $modelsToMask->all());
+            
             $command->info("$modelCount models to Mask: $modelsString");
+            $command->newLine();
 
-            foreach ($modelsWithPopulatedMaskedFields as $thisModel) {
+            foreach ($modelsToMask as $thisModel) {
                 $maskModel = new MaskModel();
                 $maskModel($thisModel, $command);
             }
@@ -58,15 +73,23 @@ class MaskDatabase
         if ($modelsWithEmptyMaskedFields) {
             $modelCount = $modelsWithEmptyMaskedFields->count();
             $modelsString = implode(', ', $modelsWithEmptyMaskedFields->all());
-            $command->line("$modelCount models to skip: $modelsString");
+            $command->line("$modelCount Models to skip: $modelsString");
         }
 
         // then, for each *missing* one, log as missing / problem
         if ($modelsMissingMaskedFields) {
             $modelCount = $modelsMissingMaskedFields->count();
             $modelsString = implode(', ', $modelsMissingMaskedFields->all());
-            $command->warn("$modelCount MODELS NOT SPECIFIED: $modelsString");
+            $command->warn("$modelCount Models with mo 'masked' parameter specified: $modelsString");
         }
+
+        // then, for model we want to mask but can't because we have no Factory, complain loudly
+        if ($modelsWithNoFactory) {
+            $modelCount = $modelsWithNoFactory->count();
+            $modelsString = implode(', ', $modelsWithNoFactory->all());
+            $command->error("$modelCount Models with no Factory: $modelsString");
+        }
+
     }
 
     public function getModels(): Collection
