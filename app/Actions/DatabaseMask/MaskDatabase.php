@@ -27,11 +27,12 @@ class MaskDatabase
             $defaultProperties = (new \ReflectionClass($thisModel))->getDefaultProperties();
 
             // Check if the 'masked' property is mising.
-            if (! array_key_exists('masked', $defaultProperties)) {                
+            if (! array_key_exists('masked', $defaultProperties)) {
                 $modelsMissingMaskedFields->push($thisModel);
+
                 continue; // continue with the next model
-            } 
-        
+            }
+
             // Get the 'masked' property
             $masked = $defaultProperties['masked'];
 
@@ -39,20 +40,21 @@ class MaskDatabase
             if (! is_array($masked) or ! $masked) {
                 // It's not an array, or it's an empty array
                 $modelsWithEmptyMaskedFields->push($thisModel);
+
                 continue; // continue with the next model
-            } 
-        
+            }
+
             // Let's check if the factory is missing
             try {
                 $thisModel::factory();
             } catch (Throwable $e) {
                 $modelsWithNoFactory->push($thisModel);
+
                 continue; // continue with the next model
             }
 
             // If we get this far, we can mask this model
-            $modelsToMask->push($thisModel);            
-            
+            $modelsToMask->push($thisModel);
         } // next model
 
         // For each model we can mask, go ahead and mask it

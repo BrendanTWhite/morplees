@@ -4,8 +4,6 @@ namespace App\Actions\DatabaseMask;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-use Throwable;
 
 class MaskModel
 {
@@ -23,7 +21,7 @@ class MaskModel
         $progressBar = $command->getOutput()->createProgressBar($chunk_count);
         $progressBar->setFormat('%bar%');
 
-        // From the model, determine which fields to mask 
+        // From the model, determine which fields to mask
         $fieldsToMask = $this->getFieldsToMaskFrom($model);
 
         // Process all records from this model in chunks
@@ -38,24 +36,22 @@ class MaskModel
 
     private function maskChunk($chunk, $model, $fieldsToMask)
     {
-        
         // now loop through each record
-        foreach($chunk as $realRecord) {
-
+        foreach ($chunk as $realRecord) {
             // create a (full) fake record
             $fakeRecord = $model::factory()->make();
 
             // and replace the appropriate fields on the real record with values from the fake one
             $realRecord->fill($fakeRecord->only($fieldsToMask))->save();
-
         }
-
     }
 
-    private function getFieldsToMaskFrom(String $thisModel):Array {
+    private function getFieldsToMaskFrom(string $thisModel): array
+    {
         $reflection = new \ReflectionClass($thisModel);
         $defaultProperties = $reflection->getDefaultProperties();
         $maskedFields = $defaultProperties['masked'];
+
         return $maskedFields;
     }
 }
