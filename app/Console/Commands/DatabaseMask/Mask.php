@@ -50,7 +50,7 @@ class Mask extends Command
 
         // All done. The masking completed successfully. Let's tell the user.
         $environment = App::environment();
-        $this->info("This `{$environment}` environment has been masked. OR WILL BE WHEN WE HAVE FINISHED BUILDING THIS!");
+        $this->info("This `{$environment}` environment has been masked.");
 
         return Command::SUCCESS;
     }

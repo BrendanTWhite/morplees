@@ -9,11 +9,11 @@ use Throwable;
 
 class MaskModel
 {
-    const CHUNK_SIZE = 10;
+    const CHUNK_SIZE = 5;
 
     public function __invoke(string $model, Command $command)
     {
-        $command->line("$model");
+        $command->line("Masking $model");
 
         // Check to see if we the model has a factory
 
@@ -23,34 +23,39 @@ class MaskModel
         $progressBar = $command->getOutput()->createProgressBar($chunk_count);
         $progressBar->setFormat('%bar%');
 
-        // try to process all of this model from the database in chunks
-        try {
-            $model::chunk(self::CHUNK_SIZE, function ($thisChunk) use ($progressBar, $model) {
-                $this->maskChunk($thisChunk, $model);
-                $progressBar->advance();
-            });
-        } catch (Throwable $e) {
-            //Log::info($e->__toString());
-            return;
-        }
+        // From the model, determine which fields to mask 
+        $fieldsToMask = $this->getFieldsToMaskFrom($model);
+
+        // Process all records from this model in chunks
+        $model::chunk(self::CHUNK_SIZE, function ($chunk) use ($progressBar, $model, $fieldsToMask) {
+            $this->maskChunk($chunk, $model, $fieldsToMask);
+            $progressBar->advance();
+        });
 
         $progressBar->finish();
         $command->newLine(2);
     }
 
-    private function maskChunk($thisChunk, $model)
+    private function maskChunk($chunk, $model, $fieldsToMask)
     {
-        $chunkSize = $thisChunk->count();
+        
+        // now loop through each record
+        foreach($chunk as $realRecord) {
 
-        // Create N fake records
-        $fakeRecords = $model::factory()->count($chunkSize)->make();
+            // create a (full) fake record
+            $fakeRecord = $model::factory()->make();
 
-        // From the fake records, keep ONLY the fields we need to mask https://laravel.com/docs/9.x/collections#method-only
+            // and replace the appropriate fields on the real record with values from the fake one
+            $realRecord->fill($fakeRecord->only($fieldsToMask))->save();
 
-        // MERGE the fake data in to the real data https://laravel.com/docs/9.x/collections#method-merge
+        }
 
-        // save the N records to the database
+    }
 
-        usleep(100000);
+    private function getFieldsToMaskFrom(String $thisModel):Array {
+        $reflection = new \ReflectionClass($thisModel);
+        $defaultProperties = $reflection->getDefaultProperties();
+        $maskedFields = $defaultProperties['masked'];
+        return $maskedFields;
     }
 }
