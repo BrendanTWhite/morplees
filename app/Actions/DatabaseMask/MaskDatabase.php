@@ -13,6 +13,13 @@ class MaskDatabase
 {
     public function __invoke(Command $command)
     {
+
+        // We will NEVER mask a Production environment
+        $environment = \App::environment();
+        if ($environment == 'production') {
+            throw new \Exception("DBM will not mask a '$environment' environment.");
+        }
+
         // first, get all models
         $allModels = self::getModels();
 
