@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaskModel
 {
-    const CHUNK_SIZE = 5;
+    const PROGRESS_CHUNK_SIZE = 5;
 
     public function __invoke(string $model, Command $command)
     {
         $command->line("Masking $model");
 
-        // Check to see if we the model has a factory
+        // Set up the progress bar to advance every PROGRESS_CHUNK_SIZE records
 
         $model_count = $model::count();
-        $chunk_count = 1 + intdiv($model_count - 1, self::CHUNK_SIZE);
+        $chunk_count = 1 + intdiv($model_count - 1, self::PROGRESS_CHUNK_SIZE);
 
         $progressBar = $command->getOutput()->createProgressBar($chunk_count);
         $progressBar->setFormat('%bar%');
@@ -25,7 +25,7 @@ class MaskModel
         $fieldsToMask = $this->getFieldsToMaskFrom($model);
 
         // Process all records from this model in chunks
-        $model::chunk(self::CHUNK_SIZE, function ($chunk) use ($progressBar, $model, $fieldsToMask) {
+        $model::chunk(self::PROGRESS_CHUNK_SIZE, function ($chunk) use ($progressBar, $model, $fieldsToMask) {
             $this->maskChunk($chunk, $model, $fieldsToMask);
             $progressBar->advance();
         });
