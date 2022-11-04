@@ -24,6 +24,13 @@ class Ingredient extends Model
     ];
 
 
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = [];
+
 
 
     /**

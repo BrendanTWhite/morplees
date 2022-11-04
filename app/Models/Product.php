@@ -25,6 +25,13 @@ class Product extends Model
     ];
 
 
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = [];
+
     public function toggleDefaultInList() 
     {
         $this->default_in_list = ! $this->default_in_list;

@@ -30,6 +30,15 @@ class User extends Authenticatable implements FilamentUser
     ];
 
 
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = [
+        'name','email','password',
+    ];
+
 
     public function canAccessFilament(): bool
     {
