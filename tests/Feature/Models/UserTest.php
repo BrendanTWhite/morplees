@@ -14,7 +14,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_can_login()
     {
 
         $user = User::factory()->create();
@@ -26,6 +26,6 @@ class UserTest extends TestCase
 
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response->assertOK();
     }
 }
