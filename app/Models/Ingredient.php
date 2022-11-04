@@ -29,9 +29,7 @@ class Ingredient extends Model
      *
      * @var array
      */
-    protected $masked = [
-        'quantity',
-    ];
+    protected $masked = [];
 
 
 

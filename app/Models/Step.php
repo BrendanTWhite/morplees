@@ -29,9 +29,7 @@ class Step extends Model
      *
      * @var array
      */
-    protected $masked = [
-        'instructions',
-    ];
+    protected $masked = [];
 
 
 
