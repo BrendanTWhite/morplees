@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4711c56c3886c1695a2cad601fc1ffc",
+    "content-hash": "b8171b6b30ccc224d314180d1bd03f68",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -279,6 +279,70 @@
                 }
             ],
             "time": "2022-05-11T12:38:11+00:00"
+        },
+        {
+            "name": "brendantwhite/databasemask",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BrendanTWhite/DatabaseMask.git",
+                "reference": "77c1a8594e9dd599b7a3fe47497d9a5ff6ba5bba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BrendanTWhite/DatabaseMask/zipball/77c1a8594e9dd599b7a3fe47497d9a5ff6ba5bba",
+                "reference": "77c1a8594e9dd599b7a3fe47497d9a5ff6ba5bba",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.67|^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.2"
+            },
+            "suggest": {
+                "spatie/laravel-db-snapshots": "Required for the dbm:backup and dbm:restore commands"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BrendanTWhite\\DatabaseMask\\DatabaseMaskServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BrendanTWhite\\DatabaseMask\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brendan T White",
+                    "email": "brendan@thespia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Mask data from Production using Faker to use safely elsewhere",
+            "homepage": "https://github.com/brendantwhite/databasemask",
+            "keywords": [
+                "Masking",
+                "database",
+                "laravel",
+                "obfuscation",
+                "privacy"
+            ],
+            "support": {
+                "issues": "https://github.com/BrendanTWhite/DatabaseMask/issues",
+                "source": "https://github.com/BrendanTWhite/DatabaseMask/tree/v1.0.1"
+            },
+            "time": "2022-11-04T12:01:59+00:00"
         },
         {
             "name": "brick/math",
@@ -10635,5 +10699,5 @@
     "platform-overrides": {
         "php": "8.0.21"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
