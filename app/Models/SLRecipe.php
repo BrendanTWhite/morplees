@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\BelongsToFamily;
 use App\Observers\SLRecipeObserver;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use App\Models;
+use Spatie\IcalendarGenerator\Components\Event;
 
 class SLRecipe extends Model
 {
@@ -22,6 +24,7 @@ class SLRecipe extends Model
     protected $fillable = [
         'shopping_list_id',
         'recipe_id',
+        'date',
     ];
 
     /**
@@ -30,6 +33,11 @@ class SLRecipe extends Model
      * @var array
      */
     protected $masked = [];
+
+    
+    protected $casts = [
+        'date' => 'date',
+    ];
 
 
 
@@ -58,6 +66,9 @@ class SLRecipe extends Model
     {
         static::creating(function ($SLRecipe) { 
 
+            // add a uuid
+            $SLRecipe->uuid = (string) Str::uuid();
+
             // If we don't already have a SL ID set, 
             // then get a sensible default
             if ( ! $SLRecipe->shopping_list_id ) {
@@ -78,6 +89,15 @@ class SLRecipe extends Model
         });
     }
 
+    public function getEvent() {
+        return Event::create()
+            ->uniqueIdentifier($this->uuid)
+            ->startsAt($this->date)
+            ->fullDay()
+            ->name($this->recipe->name)
+            ->description($this->recipe->products
+                ->implode('name', ' / '));
+    }
 
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Family;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,11 @@ Route::redirect('/admin/login', '/login')->name('filament.auth.login');
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
+
+ 
+Route::get('/calendar/{family:ical_uuid}.ics', function (Family $family) {
+    return response($family->calendar)
+    ->header('Content-Type', 'text/calendar; charset=utf-8');
+});
 
 require __DIR__.'/auth.php';
