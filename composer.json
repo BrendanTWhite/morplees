@@ -9,6 +9,7 @@
         "brendantwhite/databasemask": "^1.0",
         "codeat3/blade-line-awesome-icons": "^1.0",
         "davidhsianturi/blade-bootstrap-icons": "^1.2",
+        "doctrine/dbal": "^3.5",
         "filament/filament": "^2.7",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
