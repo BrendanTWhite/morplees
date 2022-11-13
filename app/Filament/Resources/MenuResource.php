@@ -32,13 +32,15 @@ class MenuResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('recipe_id')
-                    ->label('')
+                    ->label('Recipe')
                     ->options(Models\Recipe::query()->pluck('name', 'id'))
                     ->required()
                     ->reactive()
                     ->searchable()
                     ,
-            ]);
+                Forms\Components\DatePicker::make('date')
+                ->label('Date (optional)'),
+                ]);
     }
 
     public static function table(Table $table): Table
@@ -46,16 +48,19 @@ class MenuResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('recipe.name'),            
+                Tables\Columns\TextColumn::make('date')->date('D j M'),            
+                // Tables\Columns\TextInputColumn::make('date')->type('date'),    // requires filament update         
             ])
+            ->defaultSort('date')
             ->actions([
-                Tables\Actions\LinkAction::make('delete')
-                    ->label('Remove')
-                    ->action(fn (Models\SLRecipe $record) => $record->delete())
+                Tables\Actions\EditAction::make()
+                    ->label(''),
+                Tables\Actions\DeleteAction::make('delete')
+                    ->label('')
                     ->requiresConfirmation()
                         ->modalHeading('Remove Recipe')
                         ->modalSubheading('Remove this Recipe from the Shopping List?')
-                        ->modalButton('Yes, Remove it')
-                    ->color('danger'),
+                        ->modalButton('Yes, Remove it'),
             ])              
             ->bulkActions([])   
             ->filters([])
