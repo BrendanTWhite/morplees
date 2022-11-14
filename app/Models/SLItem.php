@@ -24,7 +24,15 @@ class SLItem extends Model
         's_l_recipe_id',
     ];
 
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = [];
 
+
+    
     public function toggleAlreadyOwn() 
     {    
         $this->already_own = ! $this->already_own;

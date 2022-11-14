@@ -1,0 +1,252 @@
+<?php
+
+// Replace snake-{{class}} with {{ class }} in snake_case
+
+use function Pest\Livewire\livewire;
+use App\Filament\Resources\{{ class }}Resource;
+use App\Models\{{ class }};
+
+beforeEach(function () {
+    global $user;
+    $user = App\Models\User::factory()->create();
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+});
+
+// Test can see index URL on home page
+
+it('can see index URL on home page', function () {
+    $this->get('/')
+        ->assertOk()
+        ->assertSee({{ class }}Resource::getUrl('index'));
+});
+
+// Test Action 'index' with GET at route '/snake-{{class}}s'
+
+it('can render empty {{ class }}s index', function () {
+    $this
+    ->get({{ class }}Resource::getUrl('index'))
+    ->assertOk()
+    ->assertSeeInOrder([
+        '{{ class }}s',
+        'New snake-{{class}}',
+        'No records found',
+    ]);
+});
+
+it('can render populated {{ class }}s index', function () {
+    global $user;
+
+    $snake-{{class}}s = {{ class }}::factory([
+            'family_id' => $user->family_id,
+        ])
+        ->count(10)->create();
+
+    livewire({{ class }}Resource\Pages\List{{ class }}s::class)
+        ->assertOk()
+        ->assertCanSeeTableRecords($snake-{{class}}s)
+        ->assertSeeInOrder([
+            '{{ class }}s',
+            'New snake-{{class}}',
+            'Name',
+            // 'Prep time',  // Text from the index page
+            // 'Cook time',
+            // 'Book reference',
+            // 'Url',
+        ]);
+    $this->assertAuthenticated();
+
+});
+
+// Test Action 'create' with GET at route '/snake-{{class}}s/create'
+
+it('can render empty New {{ class }} form', function () {
+    $this
+        ->get({{ class }}Resource::getUrl('create'))
+        ->assertOk()
+        ->assertSeeInOrder([
+            'Create snake-{{class}}',
+            'Name',
+            'Select an option',
+            // 'Default in list',  // Column titles from the create page
+            // 'Needed soon',
+            'Create',
+            'Create & create another',
+            'Cancel',
+        ]);
+    });
+
+// Test Action 'store' with POST at route '/snake-{{class}}s'
+
+it('can create New {{ class }}s', function () {
+    global $user;
+
+    $this->post('/snake-{{class}}s', [
+        'name' => 'Foo',
+    ])
+    ->assertSeeInOrder([
+        'View snake-{{class}}',
+        'Edit',
+        'Name',
+        'Foo', 
+    ])
+    ->assertSeeInOrder([
+        'Shop',
+    ])
+    ->assertSeeInOrder([
+        // 'Default in list',   // other fields
+        // 'Needed soon',
+        // 'Used in',
+    ]);
+});
+
+it('can create', function () {
+    global $user;
+
+    $snake-{{class}} = {{ class }}::factory()->make();
+ 
+    livewire({{ class }}Resource\Pages\Create{{ class }}::class)
+        ->fillForm([
+            'name'            => $snake-{{class}}->name,
+            'family_id'       => $user->family_id,
+            // 'default_in_list' => $snake-{{class}}->default_in_list,
+            // 'needed_soon'     => $snake-{{class}}->needed_soon,
+        ])
+        ->call('create')
+        ->assertHasNoFormErrors();
+ 
+    $this->assertDatabaseHas({{ class }}::class, [
+        'name'            => $snake-{{class}}->name,
+        'family_id'       => $user->family_id,
+        // 'default_in_list' => $snake-{{class}}->default_in_list,
+        // 'needed_soon'     => $snake-{{class}}->needed_soon,
+    ]);
+});
+
+
+// Test Action 'show' with GET at route '/snake-{{class}}s/[id]'
+
+it('can show a snake-{{class}}', function(){
+    global $user;
+
+    $snake-{{class}} = {{ class }}::factory([
+        'family_id' => $user->family_id,
+        ])->create();
+
+    $this->get('/snake-{{class}}s/'.$snake-{{class}}->id)
+    ->assertSeeInOrder([
+        'View {{ class }}',
+        'Edit',
+        // 'Prep time',   // other field titles from view page
+        // 'Cook time',
+    ])
+    ;
+});
+
+// Test Action 'edit' with GET at route '/snake-{{class}}s/[id]/edit'
+
+it('can render the edit route ', function(){
+    global $user;
+
+    $snake-{{class}} = {{ class }}::factory([
+        'family_id' => $user->family_id,
+        ])->create();
+
+    $this->get('/snake-{{class}}s/'.$snake-{{class}}->id.'/edit')
+    ->assertSeeInOrder([
+        'Edit {{ class }}',
+        'View',
+        'Delete',
+        'Save',
+        'Cancel',
+    ])
+    ->assertSeeInOrder([
+        $snake-{{class}}->name,
+        //$snake-{{class}}->bookReference,  // other fields
+        //$snake-{{class}}->bookReference,  
+        //$snake-{{class}}->bookReference,  
+        //$snake-{{class}}->bookReference,  
+        //$snake-{{class}}->bookReference,  
+    ])
+    ->assertSeeInOrder([
+        // 'Ingredients',  // Field column titles
+        // 'Steps',
+    ]);
+});
+
+it('can render edit page', function () {
+    global $user;
+
+    $this->get({{ class }}Resource::getUrl('edit', [
+            'record' => {{ class }}::factory(['family_id'=>$user->family_id])->create(),
+        ]))
+        ->assertSuccessful();
+});
+
+
+it('can retrieve data', function () {
+    global $user;
+
+    $snake-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+ 
+    livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
+        'record' => $snake-{{class}}->getKey(),
+    ])
+        ->assertFormSet([
+        'name'           => $snake-{{class}}->name,
+        // 'prep_time'      => $snake-{{class}}->prep_time,   // other fields
+        // 'cook_time'      => $snake-{{class}}->cook_time,
+        // 'book_reference' => $snake-{{class}}->book_reference,
+        // 'url'            => $snake-{{class}}->url,
+        ]);
+});
+
+// Test Action 'update' with PUT/PATCH at route '/snake-{{class}}s/[id]'
+
+it('can update a snake-{{class}}', function(){
+    global $user;
+
+    $snake-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+    $newData = {{ class }}::factory(['family_id'=>$user->family_id])->make();
+ 
+    livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
+        'record' => $snake-{{class}}->getKey(),
+    ])
+        ->fillForm([
+            'name'           => $newData->name,
+            // 'prep_time'      => $newData->prep_time,   // Other fields
+            // 'cook_time'      => $newData->cook_time,
+            // 'book_reference' => $newData->book_reference,
+            // 'url'            => $newData->url,
+        ])
+        ->call('save')
+        ->assertHasNoFormErrors();
+ 
+    expect($snake-{{class}}->refresh())
+        ->family_id      ->toBe($newData->family_id)
+        ->name           ->toBe($newData->name)
+        // ->prep_time      ->toBe((int)$newData->prep_time) // other INTEGEr field
+        // ->cook_time      ->toBe((int)$newData->cook_time)
+        // ->book_reference ->toBe($newData->book_reference)  // other text field
+        // ->url            ->toBe($newData->url)
+        ;
+});
+
+// Test Action 'destroy' with DELETE at route '/snake-{{class}}s/[id]'
+
+
+it('can delete', function () {
+    global $user;
+
+    $snake-{{class}} = {{ class }}::factory(['family_id'=>$user->family_id])->create();
+ 
+    livewire({{ class }}Resource\Pages\Edit{{ class }}::class, [
+        'record' => $snake-{{class}}->getKey(),
+    ])
+        ->callPageAction(Filament\Pages\Actions\DeleteAction::class);
+ 
+    $this->assertModelMissing($snake-{{class}});
+});
+

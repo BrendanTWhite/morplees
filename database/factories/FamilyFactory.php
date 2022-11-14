@@ -14,7 +14,8 @@ class FamilyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->firstName() . '\'s family',
+            'name'        => $this->faker->firstName() . '\'s family',
+            'ical_active' => $this->faker->boolean(),
         ];
     }
 }

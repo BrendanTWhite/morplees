@@ -5,11 +5,13 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\FamilyResource\Pages;
 use App\Filament\Resources\FamilyResource\RelationManagers;
 use App\Models\Family;
-use Filament\Forms;
+use Filament\Forms\Components;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Tables\Columns;
+use Filament\Forms\Components\Actions\Action;
+use Closure;
 
 class FamilyResource extends Resource
 {
@@ -25,8 +27,24 @@ class FamilyResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(1)
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
+                Components\TextInput::make('name')->required(),
+                Components\Toggle::make('ical_active')
+                    ->label('Activate Calendar')->reactive(),
+                Components\TextInput::make('ical_url')
+                ->label('Calendar URL')
+                ->disabled()
+                ->hidden(fn (Closure $get) => ! $get('ical_active') )
+                ->suffixAction(fn ($get) => 
+                    Action::make('visit')
+                    ->icon('heroicon-s-external-link')
+                    ->url(
+                        $get('ical_url'),
+                        shouldOpenInNewTab: true,
+                    ),
+                ),
+                
             ]);
     }
 
@@ -34,7 +52,7 @@ class FamilyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Columns\TextColumn::make('name')->searchable()->sortable(),
             ])
             ->filters([
                 //

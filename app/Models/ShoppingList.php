@@ -28,7 +28,14 @@ class ShoppingList extends Model
         'copy_recipes',
     ];
 
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = null;
 
+    
     protected $casts = [
         'include_need_soon'    => 'boolean',
         'include_usually_need' => 'boolean',

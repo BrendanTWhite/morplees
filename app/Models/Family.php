@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
-use App\Scopes\JustMyFamilyScope;
+use Illuminate\Support\Str;
+use Spatie\IcalendarGenerator\Components\Calendar;
 
 class Family extends Model
 {
@@ -19,9 +19,49 @@ class Family extends Model
      */
     protected $fillable = [
         'name',
+        'ical_active',
     ];
 
 
+
+    /**
+     * The attributes that should be masked by DatabaseMask.
+     *
+     * @var array
+     */
+    protected $masked = [
+        'name',
+    ];
+
+
+    const REFRESH_INTERVAL_IN_MINUTES = 2 * 60; // ie two hours
+    public function getCalendarAttribute()
+    { 
+        // If the family has their calendar switched off, just return a 404
+        if ( ! $this->ical_active ) {
+            abort(404);
+        }
+
+        $calendar = Calendar::create()
+            ->withoutTimezone()
+            ->name('Morplees')
+            ->description('Morplees Meal Calendar for ' . $this->name)
+            ->refreshInterval(self::REFRESH_INTERVAL_IN_MINUTES);
+
+        foreach ( $this->shoppingLists as $shoppingList ) {
+            foreach ( $shoppingList->sLRecipes as $sLRecipe ) {
+                if ($sLRecipe->date) {
+                    $calendar->event($sLRecipe->getEvent());
+                }
+            }
+        }
+        
+        return $calendar->get();
+    }
+
+    protected $casts = [
+        'ical_active' => 'boolean',
+    ];
 
 
     /**
@@ -82,6 +122,11 @@ class Family extends Model
                 return $builder;
             }
         });
+
+        static::creating(function ($family) {
+            $family->ical_uuid = (string) Str::uuid();
+        });
+
     }
 
 }
