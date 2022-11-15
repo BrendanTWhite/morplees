@@ -2,12 +2,11 @@
 
 namespace App\Observers;
 
-use App\Models\ShoppingList;
 use App\Models;
+use App\Models\ShoppingList;
 
 class ShoppingListObserver
 {
-
     /**
      * Handle the ShoppingList "creating" event.
      *
@@ -18,19 +17,18 @@ class ShoppingListObserver
     {
 
         // Save old active shopping list ID (if there is one)
-        $previous_list = Models\ShoppingList::whereActive(TRUE)->first();
-            if($previous_list) {
+        $previous_list = Models\ShoppingList::whereActive(true)->first();
+        if ($previous_list) {
             session()->now('previous_list_id',
                 $previous_list->id);
         }
 
         // Set all Shopping Lists that are already in the database
         //  to be no longer Active
-        Models\ShoppingList::whereActive(TRUE)->get()
+        Models\ShoppingList::whereActive(true)->get()
         ->each(function (Models\ShoppingList $other_shopping_list, $key) {
             $other_shopping_list->toggleActive();
         });
-
     }
 
     /**
@@ -48,7 +46,7 @@ class ShoppingListObserver
             /// ... and there actually IS a previous list...
             if ($previous_list = Models\ShoppingList::find(session('previous_list_id'))) {
 
-                // ... then loop through the SLRecipes for the previous list                
+                // ... then loop through the SLRecipes for the previous list
                 // and create a new SLR for the same recipe in the new list
                 foreach ($previous_list->s_l_recipes as $oldSLR) {
                     Models\SLRecipe::create([
@@ -56,16 +54,15 @@ class ShoppingListObserver
                         'recipe_id' => $oldSLR->recipe_id,
                     ]);
                 }
-            }    
+            }
         }
         // and in any case, clean up the session
         session()->forget('previous_list_id');
-        
 
         if ($shoppingList->include_usually_need) {
 
             // Get the Product IDs of every product that should default in the list
-            $product_ids = Models\Product::whereDefaultInList(TRUE)
+            $product_ids = Models\Product::whereDefaultInList(true)
                 ->pluck('id');
 
             // Start with an empty array of new itmes
@@ -76,20 +73,18 @@ class ShoppingListObserver
                 $new_items->push([
                     'product_id' => $product_id,
                     'shopping_list_id' => $shoppingList->id,
-                    'family_id'  => $shoppingList->family_id,
+                    'family_id' => $shoppingList->family_id,
                 ]);
             }
 
             // and add the new items to the database
-            Models\SLItem::insert($new_items->all()); 
-
+            Models\SLItem::insert($new_items->all());
         }
-
 
         if ($shoppingList->include_need_soon) {
 
             // Now the Product IDs of products with Need Soon flag set
-            $product_ids = Models\Product::whereNeededSoon(TRUE)
+            $product_ids = Models\Product::whereNeededSoon(true)
                 ->pluck('id');
 
             // Start with an empty array of new itmes
@@ -100,22 +95,18 @@ class ShoppingListObserver
                 $new_items->push([
                     'product_id' => $product_id,
                     'shopping_list_id' => $shoppingList->id,
-                    'family_id'  => $shoppingList->family_id,
+                    'family_id' => $shoppingList->family_id,
                 ]);
             }
 
             // and add the new items to the database
-            Models\SLItem::insert($new_items->all()); 
+            Models\SLItem::insert($new_items->all());
 
             // Then reset the Needed Soon flag on those products
-            Models\Product::whereNeededSoon(TRUE)
+            Models\Product::whereNeededSoon(true)
             ->each(function (Models\Product $product, $key) {
                 $product->toggleNeededSoon();
             });
-
         }
-
-
     }
-
 }

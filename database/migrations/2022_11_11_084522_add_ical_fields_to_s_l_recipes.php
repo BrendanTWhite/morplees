@@ -27,7 +27,7 @@ class AddIcalFieldsToSLRecipes extends Migration
 
         // Then, make uuid mandatory (ie not nullable) and unique
         Schema::table('s_l_recipes', function (Blueprint $table) {
-            $table->uuid('uuid')->nullable(FALSE)->unique()->change();
+            $table->uuid('uuid')->nullable(false)->unique()->change();
         });
     }
 

@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\SLRecipeResource\Pages;
 
-use App\Filament\Resources\SLRecipeResource;
 use App\Filament\Resources\Pages\EditMorpleesRecord;
+use App\Filament\Resources\SLRecipeResource;
 
 class EditSLRecipe extends EditMorpleesRecord
 {

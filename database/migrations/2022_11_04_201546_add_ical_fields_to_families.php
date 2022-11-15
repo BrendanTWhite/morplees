@@ -19,7 +19,7 @@ class AddIcalFieldsToFamilies extends Migration
         // Also add the boolean ical_active field.
         Schema::table('families', function (Blueprint $table) {
             $table->uuid('ical_uuid')->after('name')->nullable();
-            $table->boolean('ical_active')->default(FALSE)->after('name');
+            $table->boolean('ical_active')->default(false)->after('name');
         });
 
         // Then, add the initial ical_uuid values (via SQL uuid() for unique values)
@@ -27,7 +27,7 @@ class AddIcalFieldsToFamilies extends Migration
 
         // Then, make ical_uuid mandatory (ie not nullable) and unique
         Schema::table('families', function (Blueprint $table) {
-            $table->uuid('ical_uuid')->nullable(FALSE)->unique()->change();
+            $table->uuid('ical_uuid')->nullable(false)->unique()->change();
         });
     }
 

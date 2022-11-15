@@ -40,7 +40,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return ($user->is_admin);
+        return $user->is_admin;
     }
 
     /**

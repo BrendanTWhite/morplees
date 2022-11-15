@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models;
+use App\Observers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use App\Models;
-use App\Observers;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,8 +22,6 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-
-
         // Laravel 7 method - works but shouldn't
         'Illuminate\Auth\Events\Login' => [
             'App\Listeners\SetFamilyIdInSession',
@@ -34,18 +32,15 @@ class EventServiceProvider extends ServiceProvider
         //     App\Listeners\SetFamilyIdInSession::class,
         // ],
 
-
-
         // Laravel 7 method - works but shouldn't
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\RemoveFamilyIdFromSession',
         ],
-    
+
         // Laravel 8 method - should work but doesn't
         // Logout::class => [
         //     RemoveFamilyIdFromSession::class,
         // ],
-
 
     ];
 
@@ -58,6 +53,5 @@ class EventServiceProvider extends ServiceProvider
     {
         Models\ShoppingList::observe(Observers\ShoppingListObserver::class);
         Models\SLRecipe::observe(Observers\SLRecipeObserver::class);
-
     }
 }

@@ -4,9 +4,8 @@ namespace App\Traits;
 
 use App\Scopes\JustMyFamilyScope;
 
-trait BelongsToFamily 
+trait BelongsToFamily
 {
-
     /**
      * The "booted" method of the model.
      *
@@ -16,11 +15,10 @@ trait BelongsToFamily
     {
         static::addGlobalScope(new JustMyFamilyScope);
 
-        static::creating(function($model) {
-            if(session()->has('family_id')) {
+        static::creating(function ($model) {
+            if (session()->has('family_id')) {
                 $model->family_id = session(key:'family_id');
             }
         });
     }
-
 }

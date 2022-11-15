@@ -14,7 +14,7 @@ class AddCopyRecipeFieldToShoppingListsTable extends Migration
     public function up()
     {
         Schema::table('shopping_lists', function (Blueprint $table) {
-            $table->boolean('copy_recipes')->default(FALSE)
+            $table->boolean('copy_recipes')->default(false)
                 ->after('include_need_soon');
         });
     }

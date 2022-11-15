@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\StepResource\Pages;
 
-use App\Filament\Resources\StepResource;
 use App\Filament\Resources\Pages\EditMorpleesRecord;
+use App\Filament\Resources\StepResource;
 
 class EditStep extends EditMorpleesRecord
 {

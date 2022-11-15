@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('shop_id')->constrained();
 
             $table->text('name');
-            $table->boolean('default_in_list')->default(false);            
+            $table->boolean('default_in_list')->default(false);
             $table->boolean('needed_soon')->default(false);
 
             // Additional indexes for convenience and integrity
