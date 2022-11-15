@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Models;
 use Spatie\IcalendarGenerator\Components\Event;
+use Spatie\IcalendarGenerator\Properties\TextProperty;
 
 class SLRecipe extends Model
 {
@@ -94,7 +95,12 @@ class SLRecipe extends Model
             ->uniqueIdentifier($this->uuid)
             ->startsAt($this->date)
             ->fullDay()
-            ->name($this->recipe->name)
+            ->name($this->recipe->name)            
+            ->appendProperty(
+                TextProperty::create('URL', 
+                    route('filament.resources.recipes.view', ['record' => $this->recipe->id])
+                )
+            )
             ->description($this->recipe->products
                 ->implode('name', ' / '));
     }
