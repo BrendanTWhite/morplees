@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddIcalFieldsToFamilies extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -43,4 +43,4 @@ class AddIcalFieldsToFamilies extends Migration
             $table->dropColumn('ical_active');
         });
     }
-}
+};
