@@ -47,8 +47,8 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('recipe.name'),            
-                Tables\Columns\TextColumn::make('date')->date('D j M'),            
+                Tables\Columns\TextColumn::make('recipe.name')->sortable(),            
+                Tables\Columns\TextColumn::make('date')->date('D j M')->sortable(),            
                 // Tables\Columns\TextInputColumn::make('date')->type('date'),    // requires filament update         
             ])
             ->defaultSort('date')
