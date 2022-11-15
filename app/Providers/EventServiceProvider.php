@@ -24,7 +24,7 @@ class EventServiceProvider extends ServiceProvider
 
         // Laravel 7 method - works but shouldn't
         'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\SetFamilyIdInSession',
+            \App\Listeners\SetFamilyIdInSession::class,
         ],
 
         // Laravel 8 method - should work but doesn't
@@ -34,7 +34,7 @@ class EventServiceProvider extends ServiceProvider
 
         // Laravel 7 method - works but shouldn't
         'Illuminate\Auth\Events\Logout' => [
-            'App\Listeners\RemoveFamilyIdFromSession',
+            \App\Listeners\RemoveFamilyIdFromSession::class,
         ],
 
         // Laravel 8 method - should work but doesn't
