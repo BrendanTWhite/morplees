@@ -8,6 +8,7 @@
 	pwd
 
 	echo " -- Updating Repo from Origin"
+	git checkout staging
     git pull
 
     echo " -- Running Composer Install"
@@ -27,6 +28,7 @@
 	pwd
 
 	echo " -- Updating Repo from Origin"
+	git checkout production
     git pull
 
     echo " -- Running Composer Install"
