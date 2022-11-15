@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -11,7 +14,6 @@
         "davidhsianturi/blade-bootstrap-icons": "^1.2",
         "doctrine/dbal": "^3.5",
         "filament/filament": "^2.7",
-        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "jamesmills/laravel-timezone": "^1.10",
         "laravel/framework": "^8.75",
@@ -71,11 +73,9 @@
         }
     },
     "config": {
-
         "platform": {
             "php": "8.0.21"
         },
-
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
