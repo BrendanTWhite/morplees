@@ -11,6 +11,7 @@ use App\Traits\BelongsToFamily;
 
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -82,6 +83,21 @@ class User extends Authenticatable implements FilamentUser
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {        
+        static::creating(function ($user) {
+            if (! $user->password ) {
+                $user->password = (string) Str::uuid();
+            }
+        });
     }
 
 
