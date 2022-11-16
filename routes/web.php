@@ -14,6 +14,9 @@ use App\Models\Family;
 |
 */
 
+// from https://github.com/spatie/laravel-mail-preview
+Route::mailPreview();
+
 Route::redirect('/admin/login', '/login')->name('filament.auth.login'); 
 
 // Replaced by Filament

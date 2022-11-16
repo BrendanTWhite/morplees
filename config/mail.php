@@ -78,6 +78,11 @@ return [
                 'log',
             ],
         ],
+
+        'preview' => [
+            'transport' => 'preview',
+        ],
+
     ],
 
     /*
