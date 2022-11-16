@@ -7,7 +7,6 @@ use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -66,17 +65,6 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
     ];
-
-    /**
-     * Encrypt the user's password.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
 
     /**
      * The "booted" method of the model.
