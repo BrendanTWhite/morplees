@@ -13,6 +13,7 @@ class ShoppingListsRelationManager extends HasManyRelationManager
     protected static string $relationship = 'shopping_lists';
 
     protected static ?string $label = 'Shopping List';
+
     protected static ?string $pluralLabel = 'Shopping Lists';
 
     public static function form(Form $form): Form

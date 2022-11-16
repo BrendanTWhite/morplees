@@ -11,9 +11,8 @@ class ViewFamily extends ViewRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $data['ical_url'] = url('/calendar/' . $data['ical_uuid'] . '.ics');
-     
+        $data['ical_url'] = url('/calendar/'.$data['ical_uuid'].'.ics');
+
         return $data;
     }
-
 }

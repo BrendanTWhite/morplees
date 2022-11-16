@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Models\Family;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ use App\Models\Family;
 // from https://github.com/spatie/laravel-mail-preview
 Route::mailPreview();
 
-Route::redirect('/admin/login', '/login')->name('filament.auth.login'); 
+Route::redirect('/admin/login', '/login')->name('filament.auth.login');
 
 // Replaced by Filament
 // Route::get('/', function () {
@@ -28,7 +28,6 @@ Route::redirect('/admin/login', '/login')->name('filament.auth.login');
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
- 
 Route::get('/calendar/{family:ical_uuid}.ics', function (Family $family) {
     return response($family->calendar)
     ->header('Content-Type', 'text/calendar; charset=utf-8');

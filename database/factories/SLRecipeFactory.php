@@ -14,7 +14,7 @@ class SLRecipeFactory extends Factory
     public function definition()
     {
         return [
-            'date' => $this->faker->boolean() 
+            'date' => $this->faker->boolean()
                     ? $this->faker->dateTimeBetween('-1 week', '+3 weeks')
                     : null,
         ];

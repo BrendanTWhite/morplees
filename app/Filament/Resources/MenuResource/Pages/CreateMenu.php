@@ -3,14 +3,14 @@
 namespace App\Filament\Resources\MenuResource\Pages;
 
 use App\Filament\Resources\MenuResource;
-use Filament\Resources\Pages\CreateRecord;
 use Filament\Pages\Actions\Action;
+use Filament\Resources\Pages\CreateRecord;
 
 class CreateMenu extends CreateRecord
 {
     protected static string $resource = MenuResource::class;
-    protected static ?string $title = 'Add Recipe to Menu';
 
+    protected static ?string $title = 'Add Recipe to Menu';
 
     protected function getRedirectUrl(): string
     {
@@ -28,5 +28,4 @@ class CreateMenu extends CreateRecord
         return parent::getCreateAnotherFormAction()
             ->label('Add & add another');
     }
-
 }

@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SLItemResource\Pages;
-use App\Filament\Resources\SLItemResource\RelationManagers;
 use App\Models\SLItem;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -18,10 +17,13 @@ class SLItemResource extends Resource
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-database';
+
     protected static ?string $label = 'Shopping List - Item';
+
     protected static ?string $pluralLabel = 'Shopping List - Items';
 
     protected static ?string $navigationGroup = 'OTHER';
+
     public static ?int $navigationSort = 999;
 
     public static function form(Form $form): Form
@@ -54,8 +56,8 @@ class SLItemResource extends Resource
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
                 Tables\Columns\BooleanColumn::make('already_own'),
-                Tables\Columns\BooleanColumn::make('in_basket'),            
-        ]);
+                Tables\Columns\BooleanColumn::make('in_basket'),
+            ]);
     }
 
     public static function getRelations(): array

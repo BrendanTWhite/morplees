@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCopyRecipeFieldToShoppingListsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddCopyRecipeFieldToShoppingListsTable extends Migration
     public function up()
     {
         Schema::table('shopping_lists', function (Blueprint $table) {
-            $table->boolean('copy_recipes')->default(FALSE)
+            $table->boolean('copy_recipes')->default(false)
                 ->after('include_need_soon');
         });
     }
@@ -30,4 +30,4 @@ class AddCopyRecipeFieldToShoppingListsTable extends Migration
             //
         });
     }
-}
+};

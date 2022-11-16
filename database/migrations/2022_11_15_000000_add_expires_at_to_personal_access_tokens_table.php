@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('s_l_recipes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('family_id')->constrained();
-            $table->foreignId('shopping_list_id')->constrained();
-            $table->foreignId('recipe_id')->constrained();
-
-            $table->timestamps();
+        Schema::table('personal_access_tokens', function (Blueprint $table) {
+            $table->timestamp('expires_at')->nullable()->after('last_used_at');
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('s_l_recipes');
+        Schema::table('personal_access_tokens', function (Blueprint $table) {
+            $table->dropColumn('expires_at');
+        });
     }
 };

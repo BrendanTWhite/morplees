@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToFamily;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\BelongsToFamily;
 
 class Product extends Model
 {
@@ -24,7 +24,6 @@ class Product extends Model
         'needed_soon',
     ];
 
-
     /**
      * The attributes that should be masked by DatabaseMask.
      *
@@ -32,27 +31,25 @@ class Product extends Model
      */
     protected $masked = [];
 
-    public function toggleDefaultInList() 
+    public function toggleDefaultInList()
     {
         $this->default_in_list = ! $this->default_in_list;
         $this->save();
     }
 
-    public function toggleNeededSoon() 
+    public function toggleNeededSoon()
     {
         $this->needed_soon = ! $this->needed_soon;
         $this->save();
     }
 
-
     /**
      * Get the name of the shop that owns the product.
      */
-    public function getShopNameAttribute():?String
+    public function getShopNameAttribute(): ?string
     {
         return $this->shop->name;
     }
-
 
     /**
      * Get the shop that owns the product.
@@ -86,7 +83,6 @@ class Product extends Model
         return $this->hasMany(SLItem::class);
     }
 
-
     /**
      * The recipes that belong to the product.
      */
@@ -94,5 +90,4 @@ class Product extends Model
     {
         return $this->belongsToMany(Recipe::class, 'ingredients');
     }
-
 }

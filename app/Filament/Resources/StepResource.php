@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\StepResource\Pages;
-use App\Filament\Resources\StepResource\RelationManagers;
 use App\Models\Step;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -20,6 +19,7 @@ class StepResource extends Resource
     protected static ?string $navigationIcon = 'bi-list-ol';
 
     protected static ?string $navigationGroup = 'OTHER';
+
     public static ?int $navigationSort = 970;
 
     public static function form(Form $form): Form

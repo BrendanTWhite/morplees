@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateShoppingListTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,12 @@ class UpdateShoppingListTable extends Migration
     public function up()
     {
         Schema::table('shopping_lists', function (Blueprint $table) {
-
             $table->boolean('include_need_soon')
                 ->default(true)
                 ->after('active');
             $table->boolean('include_usually_need')
                 ->default(true)
                 ->after('active');
-                
         });
     }
 
@@ -37,4 +35,4 @@ class UpdateShoppingListTable extends Migration
             $table->dropColumn('votes');
         });
     }
-}
+};

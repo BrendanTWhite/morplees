@@ -2,15 +2,17 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Pages\Page;
-use Filament\Pages\Actions\ButtonAction;
 use App\Filament\Widgets;
 use App\Models;
+use Filament\Pages\Actions\ButtonAction;
+use Filament\Pages\Page;
 
 class Home extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-home';
+
     protected static ?string $slug = '';
+
     protected static ?string $navigationLabel = 'Home';
 
     protected static string $view = 'filament.pages.home';
@@ -22,28 +24,26 @@ class Home extends Page
     }
 
     protected function getActions(): array
-	{
-	    return [
+    {
+        return [
 
-	        ButtonAction::make('new')
-	            ->label('New List')
-	            ->color('secondary')
-	            ->url(route('filament.resources.shopping-lists.create')),
-	    ];
-	}
+            ButtonAction::make('new')
+                ->label('New List')
+                ->color('secondary')
+                ->url(route('filament.resources.shopping-lists.create')),
+        ];
+    }
 
- 
-	protected function getHeaderWidgets(): array
-	{
-	    return [
+    protected function getHeaderWidgets(): array
+    {
+        return [
             Widgets\MenuButton::class,
             Widgets\PantryButton::class,
             Widgets\ShoppingButton::class,
-            
+
             Widgets\RecipeButton::class,
             Widgets\ProductButton::class,
             Widgets\ShopButton::class,
         ];
-	}    	
-
+    }
 }

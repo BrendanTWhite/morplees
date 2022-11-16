@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateUserTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class UpdateUserTable extends Migration
      * @return void
      */
     public function up()
-    {   
+    {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('family_id')->constrained();
             $table->boolean('is_admin')->default(false);
@@ -28,4 +28,4 @@ class UpdateUserTable extends Migration
     {
         //
     }
-}
+};

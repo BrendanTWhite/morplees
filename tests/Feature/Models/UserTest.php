@@ -2,10 +2,8 @@
 
 namespace Tests\Feature\Models;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\User;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -16,7 +14,6 @@ class UserTest extends TestCase
      */
     public function test_can_login()
     {
-
         $user = User::factory()->create();
 
         $response = $this->post('/login', [
