@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 // from https://github.com/spatie/laravel-mail-preview
 if (App::environment('local')) {
-    Route::mailPreview('digifactory-mail-preview');
+    Route::mailPreview();
 }
 
 Route::redirect('/admin/login', '/login')->name('filament.auth.login');
