@@ -3,29 +3,30 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PantryResource\Pages;
-use App\Filament\Resources\PantryResource\RelationManagers;
 use App\Models;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Filters;
 use Illuminate\Database\Eloquent\Builder;
-use Carbon\Carbon;
 
 class PantryResource extends Resource
 {
     protected static ?string $model = Models\SLItem::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
+
     protected static ?string $navigationLabel = 'Pantry';
 
     protected static ?string $label = 'Pantry Check Item';
+
     protected static ?string $pluralLabel = 'Pantry Check Items';
+
     protected static ?string $slug = 'pantry';
 
     protected static ?string $navigationGroup = 'Shopping Lists';
+
     public static ?int $navigationSort = 220;
 
     public static function form(Form $form): Form
@@ -47,8 +48,7 @@ class PantryResource extends Resource
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Qty'),
                 Tables\Columns\TextColumn::make('product.name')->sortable()
                     ->url(
-                        fn (Models\SLItem $record): string => 
-                            route('filament.resources.products.view', ['record' => $record->product])
+                        fn (Models\SLItem $record): string => route('filament.resources.products.view', ['record' => $record->product])
                     ),
 
                 Tables\Columns\BooleanColumn::make('already_own')
@@ -63,30 +63,25 @@ class PantryResource extends Resource
 
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe')
                     ->url(
-                        fn (Models\SLItem $record): string => 
-                            ($record->s_l_recipe)
+                        fn (Models\SLItem $record): string => ($record->s_l_recipe)
                             ? route('filament.resources.recipes.view', ['record' => $record->s_l_recipe->recipe])
                            : ''
                     ),
 
-                Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['name','shop_id'])
+                Tables\Columns\TextColumn::make('product.shop_name')->label('Shop')->sortable(['name', 'shop_id'])
                     ->url(
-                        fn (Models\SLItem $record): string => 
-                            route('filament.resources.shops.view', ['record' => $record->product->shop])
+                        fn (Models\SLItem $record): string => route('filament.resources.shops.view', ['record' => $record->product->shop])
                     ),
 
             ])
             ->defaultSort('product.shop_name')
             ->actions([
                 //
-            ])              
+            ])
             ->bulkActions([
                 //
-            ])   
-            ;
+            ]);
     }
-
-
 
     public static function getEloquentQuery(): Builder
     {
@@ -109,5 +104,4 @@ class PantryResource extends Resource
             //'edit' => Pages\EditPantry::route('/{record}/edit'),
         ];
     }
-    
 }

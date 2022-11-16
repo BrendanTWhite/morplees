@@ -2,13 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Family;
+use App\Models\Recipe;
+use App\Models\Shop;
+use App\Models\ShoppingList;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Factories\Sequence;
-use App\Models\{
-	Family, User, Shop,  
-	Recipe, ShoppingList,
-};
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,11 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         $this->command->comment('Seeding starting...');
 
         Family::factory()
-            ->count(5) 
+            ->count(5)
             ->hasUsers(3)
 
             ->has(
@@ -32,7 +29,7 @@ class DatabaseSeeder extends Seeder
                     ->hasProducts(10,
                         function (array $attributes, Shop $shop) {
                             // dd($attributes); // array:3 [ "name" => "quo", "default_in_list" => true, "needed_soon" => true ]
-                            return [ 'family_id' => $shop->family_id ];
+                            return ['family_id' => $shop->family_id];
                         }
                     )
             )
@@ -40,31 +37,29 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Recipe::factory()
                     ->count(10)
-                    ->hasSteps(6, 
+                    ->hasSteps(6,
                         function (array $attributes, Recipe $recipe) {
-                            return [ 'family_id' => $recipe->family->id ];
+                            return ['family_id' => $recipe->family->id];
                         })
-                    ->hasIngredients(10, 
+                    ->hasIngredients(10,
                         function (array $attributes, Recipe $recipe) {
                             return [
                                 'family_id' => $recipe->family->id,
-                                'product_id' => 
-                                $recipe->family->shops->random()
-                                ->products->random()->id
+                                'product_id' => $recipe->family->shops->random()
+                                ->products->random()->id,
                             ];
                         }
                     )
             )
 
-            -> has (
+            ->has(
                 $shopping_list = ShoppingList::factory()
                     ->count(20)
-                    ->hasSLRecipes(7, 
+                    ->hasSLRecipes(7,
                         function (array $attributes, ShoppingList $shopping_list) {
                             return [
                                 'family_id' => $shopping_list->family->id,
-                                'recipe_id' => 
-                                $shopping_list->family->recipes->random()->id
+                                'recipe_id' => $shopping_list->family->recipes->random()->id,
                             ];
                         }
                     )
@@ -73,10 +68,8 @@ class DatabaseSeeder extends Seeder
 
             ->create();
 
-            // We won't seed the SLItem table - too tricky
+        // We won't seed the SLItem table - too tricky
 
         $this->command->info('Seeding complete.');
-
     }
-
 }

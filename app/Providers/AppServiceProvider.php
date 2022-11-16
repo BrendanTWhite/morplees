@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Filament\Facades\Filament;
-
 use Filament\Navigation\UserMenuItem;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -56,25 +55,24 @@ class AppServiceProvider extends ServiceProvider
 
         // Add environment-specific colours
         switch (\App::environment()) {
-            case "local":
+            case 'local':
                 Filament::registerStyles([
                     asset('css/custom-filament-local.css'),
                 ]);
                 break;
-            case "staging":
+            case 'staging':
                 Filament::registerStyles([
                     asset('css/custom-filament-staging.css'),
                 ]);
                 break;
-            case "testing":
+            case 'testing':
                 // no custom required for testing
                 break;
-            case "production":
+            case 'production':
                 // no custom required for production
                 break;
-            default :
+            default:
                 dd('Unknown Environment in app/Providers/AppServiceProvider: '.\App::environment());
         }
-
     }
 }

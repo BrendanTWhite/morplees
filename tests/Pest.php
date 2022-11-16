@@ -39,7 +39,6 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-
 /**
  * Set the currently logged in user for the application.
  *

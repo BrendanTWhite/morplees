@@ -3,9 +3,8 @@
 namespace App\Filament\Resources\StepResource\Pages;
 
 use App\Filament\Resources\StepResource;
-use Filament\Resources\Pages\ListRecords;
-
 use Closure;
+use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Model;
 
 class ListSteps extends ListRecords
@@ -16,8 +15,8 @@ class ListSteps extends ListRecords
     {
         return function (Model $record): ?string {
             $resource = static::getResource();
+
             return $resource::getUrl('view', ['record' => $record]);
         };
     }
-
 }

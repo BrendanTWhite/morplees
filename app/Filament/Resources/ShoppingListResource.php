@@ -10,7 +10,6 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
 
 class ShoppingListResource extends Resource
 {
@@ -21,6 +20,7 @@ class ShoppingListResource extends Resource
     protected static ?string $navigationIcon = 'bi-file-text';
 
     protected static ?string $navigationGroup = 'OTHER';
+
     public static ?int $navigationSort = 999;
 
     public static function form(Form $form): Form
@@ -46,8 +46,7 @@ class ShoppingListResource extends Resource
                 Tables\Columns\TextColumn::make('slitems_count')->counts('slitems')->label('Total Items'),
                 Tables\Columns\BooleanColumn::make('active'),
             ])
-            ->actions([]) 
-            ;
+            ->actions([]);
     }
 
     public static function getRelations(): array
@@ -66,5 +65,4 @@ class ShoppingListResource extends Resource
             'edit' => Pages\EditShoppingList::route('/{record}/edit'),
         ];
     }
-
 }

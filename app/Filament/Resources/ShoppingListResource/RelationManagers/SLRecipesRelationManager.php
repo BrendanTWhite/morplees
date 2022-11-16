@@ -13,6 +13,7 @@ class SLRecipesRelationManager extends HasManyRelationManager
     protected static string $relationship = 's_l_recipes';
 
     protected static ?string $label = 'Shopping List - Recipe';
+
     protected static ?string $pluralLabel = 'Shopping List - Recipes';
 
     protected static ?string $recordTitleAttribute = 'recipe_id';

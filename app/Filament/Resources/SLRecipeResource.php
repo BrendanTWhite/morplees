@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SLRecipeResource\Pages;
-use App\Filament\Resources\SLRecipeResource\RelationManagers;
 use App\Models\SLRecipe;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -18,10 +17,13 @@ class SLRecipeResource extends Resource
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-database';
+
     protected static ?string $label = 'Shopping List - Recipe';
+
     protected static ?string $pluralLabel = 'Shopping List - Recipes';
 
     protected static ?string $navigationGroup = 'OTHER';
+
     public static ?int $navigationSort = 990;
 
     public static function form(Form $form): Form

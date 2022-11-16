@@ -13,5 +13,4 @@ class EditMenu extends EditRecord
     {
         return static::$resource::getUrl('index');
     }
-
 }

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToFamily;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\BelongsToFamily;
 
 class Step extends Model
 {
@@ -22,18 +22,12 @@ class Step extends Model
         'instructions',
     ];
 
-
-
     /**
      * The attributes that should be masked by DatabaseMask.
      *
      * @var array
      */
     protected $masked = [];
-
-
-
-
 
     /**
      * Get the recipe that owns the step.
@@ -42,5 +36,4 @@ class Step extends Model
     {
         return $this->belongsTo(Recipe::class);
     }
-
 }

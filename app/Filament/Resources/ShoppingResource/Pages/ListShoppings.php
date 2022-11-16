@@ -12,25 +12,25 @@ class ListShoppings extends ListRecords
     protected function getActions(): array
     {
         return [
-        	//
+            //
         ];
     }
 
-    protected function isTablePaginationEnabled(): bool 
+    protected function isTablePaginationEnabled(): bool
     {
         return false;
-    } 
-    
-    protected function getTableEmptyStateIcon(): ?string 
+    }
+
+    protected function getTableEmptyStateIcon(): ?string
     {
         return 'heroicon-o-emoji-sad';
     }
- 
+
     protected function getTableEmptyStateHeading(): ?string
     {
         return 'No Items Yet.';
     }
- 
+
     protected function getTableEmptyStateActions(): array
     {
         return [
@@ -39,6 +39,5 @@ class ListShoppings extends ListRecords
                 ->url(route('filament.resources.pantry.create'))
                 ->icon('heroicon-o-plus'),
         ];
-    } 
-
+    }
 }

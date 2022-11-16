@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShopsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class CreateShopsTable extends Migration
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->foreignId('family_id')->constrained();
-            
+
             $table->text('name');
 
             $table->timestamps();
@@ -32,4 +32,4 @@ class CreateShopsTable extends Migration
     {
         Schema::dropIfExists('shops');
     }
-}
+};
