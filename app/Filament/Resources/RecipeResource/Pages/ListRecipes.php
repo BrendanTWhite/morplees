@@ -3,9 +3,8 @@
 namespace App\Filament\Resources\RecipeResource\Pages;
 
 use App\Filament\Resources\RecipeResource;
-use Filament\Resources\Pages\ListRecords;
-
 use Closure;
+use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Model;
 
 class ListRecipes extends ListRecords
@@ -16,8 +15,8 @@ class ListRecipes extends ListRecords
     {
         return function (Model $record): ?string {
             $resource = static::getResource();
+
             return $resource::getUrl('view', ['record' => $record]);
         };
     }
-
 }

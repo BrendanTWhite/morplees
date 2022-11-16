@@ -5,13 +5,13 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\FamilyResource\Pages;
 use App\Filament\Resources\FamilyResource\RelationManagers;
 use App\Models\Family;
+use Closure;
 use Filament\Forms\Components;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Columns;
-use Filament\Forms\Components\Actions\Action;
-use Closure;
 
 class FamilyResource extends Resource
 {
@@ -22,6 +22,7 @@ class FamilyResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $navigationGroup = 'OTHER';
+
     public static ?int $navigationSort = 910;
 
     public static function form(Form $form): Form
@@ -35,16 +36,15 @@ class FamilyResource extends Resource
                 Components\TextInput::make('ical_url')
                 ->label('Calendar URL')
                 ->disabled()
-                ->hidden(fn (Closure $get) => ! $get('ical_active') )
-                ->suffixAction(fn ($get) => 
-                    Action::make('visit')
+                ->hidden(fn (Closure $get) => ! $get('ical_active'))
+                ->suffixAction(fn ($get) => Action::make('visit')
                     ->icon('heroicon-s-external-link')
                     ->url(
                         $get('ical_url'),
                         shouldOpenInNewTab: true,
                     ),
                 ),
-                
+
             ]);
     }
 
@@ -78,5 +78,4 @@ class FamilyResource extends Resource
             'edit' => Pages\EditFamily::route('/{record}/edit'),
         ];
     }
-
 }

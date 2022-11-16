@@ -3,12 +3,9 @@
 namespace App\Observers;
 
 use App\Models\SLRecipe;
-use App\Models;
-use Illuminate\Support\Facades\Log;
 
 class SLRecipeObserver
 {
-
     public function created(SLRecipe $sLRecipe)
     {
         $sLRecipe->createSLItems();
@@ -32,5 +29,4 @@ class SLRecipeObserver
     {
         $sLRecipe->deleteSLItems();
     }
-
 }

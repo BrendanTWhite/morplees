@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\RecipeResource\Pages;
 
-use App\Filament\Resources\RecipeResource;
 use App\Filament\Resources\Pages\CreateMorpleesRecord;
+use App\Filament\Resources\RecipeResource;
 
 class CreateRecipe extends CreateMorpleesRecord
 {

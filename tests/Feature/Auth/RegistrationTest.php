@@ -26,10 +26,7 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        // TODO - Reinstate these tests,
-        // once we've got registration working
-        // with family worked out
-        //$this->assertAuthenticated();
-        //$response->assertRedirect(RouteServiceProvider::HOME);
+        $this->assertAuthenticated();
+        $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }

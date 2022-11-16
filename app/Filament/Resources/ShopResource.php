@@ -10,20 +10,17 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
-
-use App\Scopes\JustMyFamilyScope;
-use Illuminate\Database\Eloquent\Builder;
 
 class ShopResource extends Resource
 {
     protected static ?string $model = Shop::class;
 
     protected static bool $shouldRegisterNavigation = false;
-    
+
     protected static ?string $navigationIcon = 'bi-shop';
 
     protected static ?string $navigationGroup = 'OTHER';
+
     public static ?int $navigationSort = 930;
 
     public static function form(Form $form): Form
@@ -61,5 +58,4 @@ class ShopResource extends Resource
             'edit' => Pages\EditShop::route('/{record}/edit'),
         ];
     }
-
 }

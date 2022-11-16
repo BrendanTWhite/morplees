@@ -20,6 +20,7 @@ class IngredientResource extends Resource
     protected static ?string $navigationIcon = 'bi-list-ul';
 
     protected static ?string $navigationGroup = 'OTHER';
+
     public static ?int $navigationSort = 960;
 
     public static function form(Form $form): Form

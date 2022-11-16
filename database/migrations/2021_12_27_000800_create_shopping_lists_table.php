@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShoppingListsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateShoppingListsTable extends Migration
             $table->foreignId('family_id')->constrained();
 
             $table->text('override_name')->nullable();
-            $table->boolean('active')->default(TRUE);
+            $table->boolean('active')->default(true);
 
             $table->timestamps();
         });
@@ -33,4 +33,4 @@ class CreateShoppingListsTable extends Migration
     {
         Schema::dropIfExists('shopping_lists');
     }
-}
+};

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('shop_id')->constrained();
 
             $table->text('name');
-            $table->boolean('default_in_list')->default(false);            
+            $table->boolean('default_in_list')->default(false);
             $table->boolean('needed_soon')->default(false);
 
             // Additional indexes for convenience and integrity
@@ -40,4 +40,4 @@ class CreateProductsTable extends Migration
     {
         Schema::dropIfExists('products');
     }
-}
+};

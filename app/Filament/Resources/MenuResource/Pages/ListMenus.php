@@ -3,12 +3,10 @@
 namespace App\Filament\Resources\MenuResource\Pages;
 
 use App\Filament\Resources;
-use Filament\Resources\Pages\ListRecords;
-
-use Filament\Pages\Actions\ButtonAction;
-use Closure;
 use App\Models;
+use Closure;
 use Filament\Pages\Actions\Action;
+use Filament\Resources\Pages\ListRecords;
 
 class ListMenus extends ListRecords
 {
@@ -20,7 +18,7 @@ class ListMenus extends ListRecords
             return Resources\RecipeResource::getUrl('view', ['record' => $record->recipe]);
         };
     }
- 
+
     protected function getActions(): array
     {
         return [
@@ -28,18 +26,18 @@ class ListMenus extends ListRecords
                 ->label('Add Recipe')
                 ->url(route('filament.resources.menu.create')),
         ];
-    }       
+    }
 
-    protected function getTableEmptyStateIcon(): ?string 
+    protected function getTableEmptyStateIcon(): ?string
     {
         return 'heroicon-o-emoji-sad';
     }
- 
+
     protected function getTableEmptyStateHeading(): ?string
     {
         return 'No Recipes Yet.';
     }
- 
+
     protected function getTableEmptyStateActions(): array
     {
         return [
@@ -48,6 +46,5 @@ class ListMenus extends ListRecords
                 ->url(route('filament.resources.menu.create'))
                 ->icon('heroicon-o-plus'),
         ];
-    } 
-
+    }
 }
