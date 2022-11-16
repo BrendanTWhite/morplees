@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Family;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // from https://github.com/spatie/laravel-mail-preview
-Route::mailPreview();
+if (App::environment('local')) {
+    Route::mailPreview('digifactory-mail-preview');
+}
 
 Route::redirect('/admin/login', '/login')->name('filament.auth.login');
 
