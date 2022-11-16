@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 return new class extends Migration
 {
@@ -31,7 +32,7 @@ return new class extends Migration
             'name' => 'Brendan White',
             'family_id' => $white_family_id,
             'email' => 'brendan@thespia.com',
-            'password' => 'dingodingo', // gets hashed by the setPasswordAttribute mutator
+            'password' => Hash::make('dingodingo'),
         ]);
         $brendan->is_admin = true;
         $brendan->save(); // not fillable so updated separately
@@ -41,7 +42,7 @@ return new class extends Migration
             'name' => 'Kate White',
             'family_id' => $white_family_id,
             'email' => 'kate@thespia.com',
-            'password' => 'livcatpurr', // gets hashed by the setPasswordAttribute mutator
+            'password' => Hash::make('livcatpurr'),
         ]);
 
         // Insert shops
