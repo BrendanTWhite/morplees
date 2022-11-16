@@ -17,6 +17,12 @@
 	echo " -- Running Artisan Migrate"
     php artisan migrate --force
 
+	echo " -- Clearing Caches"
+	php artisan cache:clear
+	php artisan route:clear
+	php artisan config:clear
+	php artisan view:clear
+
 	echo " -- Finished Staging task."
 @endtask
 
@@ -36,6 +42,12 @@
 
 	echo " -- Running Artisan Migrate"
     php artisan migrate --force
+
+	echo " -- Clearing Caches"
+	php artisan cache:clear
+	php artisan route:clear
+	php artisan config:clear
+	php artisan view:clear
 
 	echo " -- Finished Production task."
 @endtask
