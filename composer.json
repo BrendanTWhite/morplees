@@ -20,8 +20,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "spatie/icalendar-generator": "^2.5",
-        "spatie/laravel-mail-preview": "^6.0",
-        "spatie/laravel-db-snapshots": "^2.3"
+        "spatie/laravel-db-snapshots": "^2.3",
+        "spatie/laravel-mail-preview": "^6.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
