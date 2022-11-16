@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42771687f8e76dc3d66e9a3e0b370f5a",
+    "content-hash": "36ef803a6e476894cb632f65eb8dc007",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -4717,6 +4717,83 @@
                 }
             ],
             "time": "2022-10-19T13:03:33+00:00"
+        },
+        {
+            "name": "spatie/laravel-mail-preview",
+            "version": "6.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-mail-preview.git",
+                "reference": "ac5f44fe90766da79b13bc08c56e78c8c3fff527"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-mail-preview/zipball/ac5f44fe90766da79b13bc08c56e78c8c3fff527",
+                "reference": "ac5f44fe90766da79b13bc08c56e78c8c3fff527",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "^9.0",
+                "illuminate/mail": "^9.0",
+                "illuminate/support": "^9.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0",
+                "spatie/ray": "^1.27"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\MailPreview\\MailPreviewServiceProvider"
+                    ],
+                    "aliases": {
+                        "sentMails": "Spatie\\MailPreview\\Facades\\SentMails"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\MailPreview\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "themsaid@gmail.com"
+                }
+            ],
+            "description": "A mail driver to quickly preview mail",
+            "homepage": "https://github.com/themsaid/laravel-preview-mail-driver",
+            "keywords": [
+                "laravel",
+                "mail"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-mail-preview/issues",
+                "source": "https://github.com/spatie/laravel-mail-preview/tree/6.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-09-01T06:26:05+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -10847,83 +10924,6 @@
                 }
             ],
             "time": "2022-10-26T17:39:54+00:00"
-        },
-        {
-            "name": "spatie/laravel-mail-preview",
-            "version": "6.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-mail-preview.git",
-                "reference": "ac5f44fe90766da79b13bc08c56e78c8c3fff527"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-mail-preview/zipball/ac5f44fe90766da79b13bc08c56e78c8c3fff527",
-                "reference": "ac5f44fe90766da79b13bc08c56e78c8c3fff527",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/filesystem": "^9.0",
-                "illuminate/mail": "^9.0",
-                "illuminate/support": "^9.0",
-                "php": "^8.0",
-                "spatie/laravel-package-tools": "^1.11"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^7.0",
-                "spatie/ray": "^1.27"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\MailPreview\\MailPreviewServiceProvider"
-                    ],
-                    "aliases": {
-                        "sentMails": "Spatie\\MailPreview\\Facades\\SentMails"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\MailPreview\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be"
-                },
-                {
-                    "name": "Mohamed Said",
-                    "email": "themsaid@gmail.com"
-                }
-            ],
-            "description": "A mail driver to quickly preview mail",
-            "homepage": "https://github.com/themsaid/laravel-preview-mail-driver",
-            "keywords": [
-                "laravel",
-                "mail"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-mail-preview/issues",
-                "source": "https://github.com/spatie/laravel-mail-preview/tree/6.0.4"
-            },
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-09-01T06:26:05+00:00"
         },
         {
             "name": "theseer/tokenizer",

@@ -20,7 +20,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "spatie/icalendar-generator": "^2.5",
-        "spatie/laravel-db-snapshots": "^2.3"
+        "spatie/laravel-db-snapshots": "^2.3",
+        "spatie/laravel-mail-preview": "^6.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -36,7 +37,6 @@
         "pestphp/pest-plugin-laravel": "^1.2",
         "pestphp/pest-plugin-livewire": "^1.0",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-mail-preview": "^6.0",
         "spatie/laravel-ignition": "^1.4"
     },
     "autoload": {
