@@ -11,7 +11,6 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
 
 class RecipeResource extends Resource
 {
@@ -20,6 +19,7 @@ class RecipeResource extends Resource
     protected static ?string $navigationIcon = 'bi-journal-text';
 
     protected static ?string $navigationGroup = '';
+
     public static ?int $navigationSort = 100;
 
     public static function form(Form $form): Form
@@ -38,7 +38,7 @@ class RecipeResource extends Resource
                         Forms\Components\TextInput::make('cook_time')->numeric()->postfix('mins'),
                         Forms\Components\TextInput::make('book_reference'),
                     ])->columns(3),
-                    
+
                     Forms\Components\TextInput::make('url')->url(),
 
                     Forms\Components\Grid::make()
@@ -73,14 +73,14 @@ class RecipeResource extends Resource
                             ])
                             ->columns([
                                 'md' => 10,
-                            ])                            
+                            ])
                             ->createItemButtonLabel('Add Ingredient'),
 
                         Forms\Components\HasManyRepeater::make('steps')
                             ->relationship('steps')
                             ->schema([
                                 Forms\Components\Hidden::make('sequence')->default(999),
-                                // Forms\Components\TextInput::make('sequence')->numeric()->label('')->prefix('#')                                    
+                                // Forms\Components\TextInput::make('sequence')->numeric()->label('')->prefix('#')
                                 // ->columnSpan([
                                 //     'md' => 3,
                                 // ]),
@@ -92,12 +92,12 @@ class RecipeResource extends Resource
                             ])
                             ->columns([
                                 'md' => 10,
-                            ])                            
+                            ])
                             ->createItemButtonLabel('Add Step'),
 
                     ])
                     ->columns(2),
-                        
+
                 ]), // end card
 
                 Forms\Components\Card::make()
@@ -110,8 +110,7 @@ class RecipeResource extends Resource
                         ->content(fn (?Recipe $record): string => $record && $record->updated_at ? $record->updated_at->diffForHumans() : '-'),
                 ])->columns(2)
                 ->hidden(fn ($livewire) => $livewire instanceof Pages\CreateRecipe),
- 
-    
+
             ]); // end form
     }
 
@@ -153,5 +152,4 @@ class RecipeResource extends Resource
             'edit' => Pages\EditRecipe::route('/{record}/edit'),
         ];
     }
-
 }

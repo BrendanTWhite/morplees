@@ -19,8 +19,9 @@ class ProductResource extends Resource
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'lineawesome-apple-alt-solid';
-         
+
     protected static ?string $navigationGroup = '';
+
     public static ?int $navigationSort = 110;
 
     public static function form(Form $form): Form
@@ -53,7 +54,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('shop.name')->searchable()->sortable(),
 
-                Tables\Columns\BooleanColumn::make('default_in_list')->sortable()          
+                Tables\Columns\BooleanColumn::make('default_in_list')->sortable()
                 ->label('Usually Need')
                 ->trueIcon('heroicon-o-check')
                 ->trueColor('success')
@@ -66,7 +67,7 @@ class ProductResource extends Resource
             ])
             ->actions([
                 //
-            ])            
+            ])
             ->filters([
                 SelectFilter::make('shop')->relationship('shop', 'name'),
             ]);

@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToFamily;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\BelongsToFamily;
-use Illuminate\Support\Facades\App;
 
 class SLItem extends Model
 {
@@ -31,22 +30,17 @@ class SLItem extends Model
      */
     protected $masked = [];
 
-
-    
-    public function toggleAlreadyOwn() 
-    {    
+    public function toggleAlreadyOwn()
+    {
         $this->already_own = ! $this->already_own;
         $this->save();
     }
 
-    public function toggleInBasket() 
+    public function toggleInBasket()
     {
         $this->in_basket = ! $this->in_basket;
         $this->save();
     }
-
-
-
 
     /**
      * The "booted" method of the model.
@@ -55,14 +49,13 @@ class SLItem extends Model
      */
     protected static function booted()
     {
-        static::creating(function ($sLItem) { 
+        static::creating(function ($sLItem) {
 
-            // If we don't already have a SL ID set, 
+            // If we don't already have a SL ID set,
             // then get a sensible default
-            if ( ! $sLItem->shopping_list_id ) {
-               $sLItem->shopping_list_id = ShoppingList::getActiveSL()->id; 
+            if (! $sLItem->shopping_list_id) {
+                $sLItem->shopping_list_id = ShoppingList::getActiveSL()->id;
             }
-
         });
     }
 
@@ -97,5 +90,4 @@ class SLItem extends Model
     {
         return $this->belongsTo(SLRecipe::class);
     }
-
 }

@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\BelongsToFamily;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
-use App\Traits\BelongsToFamily;
-
-use Filament\Models\Contracts\FilamentUser;
-use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
-   use BelongsToFamily;
+    use BelongsToFamily;
 
     /**
      * The attributes that are mass assignable.
@@ -29,16 +27,14 @@ class User extends Authenticatable implements FilamentUser
         'family_id',
     ];
 
-
     /**
      * The attributes that should be masked by DatabaseMask.
      *
      * @var array
      */
     protected $masked = [
-        'name','email','password',
+        'name', 'email', 'password',
     ];
-
 
     public function canAccessFilament(): bool
     {
@@ -48,9 +44,7 @@ class User extends Authenticatable implements FilamentUser
 
         // If you want everyone to see Filament, un-comment this line
         return true;
-    
     }
-
 
     /**
      * The attributes that should be hidden for serialization.
@@ -69,21 +63,30 @@ class User extends Authenticatable implements FilamentUser
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_admin'          => 'boolean',
+        'is_admin' => 'boolean',
     ];
 
-
     /**
-     * Encrypt the user's password.
+     * The "booted" method of the model.
      *
-     * @param  string  $value
      * @return void
      */
-    public function setPasswordAttribute($value)
+    protected static function booted()
     {
-        $this->attributes['password'] = Hash::make($value);
-    }
+        static::creating(function ($user) {
 
+            if (! $user->password) {
+                $user->password = (string) Str::uuid();
+            }
+
+            if ( ! $user->family_id ) {
+                $user->family_id = Family::create([
+                    'name' => $user->name . '\'s family',
+                ])->id;
+            }
+
+        });
+    }
 
     /**
      * Get the family that owns the user.
@@ -92,5 +95,4 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->belongsTo(Family::class);
     }
-
 }

@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToFamily;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
-use App\Scopes\JustMyFamilyScope;
-use App\Traits\BelongsToFamily;
 
 class Shop extends Model
 {
@@ -24,7 +21,6 @@ class Shop extends Model
         'family_id',
     ];
 
-
     /**
      * The attributes that should be masked by DatabaseMask.
      *
@@ -33,9 +29,6 @@ class Shop extends Model
     protected $masked = [
         'name',
     ];
-
-
-
 
     /**
      * Get the family that owns the shop.
@@ -52,5 +45,4 @@ class Shop extends Model
     {
         return $this->hasMany(Product::class);
     }
-
 }

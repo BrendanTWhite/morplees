@@ -2,40 +2,42 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "brendantwhite/databasemask": "^1.0",
-        "codeat3/blade-line-awesome-icons": "^1.0",
-        "davidhsianturi/blade-bootstrap-icons": "^1.2",
+        "codeat3/blade-line-awesome-icons": "^1.2",
+        "davidhsianturi/blade-bootstrap-icons": "^1.3",
         "doctrine/dbal": "^3.5",
-        "filament/filament": "^2.7",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "jamesmills/laravel-timezone": "^1.10",
-        "laravel/framework": "^8.75",
-        "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5",
+        "filament/filament": "^2.9",
+        "guzzlehttp/guzzle": "^7.2",
+        "jamesmills/laravel-timezone": "^1.11",
+        "laravel/framework": "^9.39",
+        "laravel/sanctum": "^3.0",
+        "laravel/tinker": "^2.7",
         "spatie/icalendar-generator": "^2.5",
-        "spatie/laravel-db-snapshots": "^2.3"
+        "spatie/laravel-db-snapshots": "^2.3",
+        "spatie/laravel-mail-preview": "^6.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.12",
-        "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
-        "laravel/breeze": "^1.6",
+        "laravel/breeze": "^1.15",
         "laravel/envoy": "^2.8",
         "laravel/pint": "^1.2",
-        "laravel/sail": "^1.0.1",
+        "laravel/sail": "^1.15",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^5.10",
+        "nunomaduro/collision": "^6.3",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.2",
         "pestphp/pest-plugin-livewire": "^1.0",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-mail-preview": "5.*"
+        "spatie/laravel-ignition": "^1.4"
     },
     "autoload": {
         "psr-4": {
@@ -71,11 +73,9 @@
         }
     },
     "config": {
-
         "platform": {
             "php": "8.0.21"
         },
-
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,

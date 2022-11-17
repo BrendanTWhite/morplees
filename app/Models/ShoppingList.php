@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToFamily;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\BelongsToFamily;
-use Illuminate\Database\Eloquent\Builder;
-use Carbon\CarbonInterface;
-use App\Observers\ShoppingListObserver;
 
 class ShoppingList extends Model
 {
@@ -35,14 +33,13 @@ class ShoppingList extends Model
      */
     protected $masked = null;
 
-    
     protected $casts = [
-        'include_need_soon'    => 'boolean',
+        'include_need_soon' => 'boolean',
         'include_usually_need' => 'boolean',
-        'copy_recipes'         => 'boolean',
+        'copy_recipes' => 'boolean',
     ];
 
-    public function toggleActive() 
+    public function toggleActive()
     {
         $this->active = ! $this->active;
         $this->save();
@@ -56,16 +53,15 @@ class ShoppingList extends Model
     public function getDefaultNameAttribute()
     {
         // If it's less than five minutes old, say "just now"
-        if ( $this->created_at->diffInMinutes() < 5 ) {
+        if ($this->created_at->diffInMinutes() < 5) {
             return 'Just Now';
-        } else  // If it's less than a month old, say eg "3 days ago" or "12 hours ago"
-        if ( $this->created_at->diffInDays() < 28 ) {
+        } elseif // If it's less than a month old, say eg "3 days ago" or "12 hours ago"
+        ($this->created_at->diffInDays() < 28) {
             return $this->created_at->diffForHumans(null, CarbonInterface::DIFF_RELATIVE_AUTO, false, 2);
         } else { // if it's more than a month old, just show the date
-    		return $this->created_at->toFormattedDateString();
-    	}
+            return $this->created_at->toFormattedDateString();
+        }
     }
-
 
     /**
      * Get the shopping list's display name.
@@ -74,18 +70,17 @@ class ShoppingList extends Model
      */
     public function getNameAttribute()
     {
-    	if ($this->override_name)  
-        	{
-        		return $this->override_name;
-        	} else { 
-        		return $this->default_name;
-        	}
+        if ($this->override_name) {
+            return $this->override_name;
+        } else {
+            return $this->default_name;
+        }
     }
 
     /**
      * Get the ID of the currently active shopping list.
      */
-    public static function getActiveSL(): ?ShoppingList 
+    public static function getActiveSL(): ?ShoppingList
     {
         return self::firstOrCreate(['active' => true]);
     }
@@ -97,7 +92,7 @@ class ShoppingList extends Model
     {
         return $this->belongsTo(Family::class);
     }
-    
+
     /**
      * Get the SL Recipes for this record.
      */
@@ -129,5 +124,4 @@ class ShoppingList extends Model
     {
         return $this->hasMany(SLItem::class);
     }
-
 }

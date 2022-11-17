@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToFamily;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\BelongsToFamily;
 
 class Ingredient extends Model
 {
@@ -23,15 +23,12 @@ class Ingredient extends Model
         'quantity',
     ];
 
-
     /**
      * The attributes that should be masked by DatabaseMask.
      *
      * @var array
      */
     protected $masked = [];
-
-
 
     /**
      * Get the recipe that owns the ingredient.
@@ -40,8 +37,6 @@ class Ingredient extends Model
     {
         return $this->belongsTo(Recipe::class);
     }
-
-
 
     /**
      * Get the product that owns the ingredient.
@@ -66,6 +61,4 @@ class Ingredient extends Model
     {
         return $this->hasMany(SLItem::class);
     }
-
-
 }

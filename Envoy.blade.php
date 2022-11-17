@@ -8,6 +8,7 @@
 	pwd
 
 	echo " -- Updating Repo from Origin"
+	git checkout staging
     git pull
 
     echo " -- Running Composer Install"
@@ -16,7 +17,17 @@
 	echo " -- Running Artisan Migrate"
     php artisan migrate --force
 
+	echo " -- Clearing Caches"
+	php artisan cache:clear
+	php artisan route:clear
+	php artisan config:clear
+	php artisan view:clear
+
 	echo " -- Finished Staging task."
+
+	echo "Are there any new items in /public?"
+	echo "Do you need to run:"
+	echo "ln -s ~/projects/staging/public/newthing ~/html/staging/newthing"
 @endtask
 
 @task('production', ['confirm' => true])
@@ -27,6 +38,7 @@
 	pwd
 
 	echo " -- Updating Repo from Origin"
+	git checkout production
     git pull
 
     echo " -- Running Composer Install"
@@ -35,7 +47,17 @@
 	echo " -- Running Artisan Migrate"
     php artisan migrate --force
 
+	echo " -- Clearing Caches"
+	php artisan cache:clear
+	php artisan route:clear
+	php artisan config:clear
+	php artisan view:clear
+
 	echo " -- Finished Production task."
+
+	echo "Are there any new items in /public?"
+	echo "Do you need to run:"
+	echo "ln -s ~/projects/production/public/newthing ~/html/app/newthing"
 @endtask
 
 

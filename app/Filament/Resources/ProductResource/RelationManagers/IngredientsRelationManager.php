@@ -2,13 +2,12 @@
 
 namespace App\Filament\Resources\ProductResource\RelationManagers;
 
+use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
-
-use Closure;
 use Illuminate\Database\Eloquent\Model;
 
 class IngredientsRelationManager extends HasManyRelationManager
@@ -48,12 +47,10 @@ class IngredientsRelationManager extends HasManyRelationManager
             ]);
     }
 
- 
- 
-protected function getTableRecordUrlUsing(): Closure
-{
-    return fn (Model $record): string => route('filament.resources.recipes.view', ['record' => $record->recipe_id]);
-}
+    protected function getTableRecordUrlUsing(): Closure
+    {
+        return fn (Model $record): string => route('filament.resources.recipes.view', ['record' => $record->recipe_id]);
+    }
 
     public static function getPages(): array
     {
@@ -64,5 +61,4 @@ protected function getTableRecordUrlUsing(): Closure
             //'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
-
 }

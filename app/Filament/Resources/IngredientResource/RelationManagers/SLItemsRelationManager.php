@@ -13,7 +13,9 @@ class SLItemsRelationManager extends MorphManyRelationManager
     protected static string $relationship = 's_l_items';
 
     protected static ?string $recordTitleAttribute = 'id';
+
     protected static ?string $label = 'Shopping List Item';
+
     protected static ?string $pluralLabel = 'Shopping List Items';
 
     public static function form(Form $form): Form

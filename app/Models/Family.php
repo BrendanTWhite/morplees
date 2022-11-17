@@ -22,8 +22,6 @@ class Family extends Model
         'ical_active',
     ];
 
-
-
     /**
      * The attributes that should be masked by DatabaseMask.
      *
@@ -33,36 +31,35 @@ class Family extends Model
         'name',
     ];
 
-
     const REFRESH_INTERVAL_IN_MINUTES = 2 * 60; // ie two hours
+
     public function getCalendarAttribute()
-    { 
+    {
         // If the family has their calendar switched off, just return a 404
-        if ( ! $this->ical_active ) {
+        if (! $this->ical_active) {
             abort(404);
         }
 
         $calendar = Calendar::create()
             ->withoutTimezone()
             ->name('Morplees')
-            ->description('Morplees Meal Calendar for ' . $this->name)
+            ->description('Morplees Meal Calendar for '.$this->name)
             ->refreshInterval(self::REFRESH_INTERVAL_IN_MINUTES);
 
-        foreach ( $this->shoppingLists as $shoppingList ) {
-            foreach ( $shoppingList->sLRecipes as $sLRecipe ) {
+        foreach ($this->shoppingLists as $shoppingList) {
+            foreach ($shoppingList->sLRecipes as $sLRecipe) {
                 if ($sLRecipe->date) {
                     $calendar->event($sLRecipe->getEvent());
                 }
             }
         }
-        
+
         return $calendar->get();
     }
 
     protected $casts = [
         'ical_active' => 'boolean',
     ];
-
 
     /**
      * Get the users for the family.
@@ -72,7 +69,6 @@ class Family extends Model
         return $this->hasMany(User::class);
     }
 
-
     /**
      * Get the shops for the family.
      */
@@ -80,7 +76,7 @@ class Family extends Model
     {
         return $this->hasMany(Shop::class);
     }
-    
+
     /**
      * Get the recipes for the family.
      */
@@ -111,13 +107,13 @@ class Family extends Model
      * @return void
      */
     protected static function booted()
-    {        
+    {
         // Note that JustMyFamilyScope checks the family_id foreign key
         // which doesn' exist on a Family. We need to just check the id
-        
-            static::addGlobalScope('this_family', function (Builder $builder) {
-            if(session()->has('family_id')) {
-                return $builder->where('id', '=', session(key: 'family_id'));            
+
+        static::addGlobalScope('this_family', function (Builder $builder) {
+            if (session()->has('family_id')) {
+                return $builder->where('id', '=', session(key: 'family_id'));
             } else {
                 return $builder;
             }
@@ -126,7 +122,5 @@ class Family extends Model
         static::creating(function ($family) {
             $family->ical_uuid = (string) Str::uuid();
         });
-
     }
-
 }

@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\ShoppingResource\Pages;
 
-use App\Filament\Resources\ShoppingResource;
 use App\Filament\Resources\Pages\EditMorpleesRecord;
+use App\Filament\Resources\ShoppingResource;
 
 class EditShopping extends EditMorpleesRecord
 {

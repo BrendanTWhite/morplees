@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\ShoppingListResource\Pages;
 
+use App\Filament\Pages\Home;
 use App\Filament\Resources;
 use App\Filament\Resources\Pages\CreateMorpleesRecord;
 use Filament\Pages\Actions\Action;
-use App\Filament\Pages\Home;
 
 class CreateShoppingList extends CreateMorpleesRecord
 {
     protected static string $resource = Resources\ShoppingListResource::class;
+
     protected static ?string $title = 'Create New Shopping List?';
 
     protected function getFormActions(): array
@@ -27,11 +28,10 @@ class CreateShoppingList extends CreateMorpleesRecord
             ->label('Yes!');
     }
 
-	protected function getRedirectUrl(): string
-	    {
-	    	return Home::getUrl();
-	    }
-
+    protected function getRedirectUrl(): string
+    {
+        return Home::getUrl();
+    }
 
     protected function getCancelFormAction(): Action
     {

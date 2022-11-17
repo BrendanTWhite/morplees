@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToFamily;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\BelongsToFamily;
 
 class Recipe extends Model
 {
     use HasFactory;
     use BelongsToFamily;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,8 +24,6 @@ class Recipe extends Model
         'book_reference',
         'url',
     ];
-
-
 
     /**
      * The attributes that should be masked by DatabaseMask.
@@ -42,7 +40,6 @@ class Recipe extends Model
         return $this->belongsTo(Family::class);
     }
 
-    
     /**
      * Get the ingredients for the recipe.
      */
@@ -51,7 +48,6 @@ class Recipe extends Model
         return $this->hasMany(Ingredient::class);
     }
 
-    
     /**
      * Get the steps for the recipe.
      */
@@ -59,7 +55,7 @@ class Recipe extends Model
     {
         return $this->hasMany(Step::class);
     }
-    
+
     /**
      * Get the SL Recipes for this record.
      */
@@ -68,7 +64,6 @@ class Recipe extends Model
         return $this->hasMany(SLRecipe::class);
     }
 
-
     /**
      * The products that belong to the recipe.
      */
@@ -76,5 +71,4 @@ class Recipe extends Model
     {
         return $this->belongsToMany(Product::class, 'ingredients');
     }
-
 }

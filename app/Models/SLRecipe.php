@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
+use App\Models;
+use App\Traits\BelongsToFamily;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\BelongsToFamily;
-use App\Observers\SLRecipeObserver;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use App\Models;
 use Spatie\IcalendarGenerator\Components\Event;
 use Spatie\IcalendarGenerator\Properties\TextProperty;
 
@@ -35,12 +33,9 @@ class SLRecipe extends Model
      */
     protected $masked = [];
 
-    
     protected $casts = [
         'date' => 'date',
     ];
-
-
 
     /**
      * Create Required SLItems for this SLRecipe.
@@ -49,62 +44,59 @@ class SLRecipe extends Model
     {
         $this->recipe->ingredients->each(
 
-            function(Models\Ingredient $ingredient) {
+            function (Models\Ingredient $ingredient) {
                 $newSLItem = Models\SLItem::create([
                     'shopping_list_id' => $this->shopping_list_id,
                     'product_id' => $ingredient->product->id,
                     'ingredient_id' => $ingredient->id,
                     's_l_recipe_id' => $this->id,
-                    'family_id'     => $this->family_id,
+                    'family_id' => $this->family_id,
                 ]);
             }
 
         );
     }
 
-
     protected static function booted()
     {
-        static::creating(function ($SLRecipe) { 
+        static::creating(function ($SLRecipe) {
 
             // add a uuid
             $SLRecipe->uuid = (string) Str::uuid();
 
-            // If we don't already have a SL ID set, 
+            // If we don't already have a SL ID set,
             // then get a sensible default
-            if ( ! $SLRecipe->shopping_list_id ) {
-               $SLRecipe->shopping_list_id = ShoppingList::getActiveSL()->id; 
+            if (! $SLRecipe->shopping_list_id) {
+                $SLRecipe->shopping_list_id = ShoppingList::getActiveSL()->id;
             }
-
         });
     }
-
 
     /**
      * Delete All SLItems for this SLRecipe.
      */
     public function deleteSLItems()
     {
-        $this->s_l_items->each(function(Models\SLItem $s_l_item) {
-             $s_l_item->delete();
+        $this->s_l_items->each(function (Models\SLItem $s_l_item) {
+            $s_l_item->delete();
         });
     }
 
-    public function getEvent() {
+    public function getEvent()
+    {
         return Event::create()
             ->uniqueIdentifier($this->uuid)
             ->startsAt($this->date)
             ->fullDay()
-            ->name($this->recipe->name)            
+            ->name($this->recipe->name)
             ->appendProperty(
-                TextProperty::create('URL', 
+                TextProperty::create('URL',
                     route('filament.resources.recipes.view', ['record' => $this->recipe->id])
                 )
             )
             ->description($this->recipe->products
                 ->implode('name', ' / '));
     }
-
 
     /**
      * Get the shopping list that owns this record.
@@ -137,5 +129,4 @@ class SLRecipe extends Model
     {
         return $this->hasMany(SLItem::class);
     }
-
 }

@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\PantryResource\Pages;
 
 use App\Filament\Resources\PantryResource;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Pages\Actions\Action;
+use Filament\Resources\Pages\ListRecords;
 
 class ListPantrys extends ListRecords
 {
@@ -17,23 +17,23 @@ class ListPantrys extends ListRecords
                 ->label('Add Item')
                 ->url(route('filament.resources.pantry.create')),
         ];
-    }     
+    }
 
-    protected function isTablePaginationEnabled(): bool 
+    protected function isTablePaginationEnabled(): bool
     {
         return false;
-    } 
-    
-    protected function getTableEmptyStateIcon(): ?string 
+    }
+
+    protected function getTableEmptyStateIcon(): ?string
     {
         return 'heroicon-o-emoji-sad';
     }
- 
+
     protected function getTableEmptyStateHeading(): ?string
     {
         return 'No Items Yet.';
     }
- 
+
     protected function getTableEmptyStateActions(): array
     {
         return [
@@ -42,7 +42,5 @@ class ListPantrys extends ListRecords
                 ->url(route('filament.resources.pantry.create'))
                 ->icon('heroicon-o-plus'),
         ];
-    } 
-
-
+    }
 }
