@@ -9,8 +9,16 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <!-- Explanation -->
+            <div class="block justify-start text-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                    Create a new user account in a brand new family. 
+            </div>            
+            <div class="block justify-start text-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                    You can add more people to your family later.
+            </div>
+
             <!-- Name -->
-            <div>
+            <div class="mt-4">
                 <x-input-label for="name" :value="__('Name')" />
 
                 <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
