@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+\URL::forceScheme('https');
+
 // from https://github.com/spatie/laravel-mail-preview
 if (App::environment('local')) {
     Route::mailPreview();
