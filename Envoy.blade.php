@@ -24,6 +24,10 @@
 	php artisan view:clear
 
 	echo " -- Finished Staging task."
+
+	echo "Are there any new items in /public?"
+	echo "Do you need to run:"
+	echo "ln -s ~/projects/staging/public/newthing ~/html/staging/newthing"
 @endtask
 
 @task('production', ['confirm' => true])
@@ -50,6 +54,10 @@
 	php artisan view:clear
 
 	echo " -- Finished Production task."
+
+	echo "Are there any new items in /public?"
+	echo "Do you need to run:"
+	echo "ln -s ~/projects/production/public/newthing ~/html/app/newthing"
 @endtask
 
 
