@@ -52,6 +52,21 @@
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
+
+            <!-- Join a Family -->
+            <div class="block mt-4">
+                <a class="justify-start underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('join') }}">
+                    {{ __('Join an existing family ') }}
+                </a>
+            </div>
+
+            <!-- Create a New Family -->
+            <div class="block mt-4">
+                <a class="justify-start underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
+                    {{ __('Sign up for a new family ') }}
+                </a>
+            </div>
+
         </form>
     </x-auth-card>
 </x-guest-layout>
