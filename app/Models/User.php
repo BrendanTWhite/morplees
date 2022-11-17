@@ -74,9 +74,17 @@ class User extends Authenticatable implements FilamentUser
     protected static function booted()
     {
         static::creating(function ($user) {
+
             if (! $user->password) {
                 $user->password = (string) Str::uuid();
             }
+
+            if ( ! $user->family_id ) {
+                $user->family_id = Family::create([
+                    'name' => $user->name . '\'s family',
+                ])->id;
+            }
+
         });
     }
 
