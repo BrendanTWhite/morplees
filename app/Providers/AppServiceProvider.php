@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+        \URL::forceScheme('https');
+
         // Add extra items to User menu
         Filament::serving(function () {
             Filament::registerUserMenuItems([
