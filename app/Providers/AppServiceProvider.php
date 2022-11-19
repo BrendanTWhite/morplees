@@ -32,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
         Filament::serving(function () {
             Filament::registerUserMenuItems([
 
+                'account' => UserMenuItem::make()->url(route('profile.edit')),
+
                 UserMenuItem::make()
                     ->label('Shops')
                     ->url(route('filament.resources.shops.index'))
