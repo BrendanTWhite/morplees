@@ -87,6 +87,14 @@ class Family extends Model
     }
 
     /**
+     * Get the products for the family.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
      * Get the shopping lists for the family.
      */
     public function shopping_lists() // snake case for Filament
