@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\AddDefaultContentToNewFamily;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -122,5 +123,13 @@ class Family extends Model
         static::creating(function ($family) {
             $family->ical_uuid = (string) Str::uuid();
         });
+
+        static::created(function ($family) {
+            
+            $addDefault = new AddDefaultContentToNewFamily;
+            $addDefault->execute($family);
+
+        });
+
     }
 }
