@@ -25,6 +25,7 @@ class AddDefaultContentToNewFamily
                 'family_id' => $family->id,
             ]);
             $products[$key]['shop_id'] = $shop->id;
+            unset($products[$key]['shop_name']);
         }
 
         // now add the new products

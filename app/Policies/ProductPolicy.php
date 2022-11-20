@@ -30,7 +30,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product)
     {
-        return ($user->family_id === $product->shop->family_id) or ($user->is_admin);
+        return ($user->family_id === $product->family_id) or ($user->is_admin);
     }
 
     /**
@@ -53,7 +53,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product)
     {
-        return ($user->family_id === $product->shop->family_id) or ($user->is_admin);
+        return ($user->family_id === $product->family_id) or ($user->is_admin);
     }
 
     /**
@@ -65,7 +65,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product)
     {
-        return ($user->family_id === $product->shop->family_id) or ($user->is_admin);
+        return ($user->family_id === $product->family_id) or ($user->is_admin);
     }
 
     /**
@@ -77,7 +77,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product)
     {
-        return ($user->family_id === $product->shop->family_id) or ($user->is_admin);
+        return ($user->family_id === $product->family_id) or ($user->is_admin);
     }
 
     /**
