@@ -12,6 +12,8 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 
+use Filament\Forms\Components;
+
 class RecipeResource extends Resource
 {
     protected static ?string $model = Recipe::class;
@@ -27,85 +29,69 @@ class RecipeResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\Card::make()
+                Components\Card::make()
                 ->schema([
 
-                    Forms\Components\TextInput::make('name')->required()->autofocus(),
+                    Components\TextInput::make('name')->required()->autofocus(),
 
-                    Forms\Components\Grid::make()
+                    Components\Grid::make()
                     ->schema([
-                        Forms\Components\TextInput::make('prep_time')->numeric()->postfix('mins'),
-                        Forms\Components\TextInput::make('cook_time')->numeric()->postfix('mins'),
-                        Forms\Components\TextInput::make('book_reference'),
+                        Components\TextInput::make('prep_time')->numeric()->postfix('mins'),
+                        Components\TextInput::make('cook_time')->numeric()->postfix('mins'),
+                        Components\TextInput::make('book_reference'),
                     ])->columns(3),
 
-                    Forms\Components\TextInput::make('url')->url(),
+                    Components\TextInput::make('url')->url(),
 
-                    Forms\Components\Grid::make()
+                    Components\Grid::make()
+                    ->columns(2)
                     ->schema([
-
-                        Forms\Components\HasManyRepeater::make('ingredients')
-                            ->relationship('ingredients')
-                            ->schema([
-                                Forms\Components\Hidden::make('sequence')->default(999),
-
-                                // Forms\Components\TextInput::make('sequence')->numeric()->label('')->prefix('#')
-                                //     ->columnSpan([
-                                //         'md' => 3,
-                                //     ]),
-
-                                Forms\Components\TextInput::make('quantity')->label('')
-                                    ->columnSpan([
-                                        'md' => 3,
-                                    ]),
-
-                                Forms\Components\Select::make('product_id')
-                                    //->columns(3)
-                                    ->label('')
-                                    ->options(Product::query()->pluck('name', 'id'))
-                                    ->required()
-                                    ->searchable()
-                                    ->columnSpan([
-                                        'md' => 7,
-                                    ])
-                                    ->reactive(),
-
+                        
+                        Components\Repeater::make('ingredients')
+                        ->relationship()
+                        ->orderable('sequence')
+                        ->columns([
+                            'md' => 10,
+                        ])                        
+                        ->createItemButtonLabel('Add Ingredient')
+                        ->schema([
+                            Components\TextInput::make('quantity')->required()->label('')                                    
+                            ->columnSpan([
+                                'md' => 3,
+                            ]),
+                            Components\Select::make('product_id')
+                            ->label('')
+                            ->options(Product::query()->pluck('name', 'id'))
+                            ->required()
+                            ->searchable()
+                            ->columnSpan([
+                                'md' => 7,
                             ])
-                            ->columns([
-                                'md' => 10,
-                            ])
-                            ->createItemButtonLabel('Add Ingredient'),
+                        ]),                        
 
-                        Forms\Components\HasManyRepeater::make('steps')
-                            ->relationship('steps')
-                            ->schema([
-                                Forms\Components\Hidden::make('sequence')->default(999),
-                                // Forms\Components\TextInput::make('sequence')->numeric()->label('')->prefix('#')
-                                // ->columnSpan([
-                                //     'md' => 3,
-                                // ]),
+                        Components\Repeater::make('steps')
+                        ->relationship()
+                        ->orderable('sequence')
+                        ->createItemButtonLabel('Add Step')
+                        ->schema([
+                            Components\Textarea::make('instructions')->required()->label('')
+                            ->rows(2)                                    
+                            ->columnSpan([
+                                'md' => 3,
+                            ]),
+                        ])
+                        ->columns(2),
 
-                                Forms\Components\TextInput::make('instructions')->label('')
-                                ->columnSpan([
-                                    'md' => 10,
-                                ]),
-                            ])
-                            ->columns([
-                                'md' => 10,
-                            ])
-                            ->createItemButtonLabel('Add Step'),
-
-                    ])
-                    ->columns(2),
+                    ]),
 
                 ]), // end card
 
-                Forms\Components\Card::make()
+                Components\Card::make()
                 ->schema([
-                    Forms\Components\Placeholder::make('created_at')
+                    Components\Placeholder::make('created_at')
                         ->label('Created at')
                         ->content(fn (?Recipe $record): string => $record && $record->created_at ? $record->created_at->diffForHumans() : '-'),
-                    Forms\Components\Placeholder::make('updated_at')
+                    Components\Placeholder::make('updated_at')
                         ->label('Last modified at')
                         ->content(fn (?Recipe $record): string => $record && $record->updated_at ? $record->updated_at->diffForHumans() : '-'),
                 ])->columns(2)
