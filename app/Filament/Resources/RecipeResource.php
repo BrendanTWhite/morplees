@@ -75,6 +75,7 @@ class RecipeResource extends Resource
                         ->createItemButtonLabel('Add Step')
                         ->schema([
                             Components\Textarea::make('instructions')->required()->label('')
+                            // ->autosize()
                             ->rows(2)                                    
                             ->columnSpan([
                                 'md' => 3,
