@@ -67,6 +67,7 @@ class RecipeResource extends Resource
                             ->columnSpan([
                                 'md' => 7,
                             ])
+                            ]),
                         ]),                        
 
                         Components\Repeater::make('steps')
