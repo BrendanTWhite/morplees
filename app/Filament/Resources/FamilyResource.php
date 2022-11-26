@@ -32,7 +32,7 @@ class FamilyResource extends Resource
             ->schema([
                 Components\TextInput::make('name')->required(),
                 Components\Toggle::make('ical_active')
-                    ->label('Activate Calendar')->reactive(),
+                    ->label('Calendar Active')->reactive(),
                 Components\TextInput::make('ical_url')
                 ->label('Calendar URL')
                 ->disabled()
