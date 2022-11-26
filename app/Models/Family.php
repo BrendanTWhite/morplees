@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\AddDefaultContentToNewFamily;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -86,6 +87,14 @@ class Family extends Model
     }
 
     /**
+     * Get the products for the family.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
      * Get the shopping lists for the family.
      */
     public function shopping_lists() // snake case for Filament
@@ -122,5 +131,13 @@ class Family extends Model
         static::creating(function ($family) {
             $family->ical_uuid = (string) Str::uuid();
         });
+
+        static::created(function ($family) {
+            
+            $addDefault = new AddDefaultContentToNewFamily;
+            $addDefault->execute($family);
+
+        });
+
     }
 }
