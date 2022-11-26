@@ -13,6 +13,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 
 use Filament\Forms\Components;
+use Illuminate\Support\Facades\Log;
 
 class RecipeResource extends Resource
 {
@@ -55,19 +56,60 @@ class RecipeResource extends Resource
                         ])                        
                         ->createItemButtonLabel('Add Ingredient')
                         ->schema([
+
                             Components\TextInput::make('quantity')->required()->label('')                                    
                             ->columnSpan([
                                 'md' => 3,
                             ]),
-                            Components\Select::make('product_id')
+
+                            Components\TextInput::make('product_id')
+                            ->datalist( fn() => Product::pluck('name')->all() )
                             ->label('')
-                            ->options(Product::query()->pluck('name', 'id'))
                             ->required()
-                            ->searchable()
                             ->columnSpan([
                                 'md' => 7,
                             ])
-                            ]),
+
+                            ->afterStateHydrated(function (Components\TextInput $component,$state,string $context) {
+                                Log::info('- starting setup for product_id');
+
+                                Log::info('getting product_id');
+                                $existng_product_id = $state;
+                                Log::info('existng_product_id is '. $existng_product_id);
+
+                                // Do we have a product ID yet?
+                                if ( ! $existng_product_id ) {
+                                    Log::info('No product ID yet, so no need to set a product name');
+                                    return;
+                                }
+
+                                Log::info('getting name of related product');
+                                $existng_product_name = Product::find($existng_product_id)->name;
+                                Log::info('existng_product_name is '. $existng_product_name);
+
+                                Log::info('setting state to ' . $existng_product_name );
+                                $component->state($existng_product_name);
+
+                                Log::info('- ending setup for product_id');
+                            })
+
+                            ->dehydrateStateUsing(function ($state, Components\TextInput $component) {
+                                Log::info('- starting teardown for product_id');
+
+                                Log::info('getting value of product_nm field');
+                                $product_nm = $state;
+                                Log::info('product_nm is ' . $product_nm);
+
+                                Log::info('Finding (or creating) the product with that name');
+                                $product = Product::firstOrCreate([ 'name' => $product_nm ]);
+                                Log::info('product is ' . $product->toJson());
+
+                                Log::info('Setting the product_id field to '. $product->id);
+                                return $product->id;
+
+                                // Log::info('- ending teardown for product_id');
+                            }),
+
                         ]),                        
 
                         Components\Repeater::make('steps')
@@ -76,8 +118,8 @@ class RecipeResource extends Resource
                         ->createItemButtonLabel('Add Step')
                         ->schema([
                             Components\Textarea::make('instructions')->required()->label('')
-                            // ->autosize()
-                            ->rows(2)                                    
+                            // ->autosize() // TODO: Put un-comment this line, and remove rows(2). But then go through and change 150px to ... something smaller.
+                            ->rows(2)        
                             ->columnSpan([
                                 'md' => 3,
                             ]),
