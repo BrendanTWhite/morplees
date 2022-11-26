@@ -32,7 +32,7 @@ return new class extends Migration
             'name' => 'Brendan White',
             'family_id' => $white_family_id,
             'email' => 'brendan@thespia.com',
-            'password' => Hash::make('dingodingo'),
+            'password' => '$2y$10$gHyTmbFQEkuDdVU7nMwkFOcgZhMFDHPClGwkRrUzitvIJ2f1Q3HnG',
         ]);
         $brendan->is_admin = true;
         $brendan->save(); // not fillable so updated separately
@@ -42,7 +42,7 @@ return new class extends Migration
             'name' => 'Kate White',
             'family_id' => $white_family_id,
             'email' => 'kate@thespia.com',
-            'password' => Hash::make('livcatpurr'),
+            'password' => '$2y$10$fVTlEN9CqgtsUy81DnnJbO3gOCJsQZsAMJxLeDdDyHQ47OpmOKVD.',
         ]);
 
         // Insert shops

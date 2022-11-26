@@ -24,29 +24,18 @@ class DatabaseSeeder extends Seeder
             ->hasUsers(3)
 
             ->has(
-                Shop::factory()
-                    ->count(5)
-                    ->hasProducts(10,
-                        function (array $attributes, Shop $shop) {
-                            // dd($attributes); // array:3 [ "name" => "quo", "default_in_list" => true, "needed_soon" => true ]
-                            return ['family_id' => $shop->family_id];
-                        }
-                    )
-            )
-
-            ->has(
                 Recipe::factory()
                     ->count(10)
                     ->hasSteps(6,
                         function (array $attributes, Recipe $recipe) {
-                            return ['family_id' => $recipe->family->id];
+                            return ['family_id' => $recipe->family_id];
                         })
                     ->hasIngredients(10,
                         function (array $attributes, Recipe $recipe) {
                             return [
-                                'family_id' => $recipe->family->id,
-                                'product_id' => $recipe->family->shops->random()
-                                ->products->random()->id,
+                                'family_id' => $recipe->family_id,
+                                'product_id' => $recipe->family
+                                    ->products->random()->id,
                             ];
                         }
                     )
@@ -58,13 +47,14 @@ class DatabaseSeeder extends Seeder
                     ->hasSLRecipes(7,
                         function (array $attributes, ShoppingList $shopping_list) {
                             return [
-                                'family_id' => $shopping_list->family->id,
+                                'family_id' => $shopping_list->family_id,
                                 'recipe_id' => $shopping_list->family->recipes->random()->id,
                             ];
                         }
                     )
+            )
 
-                )
+            ->hasProducts(5) // these ones have no Shop
 
             ->create();
 
