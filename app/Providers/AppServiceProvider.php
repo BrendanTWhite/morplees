@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
 
                 UserMenuItem::make()
                     ->label('Family')
-                    ->url(route('filament.resources.families.index'))
+                    ->url(route('filament.resources.families.view', ['record' => Auth::user()->family_id]))
                     ->icon('heroicon-o-user-group'),
 
             ]);
