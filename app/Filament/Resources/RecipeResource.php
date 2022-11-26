@@ -57,12 +57,14 @@ class RecipeResource extends Resource
                         ->createItemButtonLabel('Add Ingredient')
                         ->schema([
 
-                            Components\TextInput::make('quantity')->required()->label('')                                    
+                            Components\TextInput::make('quantity')->label('')
+                            ->placeholder('qty')
                             ->columnSpan([
                                 'md' => 3,
                             ]),
 
                             Components\TextInput::make('product_id')
+                            ->placeholder('ingredient')
                             ->datalist( fn() => Product::pluck('name')->all() )
                             ->label('')
                             ->required()
@@ -70,7 +72,7 @@ class RecipeResource extends Resource
                                 'md' => 7,
                             ])
 
-                            ->afterStateHydrated(function (Components\TextInput $component,$state,string $context) {
+                            ->afterStateHydrated(function (Components\TextInput $component,$state) {
                                 Log::info('- starting setup for product_id');
 
                                 Log::info('getting product_id');
