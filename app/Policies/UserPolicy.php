@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return ($user->id === $model->id) or ($user->is_admin);
+        return ($user->family_id === $model->family_id) or ($user->is_admin);
     }
 
     /**
@@ -40,7 +40,8 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin;
+        // return $user->is_admin;
+        return true; // we want ALL users to be able to add new users
     }
 
     /**
