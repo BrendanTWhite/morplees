@@ -20,6 +20,10 @@ class UsersRelationManager extends HasManyRelationManager
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('email')->email()->required(),
+                Forms\Components\Textarea::make('note')->disabled()->label('')->columnSpan(2)->autosize()
+                ->hidden( fn(string $context) => $context != 'create' )
+                ->default('Note - Morplees will not email this person their password.
+You will need to contact them and ask them to reset their password on the password reset page.')
             ]);
     }
 
