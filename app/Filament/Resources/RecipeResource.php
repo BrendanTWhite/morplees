@@ -6,13 +6,11 @@ use App\Filament\Resources\RecipeResource\Pages;
 use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Models\Product;
 use App\Models\Recipe;
-use Filament\Forms;
+use Filament\Forms\Components;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-
-use Filament\Forms\Components;
 use Illuminate\Support\Facades\Log;
 
 class RecipeResource extends Resource
@@ -47,13 +45,13 @@ class RecipeResource extends Resource
                     Components\Grid::make()
                     ->columns(2)
                     ->schema([
-                        
+
                         Components\Repeater::make('ingredients')
                         ->relationship()
                         ->orderable('sequence')
                         ->columns([
                             'md' => 10,
-                        ])                        
+                        ])
                         ->createItemButtonLabel('Add Ingredient')
                         ->schema([
 
@@ -65,31 +63,32 @@ class RecipeResource extends Resource
 
                             Components\TextInput::make('product_id')
                             ->placeholder('ingredient')
-                            ->datalist( fn() => Product::pluck('name')->all() )
+                            ->datalist(fn () => Product::pluck('name')->all())
                             ->label('')
                             ->required()
                             ->columnSpan([
                                 'md' => 7,
                             ])
 
-                            ->afterStateHydrated(function (Components\TextInput $component,$state) {
+                            ->afterStateHydrated(function (Components\TextInput $component, $state) {
                                 Log::info('- starting setup for product_id');
 
                                 Log::info('getting product_id');
                                 $existng_product_id = $state;
-                                Log::info('existng_product_id is '. $existng_product_id);
+                                Log::info('existng_product_id is '.$existng_product_id);
 
                                 // Do we have a product ID yet?
-                                if ( ! $existng_product_id ) {
+                                if (! $existng_product_id) {
                                     Log::info('No product ID yet, so no need to set a product name');
+
                                     return;
                                 }
 
                                 Log::info('getting name of related product');
                                 $existng_product_name = Product::find($existng_product_id)->name;
-                                Log::info('existng_product_name is '. $existng_product_name);
+                                Log::info('existng_product_name is '.$existng_product_name);
 
-                                Log::info('setting state to ' . $existng_product_name );
+                                Log::info('setting state to '.$existng_product_name);
                                 $component->state($existng_product_name);
 
                                 Log::info('- ending setup for product_id');
@@ -100,19 +99,20 @@ class RecipeResource extends Resource
 
                                 Log::info('getting value of product_nm field');
                                 $product_nm = $state;
-                                Log::info('product_nm is ' . $product_nm);
+                                Log::info('product_nm is '.$product_nm);
 
                                 Log::info('Finding (or creating) the product with that name');
-                                $product = Product::firstOrCreate([ 'name' => $product_nm ]);
-                                Log::info('product is ' . $product->toJson());
+                                $product = Product::firstOrCreate(['name' => $product_nm]);
+                                Log::info('product is '.$product->toJson());
 
-                                Log::info('Setting the product_id field to '. $product->id);
+                                Log::info('Setting the product_id field to '.$product->id);
+
                                 return $product->id;
 
                                 // Log::info('- ending teardown for product_id');
                             }),
 
-                        ]),                        
+                        ]),
 
                         Components\Repeater::make('steps')
                         ->relationship()
@@ -121,7 +121,7 @@ class RecipeResource extends Resource
                         ->schema([
                             Components\Textarea::make('instructions')->required()->label('')
                             // ->autosize() // TODO: Put un-comment this line, and remove rows(2). But then go through and change 150px to ... something smaller.
-                            ->rows(2)        
+                            ->rows(2)
                             ->columnSpan([
                                 'md' => 3,
                             ]),

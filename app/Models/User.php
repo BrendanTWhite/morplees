@@ -38,7 +38,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {
-
         // If you want only Admins to see Filament, un-commment the following line
         //return $this->is_admin;
 
@@ -74,17 +73,15 @@ class User extends Authenticatable implements FilamentUser
     protected static function booted()
     {
         static::creating(function ($user) {
-
             if (! $user->password) {
                 $user->password = (string) Str::uuid();
             }
 
-            if ( ! $user->family_id ) {
+            if (! $user->family_id) {
                 $user->family_id = Family::create([
-                    'name' => $user->name . '\'s family',
+                    'name' => $user->name.'\'s family',
                 ])->id;
             }
-
         });
     }
 

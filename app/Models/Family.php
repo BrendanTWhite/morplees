@@ -133,11 +133,8 @@ class Family extends Model
         });
 
         static::created(function ($family) {
-            
             $addDefault = new AddDefaultContentToNewFamily;
             $addDefault->execute($family);
-
         });
-
     }
 }

@@ -60,7 +60,6 @@ class SLRecipe extends Model
     protected static function booted()
     {
         static::creating(function ($SLRecipe) {
-
             // add a uuid
             $SLRecipe->uuid = (string) Str::uuid();
 

@@ -15,7 +15,6 @@ class ShoppingListObserver
      */
     public function creating(ShoppingList $shoppingList)
     {
-
         // Save old active shopping list ID (if there is one)
         $previous_list = Models\ShoppingList::whereActive(true)->first();
         if ($previous_list) {
@@ -39,13 +38,10 @@ class ShoppingListObserver
      */
     public function created(ShoppingList $shoppingList)
     {
-
         // If the user wanted to copy recipes from the previous list...
         if ($shoppingList->copy_recipes) {
-
             /// ... and there actually IS a previous list...
             if ($previous_list = Models\ShoppingList::find(session('previous_list_id'))) {
-
                 // ... then loop through the SLRecipes for the previous list
                 // and create a new SLR for the same recipe in the new list
                 foreach ($previous_list->s_l_recipes as $oldSLR) {
@@ -60,7 +56,6 @@ class ShoppingListObserver
         session()->forget('previous_list_id');
 
         if ($shoppingList->include_usually_need) {
-
             // Get the Product IDs of every product that should default in the list
             $product_ids = Models\Product::whereDefaultInList(true)
                 ->pluck('id');
@@ -82,7 +77,6 @@ class ShoppingListObserver
         }
 
         if ($shoppingList->include_need_soon) {
-
             // Now the Product IDs of products with Need Soon flag set
             $product_ids = Models\Product::whereNeededSoon(true)
                 ->pluck('id');
