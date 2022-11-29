@@ -29,6 +29,7 @@ class MenuResource extends Resource
 
     public static ?int $navigationSort = 210;
 
+    protected static ?string $pluralModelLabel = 'Menu';
 
     public static function form(Form $form): Form
     {
