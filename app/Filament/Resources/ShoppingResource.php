@@ -14,7 +14,7 @@ class ShoppingResource extends Resource
 {
     protected static ?string $model = Models\SLItem::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+    protected static ?string $navigationIcon = 'bi-basket';
 
     protected static ?string $navigationLabel = 'Shopping';
 

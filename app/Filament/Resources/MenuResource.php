@@ -15,7 +15,7 @@ class MenuResource extends Resource
 {
     protected static ?string $model = Models\SLRecipe::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'bi-journal';
 
     protected static ?string $navigationLabel = 'Menu';
 
