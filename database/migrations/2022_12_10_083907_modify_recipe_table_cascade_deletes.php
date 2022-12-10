@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-    }
+        Schema::table('ingredients', function (Blueprint $table) {
+            $table->dropForeign(['recipe_id']);
+            $table->foreign(['recipe_id'])->references('id')->on('recipes')
+                ->cascadeOnUpdate()->cascadeOnDelete()->change();
+        });
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
+        Schema::table('steps', function (Blueprint $table) {
+            $table->dropForeign(['recipe_id']);
+            $table->foreign(['recipe_id'])->references('id')->on('recipes')
+                ->cascadeOnUpdate()->cascadeOnDelete()->change();
+        });
     }
 };
