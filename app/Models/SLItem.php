@@ -50,7 +50,6 @@ class SLItem extends Model
     protected static function booted()
     {
         static::creating(function ($sLItem) {
-
             // If we don't already have a SL ID set,
             // then get a sensible default
             if (! $sLItem->shopping_list_id) {
