@@ -15,7 +15,7 @@ class PantryResource extends Resource
 {
     protected static ?string $model = Models\SLItem::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
+    protected static ?string $navigationIcon = 'bi-card-checklist';
 
     protected static ?string $navigationLabel = 'Pantry';
 

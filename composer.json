@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8",
         "brendantwhite/databasemask": "^1.0",
         "codeat3/blade-line-awesome-icons": "^1.2",
         "davidhsianturi/blade-bootstrap-icons": "^1.3",

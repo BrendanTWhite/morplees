@@ -15,7 +15,7 @@ class MenuResource extends Resource
 {
     protected static ?string $model = Models\SLRecipe::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'bi-journal';
 
     protected static ?string $navigationLabel = 'Menu';
 
@@ -28,6 +28,8 @@ class MenuResource extends Resource
     protected static ?string $navigationGroup = 'Shopping Lists';
 
     public static ?int $navigationSort = 210;
+
+    protected static ?string $pluralModelLabel = 'Menu';
 
     public static function form(Form $form): Form
     {
