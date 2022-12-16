@@ -9,7 +9,7 @@ use Filament\Pages\Page;
 
 class Home extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-home';
+    protected static ?string $navigationIcon = 'bi-house-door';
 
     protected static ?string $slug = '';
 
