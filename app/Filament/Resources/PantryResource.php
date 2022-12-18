@@ -51,7 +51,8 @@ class PantryResource extends Resource
                         fn (Models\SLItem $record): string => route('filament.resources.products.view', ['record' => $record->product])
                     ),
 
-                Tables\Columns\BooleanColumn::make('already_own')
+                Tables\Columns\IconColumn::make('already_own')
+                    ->boolean()
                     ->label('Got')
                     ->trueIcon('heroicon-o-check')
                     ->trueColor('success')

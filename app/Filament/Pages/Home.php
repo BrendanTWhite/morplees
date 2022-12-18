@@ -4,7 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets;
 use App\Models;
-use Filament\Pages\Actions\ButtonAction;
+use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
 
 class Home extends Page
@@ -27,7 +27,7 @@ class Home extends Page
     {
         return [
 
-            ButtonAction::make('new')
+            Action::make('new')
                 ->label('New List')
                 ->color('secondary')
                 ->url(route('filament.resources.shopping-lists.create')),

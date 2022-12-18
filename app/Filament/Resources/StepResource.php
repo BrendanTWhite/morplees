@@ -26,7 +26,7 @@ class StepResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\BelongsToSelect::make('recipe_id')
+                Forms\Components\Select::make('recipe_id')
                     ->relationship('recipe', 'name'),
                 Forms\Components\TextInput::make('sequence')->required(),
                 Forms\Components\TextInput::make('instructions')->required(),

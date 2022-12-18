@@ -4,11 +4,11 @@ namespace App\Filament\Resources\FamilyResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\HasManyRelationManager;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 
-class UsersRelationManager extends HasManyRelationManager
+class UsersRelationManager extends RelationManager
 {
     protected static string $relationship = 'users';
 
@@ -36,6 +36,16 @@ You will need to contact them and ask them to reset their password on the passwo
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                //
             ]);
-    }
+    }    
 }
