@@ -30,18 +30,18 @@ class SLItemResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\BelongsToSelect::make('shopping_list_id')
+                Forms\Components\Select::make('shopping_list_id')
                     ->relationship('shopping_list', 'created_at')
                     ->required(),
 
                 Forms\Components\Checkbox::make('already_own'),
                 Forms\Components\Checkbox::make('in_basket'),
 
-                Forms\Components\BelongsToSelect::make('product_id')
+                Forms\Components\Select::make('product_id')
                     ->relationship('product', 'name')
                     ->required(),
 
-                Forms\Components\BelongsToSelect::make('ingredient_id')
+                Forms\Components\Select::make('ingredient_id')
                     ->relationship('ingredient', 'quantity'),
 
             ]);
@@ -55,8 +55,8 @@ class SLItemResource extends Resource
                 Tables\Columns\TextColumn::make('product.name'),
                 Tables\Columns\TextColumn::make('ingredient.quantity')->label('Quantity'),
                 Tables\Columns\TextColumn::make('ingredient.recipe.name')->label('Recipe'),
-                Tables\Columns\BooleanColumn::make('already_own'),
-                Tables\Columns\BooleanColumn::make('in_basket'),
+                Tables\Columns\IconColumn::make('already_own')->boolean(),
+                Tables\Columns\IconColumn::make('in_basket')->boolean(),
             ]);
     }
 

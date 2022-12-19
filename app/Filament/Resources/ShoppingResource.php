@@ -41,7 +41,8 @@ class ShoppingResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\BooleanColumn::make('in_basket')
+                Tables\Columns\IconColumn::make('in_basket')
+                    ->boolean()
                     ->label('In Basket')
                     ->trueIcon('heroicon-o-check')
                     ->trueColor('success')

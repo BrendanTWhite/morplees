@@ -44,7 +44,7 @@ class ShoppingListResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Shopping List')->searchable(['override_name']),
                 Tables\Columns\TextColumn::make('slrecipes_count')->counts('slrecipes')->label('Recipes'),
                 Tables\Columns\TextColumn::make('slitems_count')->counts('slitems')->label('Total Items'),
-                Tables\Columns\BooleanColumn::make('active'),
+                Tables\Columns\IconColumn::make('active')->boolean(),
             ])
             ->actions([]);
     }
