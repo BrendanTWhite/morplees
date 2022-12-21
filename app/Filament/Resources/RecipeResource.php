@@ -40,7 +40,16 @@ class RecipeResource extends Resource
                         Components\TextInput::make('book_reference'),
                     ])->columns(3),
 
-                    Components\TextInput::make('url')->url(),
+                    Components\TextInput::make('url')->url()
+                    ->prefixAction(fn (?string $state): Components\Actions\Action =>
+                    Components\Actions\Action::make('visit')
+                            ->hidden(fn (\Filament\Resources\Pages\Page $livewire) => !($livewire instanceof Pages\ViewRecipe))
+                            ->icon('heroicon-s-external-link')
+                            ->url(
+                                filled($state) ? "{$state}" : null,
+                                shouldOpenInNewTab: true,
+                            ),
+                    ),
 
                     Components\Grid::make()
                     ->columns(2)
@@ -170,8 +179,7 @@ class RecipeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // RelationManagers\IngredientsRelationManager::class,
-            // RelationManagers\StepsRelationManager::class,
+                //
         ];
     }
 

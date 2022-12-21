@@ -30,9 +30,9 @@ class SLRecipeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\BelongsToSelect::make('shopping_list_id')
+                Forms\Components\Select::make('shopping_list_id')
                     ->relationship('shopping_list', 'created_at'),
-                Forms\Components\BelongsToSelect::make('recipe_id')
+                Forms\Components\Select::make('recipe_id')
                     ->relationship('recipe', 'name'),
             ]);
     }

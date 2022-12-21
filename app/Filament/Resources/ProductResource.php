@@ -29,7 +29,7 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\BelongsToSelect::make('shop_id')
+                Forms\Components\Select::make('shop_id')
                     ->relationship('shop', 'name'),
                 Forms\Components\Checkbox::make('default_in_list'),
                 Forms\Components\Checkbox::make('needed_soon'),
@@ -41,7 +41,8 @@ class ProductResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\BooleanColumn::make('needed_soon')->sortable()
+                Tables\Columns\IconColumn::make('needed_soon')->sortable()
+                ->boolean()
                 ->label('Need Soon')
                 ->trueIcon('heroicon-o-check')
                 ->trueColor('success')
@@ -54,7 +55,8 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('shop.name')->searchable()->sortable(),
 
-                Tables\Columns\BooleanColumn::make('default_in_list')->sortable()
+                Tables\Columns\IconColumn::make('default_in_list')->sortable()
+                ->boolean()
                 ->label('Usually Need')
                 ->trueIcon('heroicon-o-check')
                 ->trueColor('success')
