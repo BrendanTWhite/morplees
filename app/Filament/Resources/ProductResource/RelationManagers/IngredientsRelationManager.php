@@ -5,12 +5,12 @@ namespace App\Filament\Resources\ProductResource\RelationManagers;
 use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\HasManyRelationManager;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
 
-class IngredientsRelationManager extends HasManyRelationManager
+class IngredientsRelationManager extends RelationManager
 {
     protected static string $relationship = 'ingredients';
 
@@ -43,6 +43,15 @@ class IngredientsRelationManager extends HasManyRelationManager
                 //
             ])
             ->filters([
+                //
+            ])
+            ->headerActions([
+                //
+            ])
+            ->actions([
+                //
+            ])
+            ->bulkActions([
                 //
             ]);
     }

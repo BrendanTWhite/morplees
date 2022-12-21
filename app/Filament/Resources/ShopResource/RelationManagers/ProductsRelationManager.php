@@ -4,11 +4,11 @@ namespace App\Filament\Resources\ShopResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\HasManyRelationManager;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 
-class ProductsRelationManager extends HasManyRelationManager
+class ProductsRelationManager extends RelationManager
 {
     protected static string $relationship = 'products';
 
@@ -30,6 +30,17 @@ class ProductsRelationManager extends HasManyRelationManager
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
+
     }
 }
