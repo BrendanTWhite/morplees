@@ -48,8 +48,11 @@ class Product extends Model
      */
     public function getShopNameAttribute(): ?string
     {
-        return $this->shop->name;
-    }
+        return 
+            ($this->shop_id)
+            ? $this->shop->name
+            : '';
+        }
 
     /**
      * Get the shop that owns the product.
