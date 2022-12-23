@@ -41,15 +41,18 @@ class RecipeResource extends Resource
                     ])->columns(3),
 
                     Components\TextInput::make('url')->url()
-                    ->prefixAction(fn (?string $state): Components\Actions\Action =>
-                    Components\Actions\Action::make('visit')
-                            ->hidden(fn (\Filament\Resources\Pages\Page $livewire) => !($livewire instanceof Pages\ViewRecipe))
-                            ->icon('heroicon-s-external-link')
-                            ->url(
-                                filled($state) ? "{$state}" : null,
-                                shouldOpenInNewTab: true,
-                            ),
-                    ),
+                    ->prefixAction(fn (?string $state): ?Components\Actions\Action =>
+
+                        ( ! $state )
+                        ? null
+                        : Components\Actions\Action::make('visit')
+                                ->hidden(fn (\Filament\Resources\Pages\Page $livewire) => !($livewire instanceof Pages\ViewRecipe))
+                                ->icon('heroicon-s-external-link')
+                                ->url(
+                                    filled($state) ? "{$state}" : null,
+                                    shouldOpenInNewTab: true,
+                                )
+                        ),
 
                     Components\Grid::make()
                     ->columns(2)
