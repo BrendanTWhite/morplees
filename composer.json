@@ -19,6 +19,7 @@
         "laravel/framework": "^9.39",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "league/flysystem-ftp": "^3.0",
         "spatie/icalendar-generator": "^2.5",
         "spatie/laravel-db-snapshots": "^2.3",
         "spatie/laravel-mail-preview": "^6.0"
