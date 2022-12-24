@@ -42,8 +42,8 @@ class Home extends Page
             Widgets\ShoppingButton::class,
 
             Widgets\RecipeButton::class,
-            Widgets\ProductButton::class,
-            Widgets\ShopButton::class,
+            // Widgets\ProductButton::class,
+            // Widgets\ShopButton::class,
         ];
     }
 }

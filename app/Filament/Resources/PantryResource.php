@@ -4,12 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PantryResource\Pages;
 use App\Models;
-use Filament\Forms;
+use Filament\Forms\Components;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Log;
 
 class PantryResource extends Resource
 {
@@ -33,10 +34,28 @@ class PantryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\BelongsToSelect::make('product_id')
-                    ->relationship('product', 'name')
-                    ->searchable()
-                    ->required(),
+
+                Components\TextInput::make('product_id')
+                ->datalist(fn () => Models\Product::pluck('name')->all())
+                ->label('Product')
+                ->required()
+
+                ->dehydrateStateUsing(function ($state, Components\TextInput $component) {
+                    Log::info('- starting teardown for product_id');
+
+                    Log::info('getting value of product_nm field');
+                    $product_nm = $state;
+                    Log::info('product_nm is '.$product_nm);
+
+                    Log::info('Finding (or creating) the product with that name');
+                    $product = Models\Product::firstOrCreate(['name' => $product_nm]);
+                    Log::info('product is '.$product->toJson());
+
+                    Log::info('Setting the product_id field to '.$product->id);
+
+                    return $product->id;
+                }),
+
             ]);
     }
 
