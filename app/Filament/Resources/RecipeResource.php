@@ -59,7 +59,7 @@ class RecipeResource extends Resource
                     ->schema([
 
                         Components\Repeater::make('ingredients')
-                        ->defaultItems(8)
+                        ->defaultItems(12)
                         ->disableItemDeletion()
                         ->relationship()
                         ->orderable('sequence')
@@ -104,7 +104,7 @@ class RecipeResource extends Resource
                         ]),
 
                         Components\Repeater::make('steps')
-                        ->defaultItems(8)
+                        ->defaultItems(12)
                         ->disableItemDeletion()
                         ->relationship()
                         ->orderable('sequence')
