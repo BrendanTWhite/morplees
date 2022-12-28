@@ -30,6 +30,33 @@ class Step extends Model
     protected $masked = [];
 
     /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+
+        // If we're trying to create a empty step with no instructions,
+        // then don't create it.
+        static::creating(function ($step) {
+            if ( !$step->instructions ) {
+                return false;
+            }
+        });
+
+        // If we're trying to update a step to be empty with no instructions,
+        // then delete it (and don't update it).
+        static::updating(function ($step) {
+            if ( !$step->instructions ) {
+                $step->delete();
+                return false;
+            }
+        });
+
+    }
+
+    /**
      * Get the recipe that owns the step.
      */
     public function recipe()
