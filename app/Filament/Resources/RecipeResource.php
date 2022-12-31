@@ -59,6 +59,8 @@ class RecipeResource extends Resource
                     ->schema([
 
                         Components\Repeater::make('ingredients')
+                        ->defaultItems(12)
+                        ->disableItemDeletion()
                         ->relationship()
                         ->orderable('sequence')
                         ->columns([
@@ -77,61 +79,39 @@ class RecipeResource extends Resource
                             ->placeholder('ingredient')
                             ->datalist(fn () => Product::pluck('name')->all())
                             ->label('')
-                            ->required()
                             ->columnSpan([
                                 'md' => 7,
                             ])
 
                             ->afterStateHydrated(function (Components\TextInput $component, $state) {
-                                Log::info('- starting setup for product_id');
-
-                                Log::info('getting product_id');
                                 $existng_product_id = $state;
-                                Log::info('existng_product_id is '.$existng_product_id);
-
-                                // Do we have a product ID yet?
-                                if (! $existng_product_id) {
-                                    Log::info('No product ID yet, so no need to set a product name');
-
-                                    return;
+                                if ($existng_product_id) {
+                                    $existng_product_name = Product::find($existng_product_id)->name;
+                                    $component->state($existng_product_name);
                                 }
-
-                                Log::info('getting name of related product');
-                                $existng_product_name = Product::find($existng_product_id)->name;
-                                Log::info('existng_product_name is '.$existng_product_name);
-
-                                Log::info('setting state to '.$existng_product_name);
-                                $component->state($existng_product_name);
-
-                                Log::info('- ending setup for product_id');
                             })
 
                             ->dehydrateStateUsing(function ($state, Components\TextInput $component) {
-                                Log::info('- starting teardown for product_id');
-
-                                Log::info('getting value of product_nm field');
                                 $product_nm = $state;
-                                Log::info('product_nm is '.$product_nm);
-
-                                Log::info('Finding (or creating) the product with that name');
-                                $product = Product::firstOrCreate(['name' => $product_nm]);
-                                Log::info('product is '.$product->toJson());
-
-                                Log::info('Setting the product_id field to '.$product->id);
-
-                                return $product->id;
-
-                                // Log::info('- ending teardown for product_id');
+                                if ($product_nm) {
+                                    $product = Product::firstOrCreate(['name' => $product_nm]);
+                                    return $product->id;
+                                } else {
+                                    return null;
+                                }
                             }),
 
                         ]),
 
                         Components\Repeater::make('steps')
+                        ->defaultItems(12)
+                        ->disableItemDeletion()
                         ->relationship()
                         ->orderable('sequence')
                         ->createItemButtonLabel('Add Step')
                         ->schema([
-                            Components\Textarea::make('instructions')->required()->label('')
+                            Components\Textarea::make('instructions')
+                            ->label('')
                             // ->autosize() // TODO: Put un-comment this line, and remove rows(2). But then go through and change 150px to ... something smaller.
                             ->rows(2)
                             ->columnSpan([

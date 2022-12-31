@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\BelongsToFamily;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Ingredient extends Model
 {
@@ -29,6 +30,33 @@ class Ingredient extends Model
      * @var array
      */
     protected $masked = [];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+
+        // If we're trying to create an empty ingredient with no quanitity and no product,
+        // then don't create it.
+        static::creating(function ($ingredient) {
+            if ( !$ingredient->quantity && !$ingredient->product_id ) {
+                return false;
+            }
+        });
+
+        // If we're trying to update an ingredient to be empty with no quanitity and no product,
+        // then delete it (and don't update it).
+        static::updating(function ($ingredient) {
+            if ( !$ingredient->quantity && !$ingredient->product_id ) {
+                $ingredient->delete();
+                return false;
+            }
+        });
+
+    }
 
     /**
      * Get the recipe that owns the ingredient.
