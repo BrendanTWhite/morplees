@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\BelongsToFamily;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,6 +54,34 @@ class Product extends Model
             ? $this->shop->name
             : '';
         }
+
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+
+        // If we're trying to delete a product that is  
+        // being used as an ingredient in a recipe,
+        // then warn the user and don't delete it.
+        static::deleting(function ($product) {
+
+            if ( ! $product->ingredients->isEmpty() ) {
+                Notification::make() 
+                    ->title("Can't delete '$product->name' as it's being used in a recipe.")
+                    ->warning()
+                    ->persistent()
+                    ->send(); 
+
+                return false;
+            }
+
+        });
+
+    }
 
     /**
      * Get the shop that owns the product.

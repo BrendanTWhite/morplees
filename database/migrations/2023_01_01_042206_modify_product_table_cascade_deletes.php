@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
+        Schema::table('s_l_items', function (Blueprint $table) {
+            $table->dropForeign(['product_id']);
+            $table->foreign(['product_id'])->references('id')->on('products')
+                ->cascadeOnUpdate()->cascadeOnDelete()->change();
+        });
     }
 };
