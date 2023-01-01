@@ -150,7 +150,9 @@ class RecipeResource extends Resource
                     ->limit('30')
                     ->url(fn (Recipe $record): string => $record->url ? $record->url : '')
                     ->openUrlInNewTab(),
+                Tables\Columns\TextColumn::make('updated_at')->date()->sortable(),
             ])
+            ->defaultSort('updated_at','desc')
             ->filters([
                 //
             ])
