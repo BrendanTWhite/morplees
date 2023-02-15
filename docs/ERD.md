@@ -17,7 +17,7 @@ Can't delete parent
 - And in all cases - explain why the delete failed
 
 ## nullOnDelete
-Child remains, gets `null` as their parent
+Child remains, gets `null` as their parent.
 Note - parent_id field on child must be `->nullable()`
 
 ## ERD Diagram
