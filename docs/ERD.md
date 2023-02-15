@@ -17,35 +17,25 @@ Can't delete parent
 - Anything else - explain why the delete failed
 
 ## nullOnDelete
-Child remains, gets ~null~ as their parent
-Note - parent_id field on child must be ~->nullable()~
+Child remains, gets `null` as their parent
+Note - parent_id field on child must be `->nullable()`
 
 ````mermaid
-
     erDiagram
-
         Family   ||--o{ ShoppingList : restrictOnDelete
         ShoppingList ||--o{ SLItem : cascadeOnDelete
-
         ShoppingList ||--o{ SLRecipe : cascadeOnDelete
-
         Family   ||--o{ Recipe     : restrictOnDelete
-
         Recipe   ||--o{ SLRecipe   : cascadeOnDelete
         SLRecipe |o--o{ SLItem     : nullOnDelete
-
         Recipe   ||--o{ Ingredient : cascadeOnDelete
         Recipe   ||--o{ Step       : cascadeOnDelete
         Ingredient |o--o{ SLItem   : nullOnDelete 
-
         Family   ||--o{ Shop       : restrictOnDelete
         Shop     ||--o{ Product    : restrictOnDelete
-
         Product    ||--o{ Ingredient : restrictOnDelete
         Product    ||--o{ SLItem   : restrictOnDelete
-
         Family   ||--|{ User       : restrictOnDelete
-
 ````
 
 *Note* - when a `SLRecipe` is deleted from a `ShoppingList`, 
