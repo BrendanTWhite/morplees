@@ -1,7 +1,7 @@
 # ERD Diagram
 
 
-## Options
+## Delete Options
 Options for Delete (from [the doco](https://laravel.com/docs/9.x/migrations#foreign-key-constraints))
 - cascadeOnDelete
 - restrictOnDelete
@@ -14,11 +14,14 @@ eg delete a recipe, the steps and ingredients also vanish
 ## restrictOnDelete
 Can't delete parent
 - Family to Anything = restrictOnDelete, but (eventually) offer Redact
-- Anything else - explain why the delete failed
+- And in all cases - explain why the delete failed
 
 ## nullOnDelete
 Child remains, gets `null` as their parent
 Note - parent_id field on child must be `->nullable()`
+
+## ERD Diagram
+... with delete options
 
 ````mermaid
     erDiagram
