@@ -23,25 +23,29 @@ Note - parent_id field on child must be `->nullable()`
 ````mermaid
     erDiagram
         Family   ||--o{ ShoppingList : restrictOnDelete
-        ShoppingList ||--o{ SLItem : cascadeOnDelete
         ShoppingList ||--o{ SLRecipe : cascadeOnDelete
-        Family   ||--o{ Recipe     : restrictOnDelete
-        Recipe   ||--o{ SLRecipe   : cascadeOnDelete
-        SLRecipe |o--o{ SLItem     : nullOnDelete
-        Recipe   ||--o{ Ingredient : cascadeOnDelete
-        Recipe   ||--o{ Step       : cascadeOnDelete
-        Ingredient |o--o{ SLItem   : nullOnDelete 
-        Family   ||--o{ Shop       : restrictOnDelete
-        Shop     ||--o{ Product    : restrictOnDelete
-        Product    ||--o{ Ingredient : restrictOnDelete
-        Product    ||--o{ SLItem   : restrictOnDelete
-        Family   ||--|{ User       : restrictOnDelete
+        ShoppingList ||--o{ SLItem   : cascadeOnDelete
+        Family   ||--o{ Recipe       : restrictOnDelete
+        Recipe   ||--o{ SLRecipe     : cascadeOnDelete
+        SLRecipe |o--o{ SLItem       : nullOnDelete
+        Recipe   ||--o{ Ingredient   : cascadeOnDelete
+        Recipe   ||--o{ Step         : cascadeOnDelete
+        Ingredient |o--o{ SLItem     : nullOnDelete 
+        Family   ||--o{ Shop         : restrictOnDelete
+        Shop     ||--o{ Product      : restrictOnDelete
+        Product  ||--o{ Ingredient   : restrictOnDelete
+        Product  ||--o{ SLItem       : restrictOnDelete
+        Family   ||--|{ User         : restrictOnDelete
 ````
 
-*Note* - when a `SLRecipe` is deleted from a `ShoppingList`, 
-then the `SLItem`s will need to be explicitly deleted first.
+*Note* - when a `Recipe` is deleted, any related `SLRecipe`s
+should be deleted via cascading, but the `SLItem`s should 
+remain (with a null parent). 
 
-Because when a `Recipe` is deleted, any related `SLRecipe`
-will be deleted via cascading, but the `SLItem` will remain
-with a null parent. Which means we have `SLRecipe` to 
-`SLItem` set to  `nullOnDelete` not `cascadeOnDelete`.
+Which means the `SLRecipe` -{ `SLItem` join must be set 
+to `nullOnDelete`.
+
+Therefore, when the user deletes a `SLRecipe` from a 
+`ShoppingList` (and we can reasonably assume that they want 
+the `SLItem`s to vanish too), we will need to 
+explicitly delete the `SLItem`s before deleting the `SLRecipe`.
