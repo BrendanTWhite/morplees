@@ -1,6 +1,5 @@
 # ERD Diagram
 
-
 ## Delete Options
 Options for Delete (from [the doco](https://laravel.com/docs/9.x/migrations#foreign-key-constraints))
 - cascadeOnDelete
@@ -8,17 +7,18 @@ Options for Delete (from [the doco](https://laravel.com/docs/9.x/migrations#fore
 - nullOnDelete
 
 ## cascadeOnDelete
-Child records get deleted
-eg delete a recipe, the steps and ingredients also vanish
+Child records get deleted. For example if the user
+deletes a `Recipe`, the `Steps` and `Ingredients` 
+should also vanish.
 
 ## restrictOnDelete
-Can't delete parent
-- Family to Anything = restrictOnDelete, but (eventually) offer Redact
-- And in all cases - explain why the delete failed
+Can't delete parent.
+- But explain why the delete failed
+- Also - for `Family` to Anything - make it restrictOnDelete, but we (eventually) want to offer Redact instead of Delete.
 
 ## nullOnDelete
 Child remains, gets `null` as their parent.
-Note - parent_id field on child must be `->nullable()`
+*Note* - parent_id field on child must be `->nullable()`
 
 ## ERD Diagram
 ... with delete options
@@ -41,14 +41,14 @@ Note - parent_id field on child must be `->nullable()`
         Family   ||--|{ User         : restrictOnDelete
 ````
 
-*Note* - when a `Recipe` is deleted, any related `SLRecipe`s
-should be deleted via cascading, but the `SLItem`s should 
+*Note* - when a `Recipe` is deleted, any related `SLRecipes`
+should be deleted via cascading, but the `SLItems` should 
 remain (with a null parent). 
 
 Which means the `SLRecipe` -{ `SLItem` join must be set 
 to `nullOnDelete`.
 
-Therefore, when the user deletes a `SLRecipe` from a 
-`ShoppingList` (and we can reasonably assume that they want 
-the `SLItem`s to vanish too), we will need to 
+However, when the user deletes a `SLRecipe` from a 
+`ShoppingList`, we can reasonably assume that they want 
+the `SLItem`s to vanish too. Therefore we will need to 
 explicitly delete the `SLItem`s before deleting the `SLRecipe`.
