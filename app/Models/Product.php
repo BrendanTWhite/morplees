@@ -66,8 +66,19 @@ class Product extends Model
 
         // If we're trying to delete a product that is  
         // being used as an ingredient in a recipe,
+        // or has been used in a shopping list,
         // then warn the user and don't delete it.
         static::deleting(function ($product) {
+
+            if ( ! $product->s_l_items->isEmpty() ) {
+                Notification::make() 
+                    ->title("Can't delete '$product->name' as it's been used on a shopping list.")
+                    ->warning()
+                    ->persistent()
+                    ->send(); 
+
+                return false;
+            }
 
             if ( ! $product->ingredients->isEmpty() ) {
                 Notification::make() 
