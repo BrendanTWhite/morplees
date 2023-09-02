@@ -9,7 +9,7 @@
 
 	echo " -- Updating Repo from Origin"
 	git checkout staging
-    git pull
+    git pull --no-rebase
 
     echo " -- Running Composer Install"
     ../composer.phar install --no-dev
@@ -39,7 +39,7 @@
 
 	echo " -- Updating Repo from Origin"
 	git checkout production
-    git pull
+    git pull --no-rebase
 
     echo " -- Running Composer Install"
     ../composer.phar install --no-dev
