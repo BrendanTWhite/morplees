@@ -152,7 +152,7 @@ class RecipeResource extends Resource
                     ->trueIcon('heroicon-s-external-link')
                     ->falseIcon('')
                     ->url(fn (Recipe $record): string => $record->url ? $record->url : '')
-                    ->openUrlInNewTab(fn (Recipe $record): bool => $record->url),
+                    ->openUrlInNewTab(fn (Recipe $record): bool => boolval($record->url)),
                 Tables\Columns\TextColumn::make('updated_at')->date()->sortable(),
             ])
             ->defaultSort('updated_at','desc')
