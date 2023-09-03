@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Actions\AddRecipeToMenu;
 use App\Filament\Resources\RecipeResource\Pages;
 use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Models\Product;
@@ -140,16 +141,18 @@ class RecipeResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $addToMenu = new AddRecipeToMenu;
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('prep_time')->sortable(),
                 Tables\Columns\TextColumn::make('cook_time')->sortable(),
                 Tables\Columns\TextColumn::make('book_reference')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('url')->searchable()->sortable()
-                    ->limit('30')
+                Tables\Columns\IconColumn::make('url')
+                    ->trueIcon('heroicon-s-external-link')
+                    ->falseIcon('')
                     ->url(fn (Recipe $record): string => $record->url ? $record->url : '')
-                    ->openUrlInNewTab(),
+                    ->openUrlInNewTab(fn (Recipe $record): bool => boolval($record->url)),
                 Tables\Columns\TextColumn::make('updated_at')->date()->sortable(),
             ])
             ->defaultSort('updated_at','desc')
@@ -157,7 +160,12 @@ class RecipeResource extends Resource
                 //
             ])
             ->actions([
-                //
+                Tables\Actions\Action::make('add')
+                    ->action(
+                        fn (Recipe $record) => 
+                            $addToMenu($record)                
+                    )
+                    ->icon('bi-journal'),
             ]);
     }
 
