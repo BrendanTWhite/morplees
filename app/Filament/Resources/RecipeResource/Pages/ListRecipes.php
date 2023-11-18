@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\RecipeResource\Pages;
 
+use App\Actions\AddRecipeToMenu;
 use App\Filament\Resources\RecipeResource;
+use App\Models\Recipe;
 use Closure;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Model;
@@ -19,4 +21,11 @@ class ListRecipes extends ListRecords
             return $resource::getUrl('view', ['record' => $record]);
         };
     }
+
+
+    public function addToMenu(Recipe $record) {
+        $add = new AddRecipeToMenu;
+        $add($record);    
+    }
+                
 }

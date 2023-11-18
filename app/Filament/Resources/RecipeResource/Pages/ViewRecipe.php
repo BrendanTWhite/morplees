@@ -24,9 +24,9 @@ class ViewRecipe extends ViewRecord
      
     public function addToMenu(): void
     {
-
         $addRecipeToMenu = new \App\Actions\AddRecipeToMenu;
         $addRecipeToMenu($this->record);
+        $this->refreshFormData([]);
 
     }
 

@@ -161,10 +161,7 @@ class RecipeResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('add')
-                    ->action(
-                        fn (Recipe $record) => 
-                            $addToMenu($record)                
-                    )
+                    ->action('addToMenu') // defined in App\Filament\Resources\RecipeResource\Pages\ListRecipes
                     ->icon('bi-journal'),
             ]);
     }

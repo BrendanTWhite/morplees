@@ -31,6 +31,11 @@ class MenuResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Menu';
 
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('shopping_list_id', Models\ShoppingList::getActiveSL()?->id)->count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
